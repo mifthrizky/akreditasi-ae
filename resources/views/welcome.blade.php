@@ -9,9 +9,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Base */
+        html,
         body {
             font-family: 'DM Sans', sans-serif;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* Edge/IE */
+            background-color: #0a1628;
+            overscroll-behavior: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        /* Hide scrollbar for Chrome/Safari */
+        body::-webkit-scrollbar {
+            display: none;
         }
 
         .font-display {
@@ -331,7 +347,7 @@
         <div class="font-display font-bold text-xl text-white tracking-tight w-35">
             <img src="{{ asset('images/polman.png') }}" alt="Logo">
         </div>
-        <a href="/login" class="text-sm font-medium text-slate-300 hover:text-white border border-slate-600 hover:bg-blue-400 hover:border-white px-4 py-2 rounded-lg transition-all duration-200">
+        <a href="/login" class="text-sm font-medium text-white bg-blue-900 hover:text-white border border-slate-600 hover:bg-blue-400 hover:border-white px-4 py-2 rounded-lg transition-all duration-200">
             Login
         </a>
     </nav>
