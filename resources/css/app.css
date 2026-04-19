@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+/* Disable rubber/bounce scroll effect */
+html,
+body {
+    overscroll-behavior: none;
+}
+
+.swal2-container {
+    z-index: 9999 !important;
+}
+
+/* Sidebar: z-index lebih rendah dari modal */
+.sidebar,
+aside[class*="sidebar"],
+[class*="side-bar"] {
+    z-index: 50 !important;
+}
+
+/* Hapus overflow-hidden dari wrapper utama jika ada */
+.layout-wrapper,
+.main-wrapper,
+[class*="flex"].h-screen {
+    overflow: visible !important;
+}
+
+/* Pastikan backdrop menutupi full viewport */
+.swal2-backdrop-show {
+    background: rgba(0, 0, 0, 0.4) !important;
+}

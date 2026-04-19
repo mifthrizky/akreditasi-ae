@@ -8,6 +8,7 @@ class Submission extends Model
 {
     protected $table = 'submission';
     protected $primaryKey = 'submission_id';
+    public $timestamps = false;
     protected $fillable = ['prodi_id', 'kriteria_id', 'user_id', 'status', 'skor', 'submitted_at', 'updated_at'];
 
     public function prodi()
