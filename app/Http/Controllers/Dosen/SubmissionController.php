@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dosen;
 
+use App\Http\Controllers\Controller;
 use App\Models\ProgramStudi;
 use App\Models\Kriteria;
 use App\Models\Submission;
 use App\Models\SubmissionItem;
 use Illuminate\Http\Request;
 use App\Services\SkorService;
-use App\Services\GapAnalysisService;
-use App\Services\RadarChartService;
-use App\Services\LaporanService;
 use App\Services\AuditLogService;
 use Illuminate\Support\Facades\Auth;
 
-class DosenController extends Controller
+class SubmissionController extends Controller
 {
     /**
      * Display list of program studi assigned to dosen
@@ -28,29 +26,31 @@ class DosenController extends Controller
     /**
      * Display kriteria list for dosen's assigned prodi
      */
-    public function showProdiKriteria($prodi_id)
+    public function kriteriIndex($prodi_id)
     {
         // Get program studi
         $prodi = ProgramStudi::findOrFail($prodi_id);
 
-        // Check if user has access to this prodi (assign via user_prodi)
+        // Check if user has access to this prodi
         $userProdi = Auth::user()->prodis()->where('program_studi.prodi_id', $prodi_id)->first();
         if (!$userProdi && Auth::user()->role !== 'admin') {
             abort(403, 'Unauthorized');
         }
 
-        // Get all level 0 kriteria with their children (level 1)
+        // Get all level 0 kriteria with their children (level 1) and grandchildren (level 2)
         $kriterias = Kriteria::where('level', 0)
             ->orderBy('urutan')
             ->with(['children' => function ($query) {
-                $query->orderBy('urutan');
+                $query->orderBy('urutan')->with(['children' => function ($q) {
+                    $q->orderBy('urutan');
+                }]);
             }])
             ->get();
 
-        // Fetch submission statuses for each kriteria (level 1 only)
+        // Fetch submission statuses for each kriteria (level 2 only)
         $submissions = Submission::where('prodi_id', $prodi_id)
             ->whereHas('kriteria', function ($query) {
-                $query->where('level', 1);
+                $query->where('level', 2);
             })
             ->get()
             ->keyBy('kriteria_id');
@@ -60,9 +60,8 @@ class DosenController extends Controller
 
     /**
      * Display submission form for a specific kriteria
-     * Check: if status = 'diterima', cannot edit (edit lock)
      */
-    public function showSubmission($prodi_id, $kriteria_id)
+    public function show($prodi_id, $kriteria_id)
     {
         // Get program studi
         $prodi = ProgramStudi::findOrFail($prodi_id);
@@ -103,9 +102,8 @@ class DosenController extends Controller
 
     /**
      * Store submission form data
-     * Validation: if action=submit, score must be ≥50% minimum (per PRD)
      */
-    public function storeSubmission(Request $request, $prodi_id, $kriteria_id)
+    public function store(Request $request, $prodi_id, $kriteria_id)
     {
         // Get program studi
         $prodi = ProgramStudi::findOrFail($prodi_id);
@@ -122,7 +120,7 @@ class DosenController extends Controller
             ->where('kriteria_id', $kriteria_id)
             ->firstOrFail();
 
-        // Check edit lock: cannot edit if status = 'diterima' (approved)
+        // Check edit lock
         if (!$submission->canEdit()) {
             abort(403, 'Submission ini sudah disetujui dan tidak dapat diubah.');
         }
@@ -180,7 +178,7 @@ class DosenController extends Controller
             $submission->submitted_at = now();
             $submission->skor = $currentScore;
 
-            // Log the submission action (after save)
+            // Save and log
             $submission->save();
             AuditLogService::logSubmit($submission, $currentScore);
         } else {
@@ -188,14 +186,14 @@ class DosenController extends Controller
         }
 
         // Redirect back with success message
-        return redirect()->route('dosen.prodi.kriteria', $prodi_id)
+        return redirect()->route('dosen.submission.kriteria-index', $prodi_id)
             ->with('success', $action === 'submit' ? 'Submission berhasil dikirim untuk validasi' : 'Draft berhasil disimpan');
     }
 
     /**
      * Display submission review page (with validator feedback)
      */
-    public function showReview($submission_id, SkorService $skorService)
+    public function review($submission_id, SkorService $skorService)
     {
         $submission = Submission::with('kriteria', 'items.templateItem', 'validasi.user')
             ->findOrFail($submission_id);
@@ -226,125 +224,35 @@ class DosenController extends Controller
     }
 
     /**
-     * Display laporan kesiapan prodi (score & gaps)
+     * Reset submission (only if status = 'ditolak')
      */
-    public function showProdiLaporan(
-        $prodi_id,
-        SkorService $skorService,
-        GapAnalysisService $gapAnalysisService,
-        RadarChartService $radarChartService,
-        LaporanService $laporanService
-    ) {
+    public function reset($prodi_id, $submission_id)
+    {
         $prodi = ProgramStudi::findOrFail($prodi_id);
-
-        // Check access
-        $userProdi = Auth::user()->prodis()
-            ->where('program_studi.prodi_id', $prodi_id)
-            ->first();
-
-        if (!$userProdi && Auth::user()->role !== 'admin') {
-            abort(403, 'Unauthorized');
-        }
-
-        // Get kriteria
-        $kriterias = Kriteria::where('level', 0)
-            ->orderBy('urutan')
-            ->with(['children' => function ($query) {
-                $query->orderBy('urutan');
-            }])
-            ->get();
-
-        // Calculate scores
-        $scores = $skorService->calculateAllForProdi($prodi_id, 'diterima');
-        $totalScore = $skorService->calculateTotalForProdi($prodi_id, 'diterima');
-
-        // Get gaps
-        $gaps = $gapAnalysisService->analyzeProdi($prodi_id);
-        $gapsByParent = $gapAnalysisService->analyzeProdiByParent($prodi_id);
-
-        // Get chart data
-        $chartData = $radarChartService->generateChartData($prodi_id, 'diterima');
-        $chartDataJson = $radarChartService->generateChartDataJson($prodi_id, 'diterima');
-        $overallStatus = $radarChartService->getOverallStatus($prodi_id, 'diterima');
-
-        // Get recent laporans
-        $recentLaporans = $laporanService->getRecentLaporan($prodi_id);
-
-        return view('dosen.prodi.laporan', compact(
-            'prodi',
-            'kriterias',
-            'scores',
-            'totalScore',
-            'gaps',
-            'gapsByParent',
-            'chartData',
-            'chartDataJson',
-            'overallStatus',
-            'recentLaporans'
-        ));
-    }
-
-    /**
-     * Generate and store laporan PDF
-     */
-    public function storeLaporan($prodi_id, LaporanService $laporanService)
-    {
-        // Check access
-        $userProdi = Auth::user()->prodis()
-            ->where('program_studi.prodi_id', $prodi_id)
-            ->first();
-
-        if (!$userProdi && Auth::user()->role !== 'admin') {
-            abort(403, 'Unauthorized');
-        }
-
-        $result = $laporanService->generatePDF($prodi_id);
-
-        if ($result['success']) {
-            return redirect()->route('dosen.prodi.laporan', $prodi_id)
-                ->with('success', 'Laporan PDF berhasil dibuat: ' . $result['filename']);
-        } else {
-            return redirect()->route('dosen.prodi.laporan', $prodi_id)
-                ->with('error', $result['message']);
-        }
-    }
-
-    /**
-     * Reset submission for ditolak status - clear all answers and set to draft
-     */
-    public function resetSubmission($prodi_id, $submission_id)
-    {
-        // Find submission
         $submission = Submission::findOrFail($submission_id);
 
-        // Verify submission belongs to the specified prodi
-        $kriteria = $submission->kriteria;
-        if ($submission->prodi_id != $prodi_id) {
+        // Check access
+        $userProdi = Auth::user()->prodis()->where('program_studi.prodi_id', $prodi_id)->first();
+        if (!$userProdi && Auth::user()->role !== 'admin' && Auth::id() !== $submission->user_id) {
             abort(403, 'Unauthorized');
         }
 
-        // Verify user has access to this prodi
-        $userProdi = Auth::user()->prodis()
-            ->where('program_studi.prodi_id', $prodi_id)
-            ->first();
-
-        if (!$userProdi && Auth::user()->role !== 'admin') {
-            abort(403, 'Unauthorized');
-        }
-
-        // Only allow reset if status is ditolak
-        if ($submission->status !== 'ditolak') {
-            return redirect()->route('dosen.submission.show', [$prodi_id, $submission->kriteria_id])
-                ->with('error', 'Hanya submission dengan status ditolak yang dapat direset.');
+        // Only allow reset if status = 'ditolak' or 'revisi'
+        if (!in_array($submission->status, ['ditolak', 'revisi'])) {
+            return redirect()->back()
+                ->with('error', 'Submission hanya dapat direset jika status ditolak atau diminta revisi');
         }
 
         // Delete all submission items
         $submission->items()->delete();
 
-        // Reset submission to draft status
-        $submission->update(['status' => 'draft']);
+        // Reset to draft
+        $submission->status = 'draft';
+        $submission->submitted_at = now();
+        $submission->skor = null;
+        $submission->save();
 
-        return redirect()->route('dosen.submission.show', [$prodi_id, $submission->kriteria_id])
-            ->with('success', 'Form berhasil direset. Silahkan isi ulang dari awal sesuai dengan catatan validator.');
+        return redirect()->route('dosen.submission.kriteria-index', $prodi_id)
+            ->with('success', 'Submission berhasil direset ke draft. Silakan perbaiki dan submit kembali');
     }
 }

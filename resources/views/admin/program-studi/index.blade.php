@@ -155,7 +155,7 @@
                     </svg>
                 </button>
             </div>
-            <form id="createForm" action="{{ route('program-studi.store') }}" method="POST" class="p-6">
+            <form id="createForm" action="{{ route('admin.program-studi.store') }}" method="POST" class="p-6">
                 @csrf
                 <div class="space-y-4">
                     <div>

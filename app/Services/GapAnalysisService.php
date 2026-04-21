@@ -57,7 +57,7 @@ class GapAnalysisService
             'kriteria_kode' => $kriteria->kode,
             'kriteria_nama' => $kriteria->nama,
             'skor' => $skor,
-            'skor_percent' => round($skor * 100, 2),
+            'skor_percent' => round($skor, 2),
             'severity' => $severity,
             'status_color' => $this->skorService->getStatusColor($skor),
             'status_label' => $this->skorService->getStatusLabel($skor),
@@ -135,9 +135,9 @@ class GapAnalysisService
      */
     private function getSeverity(float $skor): string
     {
-        if ($skor < 0.5) {
+        if ($skor < 50) {
             return 'red';
-        } elseif ($skor < 0.8) {
+        } elseif ($skor < 80) {
             return 'yellow';
         } else {
             return 'green';
@@ -153,12 +153,12 @@ class GapAnalysisService
             return 'Semua item sudah terpenuhi.';
         }
 
-        if ($skor < 0.5) {
+        if ($skor < 50) {
             return sprintf(
                 'KRITIS: Lengkapi semua %d item yang hilang segera untuk memenuhi standar minimum.',
                 count($unfilledItems)
             );
-        } elseif ($skor < 0.8) {
+        } elseif ($skor < 80) {
             return sprintf(
                 'Sebagian sudah terpenuhi. Lengkapi %d item tertinggal untuk mencapai standar optimal.',
                 count($unfilledItems)

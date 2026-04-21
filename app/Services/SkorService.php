@@ -10,53 +10,54 @@ class SkorService
     /**
      * Calculate skor for a submission based on filled template items
      * 
-     * Formula: (sum of filled item bobot / sum of required item bobot) × kriteria bobot
+     * Formula per PRD: Skor = SUM(bobot_item × filled_status) / SUM(bobot_item)
+     * - Narasi items (bobot=0) are EXCLUDED from calculation
+     * - Only required items with bobot > 0 count toward score
      * 
      * Filled rules:
      * - checklist: nilai_checklist = true
-     * - upload: nilai_teks contains non-empty path
+     * - upload: dokumen exists (nilai_teks contains non-empty path)
      * - numerik: nilai_numerik >= nilai_min_numerik (if min specified, else not null)
-     * - narasi: nilai_teks is not empty/null
+     * - narasi: EXCLUDED (bobot=0, does not contribute to score)
      */
     public function calculate(Submission $submission): float
     {
-        // Get all template items for this kriteria
-        $templateItems = $submission->kriteria->templateItems()->get();
+        // Get all template items for this kriteria, excluding narasi items
+        $templateItems = $submission->kriteria->templateItems()
+            ->where('tipe', '!=', 'narasi')
+            ->get();
 
         if ($templateItems->isEmpty()) {
             return 0;
         }
 
-        $totalRequiredBobot = 0;
+        $totalBobot = 0;
         $filledBobot = 0;
 
         foreach ($templateItems as $template) {
-            // Only count required items in denominator
+            // Only count wajib items toward total
             if ($template->wajib) {
-                $totalRequiredBobot += $template->bobot;
-            }
+                $totalBobot += $template->bobot;
 
-            // Check if this item is filled
-            $submissionItem = $submission->items()
-                ->where('template_item_id', $template->template_id)
-                ->first();
+                // Check if this item is filled
+                $submissionItem = $submission->items()
+                    ->where('template_item_id', $template->template_id)
+                    ->first();
 
-            if ($this->isItemFilled($submissionItem, $template)) {
-                $filledBobot += $template->bobot;
+                if ($this->isItemFilled($submissionItem, $template)) {
+                    $filledBobot += $template->bobot;
+                }
             }
         }
 
-        // Calculate percentage (0-1)
-        if ($totalRequiredBobot == 0) {
-            $percentage = 0;
-        } else {
-            $percentage = $filledBobot / $totalRequiredBobot;
+        // Calculate percentage: filledBobot / totalBobot
+        if ($totalBobot == 0) {
+            return 0;
         }
 
-        // Apply kriteria bobot
-        $finalScore = $percentage * $submission->kriteria->bobot;
+        $percentage = ($filledBobot / $totalBobot) * 100; // 0-100 range
 
-        return round($finalScore, 2);
+        return round($percentage, 2);
     }
 
     /**
@@ -79,38 +80,40 @@ class SkorService
     }
 
     /**
-     * Aggregate scores from level-1 kriteria to level-0 parent
-     * Returns array of parent_kriteria_id => aggregated_skor
+     * General method to aggregate child scores to their parent level using Weighted Average (Bobot Kriteria)
+     * e.g. calculating Level 1 from Level 2, or Level 0 from Level 1
      */
-    public function aggregateToParent(int $prodi_id, string $status = 'diterima'): array
+    public function aggregateToParentLevel(array $childScores, int $targetLevel): array
     {
-        $scores = $this->calculateAllForProdi($prodi_id, $status);
-
-        // Get all level-1 kriteria with their parents
-        $kriterias = \App\Models\Kriteria::where('level', 1)
-            ->with('parent')
-            ->get();
+        // Get all children that belong to the target level's parents
+        // if targetLevel is 0, children are level 1
+        // if targetLevel is 1, children are level 2
+        $children = \App\Models\Kriteria::where('level', $targetLevel + 1)->get();
 
         $aggregated = [];
-        foreach ($kriterias as $kriteria) {
-            if (!isset($scores[$kriteria->kriteria_id])) {
+        foreach ($children as $child) {
+            if (!isset($childScores[$child->kriteria_id])) {
                 continue;
             }
 
-            $parentId = $kriteria->parent_id;
-            if (!isset($aggregated[$parentId])) {
-                $aggregated[$parentId] = ['sum' => 0, 'count' => 0];
+            $parentId = $child->parent_id;
+            if (!$parentId) {
+                continue;
             }
 
-            $aggregated[$parentId]['sum'] += $scores[$kriteria->kriteria_id];
-            $aggregated[$parentId]['count']++;
+            if (!isset($aggregated[$parentId])) {
+                $aggregated[$parentId] = ['sum_score_x_bobot' => 0, 'sum_bobot' => 0];
+            }
+
+            // Weighted average: Skor_i * Bobot_i
+            $aggregated[$parentId]['sum_score_x_bobot'] += $childScores[$child->kriteria_id] * $child->bobot;
+            $aggregated[$parentId]['sum_bobot'] += $child->bobot;
         }
 
-        // Calculate average
         $result = [];
         foreach ($aggregated as $parentId => $data) {
-            $result[$parentId] = $data['count'] > 0
-                ? round($data['sum'] / $data['count'], 2)
+            $result[$parentId] = $data['sum_bobot'] > 0
+                ? round($data['sum_score_x_bobot'] / $data['sum_bobot'], 2)
                 : 0;
         }
 
@@ -118,18 +121,56 @@ class SkorService
     }
 
     /**
-     * Calculate total skor across all kriteria (average of all level-0 parents)
+     * Calculate scores for all Level 0 Kriteria (for Radar Chart)
+     */
+    public function aggregateToLevel0(int $prodi_id, string $status = 'diterima'): array
+    {
+        // Level 2 scores (submissions)
+        $level2Scores = $this->calculateAllForProdi($prodi_id, $status);
+        
+        // Aggregate Level 2 -> Level 1
+        $level1Scores = $this->aggregateToParentLevel($level2Scores, 1);
+        
+        // Aggregate Level 1 -> Level 0
+        return $this->aggregateToParentLevel($level1Scores, 0);
+    }
+
+    /**
+     * Get legacy method signature so things don't break, redirecting to new logic
+     */
+    public function aggregateToParent(int $prodi_id, string $status = 'diterima'): array
+    {
+        return $this->aggregateToLevel0($prodi_id, $status);
+    }
+
+    /**
+     * Calculate total skor across all kriteria (Weighted average of all level-0 parents)
      */
     public function calculateTotalForProdi(int $prodi_id, string $status = 'diterima'): float
     {
-        $aggregated = $this->aggregateToParent($prodi_id, $status);
+        $level0Scores = $this->aggregateToLevel0($prodi_id, $status);
 
-        if (empty($aggregated)) {
+        if (empty($level0Scores)) {
             return 0;
         }
 
-        $total = array_sum($aggregated);
-        return round($total / count($aggregated), 2);
+        $level0Kriteria = \App\Models\Kriteria::where('level', 0)->get();
+        
+        $totalSum = 0;
+        $totalBobot = 0;
+
+        foreach ($level0Kriteria as $k0) {
+            if (isset($level0Scores[$k0->kriteria_id])) {
+                $totalSum += $level0Scores[$k0->kriteria_id] * $k0->bobot;
+                $totalBobot += $k0->bobot;
+            }
+        }
+
+        if ($totalBobot == 0) {
+            return 0;
+        }
+
+        return round($totalSum / $totalBobot, 2);
     }
 
     /**
@@ -168,30 +209,39 @@ class SkorService
     }
 
     /**
-     * Get status color based on score percentage
+     * Get status color based on score percentage (0-100 range)
+     * Thresholds per PRD:
+     * - ≥80%: Sangat Siap (green)
+     * - 75-79.99%: Siap (light green)
+     * - 60-74.99%: Hampir Siap (yellow)
+     * - <60%: Perlu Perbaikan (red)
      */
     public function getStatusColor(float $skor): string
     {
-        if ($skor < 50) {
-            return 'red';     // RED: Critical
-        } elseif ($skor < 80) {
-            return 'yellow';   // YELLOW: Partial
+        if ($skor >= 80) {
+            return 'green';          // GREEN: Sangat Siap
+        } elseif ($skor >= 75) {
+            return 'light-green';    // LIGHT GREEN: Siap
+        } elseif ($skor >= 60) {
+            return 'yellow';         // YELLOW: Hampir Siap
         } else {
-            return 'green';    // GREEN: Good
+            return 'red';            // RED: Perlu Perbaikan
         }
     }
 
     /**
-     * Get status label
+     * Get status label based on score percentage (0-100 range)
      */
     public function getStatusLabel(float $skor): string
     {
-        if ($skor < 50) {
-            return 'Kritis';
-        } elseif ($skor < 80) {
-            return 'Sebagian';
+        if ($skor >= 80) {
+            return 'Sangat Siap';
+        } elseif ($skor >= 75) {
+            return 'Siap';
+        } elseif ($skor >= 60) {
+            return 'Hampir Siap';
         } else {
-            return 'Baik';
+            return 'Perlu Perbaikan';
         }
     }
 }

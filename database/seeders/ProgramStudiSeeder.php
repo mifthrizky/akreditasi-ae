@@ -13,10 +13,32 @@ class ProgramStudiSeeder extends Seeder
      */
     public function run(): void
     {
+         // TRO
         ProgramStudi::create([
-            'nama' => 'Administrator',
-            'email' => 'admin@acreditasi.com',
-            'role' => 'admin',
+            'kode' => 'TRO',
+            'nama' => 'Teknik Rekayasa Otomasi',
+            'jurusan' => 'AE',
+        ]);
+
+        // TRMO
+        ProgramStudi::create([
+            'kode' => 'TRMO',
+            'nama' => 'Teknik Rekayasa Mekatronika',
+            'jurusan' => 'AE',
+        ]);
+
+        // TRIN
+        ProgramStudi::create([
+            'kode' => 'TRIN',
+            'nama' => 'Teknologi Rekayasa Informatika Industri',
+            'jurusan' => 'AE',
+        ]);
+
+         // TRSA
+        ProgramStudi::create([
+            'kode' => 'TRSA',
+            'nama' => 'Teknologi Rekayasa Sistem Aerial Nirawak',
+            'jurusan' => 'AE',
         ]);
     }
 }

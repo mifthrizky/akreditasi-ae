@@ -11,7 +11,7 @@
                 </p>
             </div>
             <div>
-                <a href="{{ route('dosen.prodi.kriteria', $prodi->prodi_id) }}"
+                <a href="{{ route('dosen.submission.kriteria-index', $prodi->prodi_id) }}"
                     class="inline-flex items-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -198,7 +198,7 @@
                 Generate laporan PDF lengkap dengan grafik radar dan analisis kesenjangan yang dapat diserahkan ke IABEE.
             </p>
 
-            <form action="{{ route('dosen.prodi.laporan.store', $prodi->prodi_id) }}" method="POST"
+            <form action="{{ route('dosen.laporan.store', $prodi->prodi_id) }}" method="POST"
                 class="flex flex-col sm:flex-row gap-3">
                 @csrf
                 <button type="submit"

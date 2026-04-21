@@ -8,7 +8,8 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
 
     <style>
         body {
@@ -216,9 +217,10 @@
                 <p class="auth-sub">Gunakan akun resmi Anda</p>
 
                 @if ($errors->any())
-                <div style="background:#fee2e2; padding:10px; border-radius:10px; margin-top:15px; font-size:13px; color:#b91c1c;">
-                    {{ $errors->first() }}
-                </div>
+                    <div
+                        style="background:#fee2e2; padding:10px; border-radius:10px; margin-top:15px; font-size:13px; color:#b91c1c;">
+                        {{ $errors->first() }}
+                    </div>
                 @endif
 
                 <form method="POST" action="{{ route('login') }}" style="margin-top:20px;">

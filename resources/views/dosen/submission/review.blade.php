@@ -12,7 +12,7 @@
                 <p class="text-slate-600 text-sm mt-1">Kode: {{ $kriteria->kode }}</p>
             </div>
             <div>
-                <a href="{{ route('dosen.prodi.kriteria', $prodi->prodi_id) }}"
+                <a href="{{ route('dosen.submission.kriteria-index', $prodi->prodi_id) }}"
                     class="inline-flex items-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -276,8 +276,8 @@
             </form>
         @endif
 
-        <!-- Read-only view (jika status diterima atau ditolak) -->
-        @if ($submission->status === 'diterima' || $submission->status === 'ditolak')
+        <!-- Read-only view (jika status diterima, ditolak, atau submitted) -->
+        @if ($submission->status === 'diterima' || $submission->status === 'ditolak' || $submission->status === 'submitted')
             <div class="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
                 <h3 class="text-lg font-semibold text-slate-900 mb-4">Jawaban Submission</h3>
 
@@ -287,7 +287,7 @@
                             @php
                                 $submissionItem = $submissionItems->get($template->template_id);
                             @endphp
-                            <div class="pb-4 border-b border-slate-200 last:border-0 last:pb-0">
+                            <div class="pb-4 border-b border-slate-200 last:border-0 last:pb-0 ">
                                 <p class="text-sm font-semibold text-slate-900 mb-2">{{ $template->label }}</p>
 
                                 @if ($template->tipe === 'checklist')
@@ -317,8 +317,7 @@
                                     <p class="text-sm font-medium text-slate-900">
                                         {{ $submissionItem?->nilai_numerik ?? '-' }}</p>
                                 @elseif ($template->tipe === 'narasi')
-                                    <p class="text-sm text-slate-700 whitespace-pre-wrap">
-                                        {{ $submissionItem?->nilai_teks ?? '-' }}</p>
+                                    <p class="text-sm text-slate-700 whitespace-pre-wrap">{{ $submissionItem?->nilai_teks ?? '-' }}</p>
                                 @endif
                             </div>
                         @endforeach

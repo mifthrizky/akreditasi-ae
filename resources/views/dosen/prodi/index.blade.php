@@ -13,7 +13,7 @@
         @if ($prodis->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($prodis as $prodi)
-                    <a href="{{ route('dosen.prodi.kriteria', $prodi->prodi_id) }}"
+                    <a href="{{ route('dosen.submission.kriteria-index', $prodi->prodi_id) }}"
                         class="bg-white rounded-lg border border-slate-200 p-6 hover:shadow-lg hover:border-blue-300 transition-all">
                         <div class="flex items-start justify-between mb-4">
                             <div>
@@ -52,3 +52,4 @@
     </div>
 
 @endsection
+

@@ -170,7 +170,7 @@
                     </svg>
                 </button>
             </div>
-            <form id="createForm" action="{{ route('users.store') }}" method="POST" class="p-6">
+            <form id="createForm" action="{{ route('admin.users.store') }}" method="POST" class="p-6">
                 @csrf
                 <div class="space-y-4">
                     <div>
@@ -350,7 +350,7 @@
         function openAssignProdiModal(userId, nama) {
             document.getElementById('assignProdiUserName').textContent = nama;
             document.getElementById('assignProdiForm').dataset.userId = userId;
-            document.getElementById('assignProdiForm').action = `/users/${userId}/assign-prodi`;
+            document.getElementById('assignProdiForm').action = `/admin/users/${userId}/assign-prodi`;
             document.getElementById('assignProdiSelect').value = '';
             openModal('assignProdiModal');
         }

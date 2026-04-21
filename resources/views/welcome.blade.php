@@ -348,7 +348,8 @@
         <div class="font-display font-bold text-xl text-white tracking-tight w-35">
             <img src="{{ asset('images/polman.png') }}" alt="Logo">
         </div>
-        <a href="/login" class="text-sm font-medium text-white bg-blue-900 hover:text-white border border-slate-600 hover:bg-blue-400 hover:border-white px-4 py-2 rounded-lg transition-all duration-200">
+        <a href="/login"
+            class="text-sm font-medium text-white bg-blue-900 hover:text-white border border-slate-600 hover:bg-blue-400 hover:border-white px-4 py-2 rounded-lg transition-all duration-200">
             Login
         </a>
     </nav>
@@ -367,34 +368,42 @@
                 <!-- Eyebrow -->
                 <div class="flex items-center gap-3">
                     <div class="accent-line"></div>
-                    <span class="text-blue-400 text-xs font-semibold uppercase tracking-widest">Platform Akreditasi</span>
+                    <span class="text-blue-400 text-xs font-semibold uppercase tracking-widest">Platform
+                        Akreditasi</span>
                 </div>
 
                 <!-- Wordmark -->
                 <div>
-                    <h1 class="font-display font-black leading-[1.05] text-white" style="font-size: clamp(2.6rem,5vw,4.2rem);">
+                    <h1 class="font-display font-black leading-[1.05] text-white"
+                        style="font-size: clamp(2.6rem,5vw,4.2rem);">
                         Persiapan Akreditasi
                     </h1>
-                    <h1 class="font-display font-black leading-[1.05] text-blue-400" style="font-size: clamp(2.6rem,5vw,4.2rem);">
+                    <h1 class="font-display font-black leading-[1.05] text-blue-400"
+                        style="font-size: clamp(2.6rem,5vw,4.2rem);">
                         IABEE
                     </h1>
                 </div>
 
                 <!-- Sub -->
                 <p class="text-slate-300 text-base leading-relaxed max-w-sm font-light">
-                    Platform infrastruktur evaluasi untuk pemenuhan standar kriteria IABEE — dirancang untuk asesor, administrator, dan pemangku kepentingan program studi Polman Bandung.
+                    Platform infrastruktur evaluasi untuk pemeriksa panduan kurikulum disesuaikan dengan standar
+                    kriteria IABEE — dirancang untuk validator, administrator, dan pemangku kepentingan program studi
+                    Polman Bandung.
                 </p>
 
                 <!-- CTA -->
                 <div class="flex items-center gap-4 pt-2 flex-wrap">
                     <a href="/login" class="cta-btn-primary">
                         Masuk ke Dashboard
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <path d="M5 12h14" />
                             <path d="m12 5 7 7-7 7" />
                         </svg>
                     </a>
-                    <a href="#deskripsi" class="text-slate-400 text-sm hover:text-white transition-colors">Pelajari lebih</a>
+                    <a href="#deskripsi" class="text-slate-400 text-sm hover:text-white transition-colors">Pelajari
+                        lebih</a>
                 </div>
 
                 <!-- Stats row -->
@@ -452,7 +461,8 @@
                     Infrastruktur yang <span class="text-blue-600">Andal</span>
                 </h2>
                 <p class="text-slate-500 max-w-xl mx-auto leading-relaxed">
-                    Dibangun secara untuk memenuhi kompleksitas teknis evaluasi akreditasi IABEE dengan presisi dan integritas data penuh.
+                    Dibangun secara untuk memenuhi kompleksitas teknis evaluasi akreditasi IABEE dengan presisi dan
+                    integritas data penuh.
                 </p>
             </div>
 
@@ -461,18 +471,23 @@
 
                 <div class="feature-card reveal" style="transition-delay:0.1s">
                     <div class="feature-icon mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                            fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <path d="M3 3v18h18" />
                             <path d="m19 9-5 5-4-4-3 3" />
                         </svg>
                     </div>
                     <h3 class="font-bold text-slate-900 text-lg mb-2">Integritas Metrik</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Pemrosesan data mentah menjadi metrik evaluasi terstruktur yang selaras penuh dengan taksonomi dan bobot kriteria IABEE.</p>
+                    <p class="text-slate-500 text-sm leading-relaxed">Pemrosesan data mentah menjadi metrik evaluasi
+                        terstruktur yang selaras penuh dengan taksonomi dan bobot kriteria IABEE.</p>
                 </div>
 
                 <div class="feature-card reveal" style="transition-delay:0.2s">
                     <div class="feature-icon mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                            fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <rect width="8" height="4" x="8" y="2" rx="1" />
                             <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
                             <path d="M12 11h4" />
@@ -482,17 +497,22 @@
                         </svg>
                     </div>
                     <h3 class="font-bold text-slate-900 text-lg mb-2">Agregasi Laporan</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Generasi rekapitulasi Capaian Pembelajaran Lulusan (CPL) secara real-time dengan visualisasi yang siap untuk dokumen asesmen resmi.</p>
+                    <p class="text-slate-500 text-sm leading-relaxed">Generasi rekapitulasi Capaian Pembelajaran
+                        Lulusan (CPL) secara real-time dengan visualisasi yang siap untuk dokumen asesmen resmi.</p>
                 </div>
 
                 <div class="feature-card reveal" style="transition-delay:0.3s">
                     <div class="feature-icon mb-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                            fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg>
                     </div>
                     <h3 class="font-bold text-slate-900 text-lg mb-2">Keamanan Akses</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Infrastruktur tertutup dengan Role-Based Access Control (RBAC) — memastikan setiap pengguna hanya mengakses data yang relevan dengan perannya.</p>
+                    <p class="text-slate-500 text-sm leading-relaxed">Infrastruktur tertutup dengan Role-Based Access
+                        Control (RBAC) — memastikan setiap pengguna hanya mengakses data yang relevan dengan perannya.
+                    </p>
                 </div>
 
             </div>
@@ -508,14 +528,16 @@
             <div class="text-center mb-20 reveal">
                 <div class="flex items-center justify-center gap-3 mb-4">
                     <div class="accent-line"></div>
-                    <span class="text-blue-400 text-xs font-semibold uppercase tracking-widest">Alur Kerja Sistem</span>
+                    <span class="text-blue-400 text-xs font-semibold uppercase tracking-widest">Alur Kerja
+                        Sistem</span>
                     <div class="accent-line"></div>
                 </div>
                 <h2 class="font-display font-black text-white text-4xl sm:text-5xl mb-5">
                     Dari Data ke <span class="text-blue-400">Keputusan</span>
                 </h2>
                 <p class="text-slate-400 max-w-lg mx-auto leading-relaxed">
-                    Empat tahap terstruktur yang mengubah data mentah program studi menjadi laporan akreditasi yang actionable.
+                    Empat tahap terstruktur yang mengubah data mentah program studi menjadi laporan akreditasi yang
+                    actionable.
                 </p>
             </div>
 
@@ -527,7 +549,8 @@
                         <div class="step-circle">01</div>
                     </div>
                     <h4 class="font-bold text-white mb-2">Input Data</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Administrator menginput capaian mahasiswa, nilai matakuliah, dan dokumen pendukung ke dalam sistem secara terpusat.</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Administrator menginput capaian mahasiswa, nilai
+                        matakuliah, dan dokumen pendukung ke dalam sistem secara terpusat.</p>
                 </div>
 
                 <div class="step-item text-center reveal" style="transition-delay:0.15s">
@@ -535,7 +558,8 @@
                         <div class="step-circle">02</div>
                     </div>
                     <h4 class="font-bold text-white mb-2">Pemetaan CPL</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Sistem secara otomatis memetakan data ke Capaian Pembelajaran Lulusan sesuai kurikulum yang telah dikonfigurasi.</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Sistem secara otomatis memetakan data ke Capaian
+                        Pembelajaran Lulusan sesuai kurikulum yang telah dikonfigurasi.</p>
                 </div>
 
                 <div class="step-item text-center reveal" style="transition-delay:0.25s">
@@ -543,7 +567,8 @@
                         <div class="step-circle">03</div>
                     </div>
                     <h4 class="font-bold text-white mb-2">Analisis Metrik</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Kalkulasi metrik evaluasi terhadap 9 kriteria IABEE dilakukan secara real-time dengan deteksi gap otomatis.</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Kalkulasi metrik evaluasi terhadap 9 kriteria
+                        IABEE dilakukan secara real-time dengan deteksi gap otomatis.</p>
                 </div>
 
                 <div class="step-item text-center reveal" style="transition-delay:0.35s">
@@ -551,7 +576,8 @@
                         <div class="step-circle">04</div>
                     </div>
                     <h4 class="font-bold text-white mb-2">Ekspor Laporan</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Laporan final digenerate dalam format siap-asesmen yang sesuai dengan template dokumen akreditasi IABEE.</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Laporan final digenerate dalam format
+                        siap-asesmen yang sesuai dengan template dokumen akreditasi IABEE.</p>
                 </div>
 
             </div>
@@ -573,19 +599,24 @@
                     Siap untuk Memulai<br>Persiapan <span class="text-blue-400">Akreditasi</span>?
                 </h2>
                 <p class="text-slate-300 max-w-lg mx-auto mb-10 leading-relaxed">
-                    Platform ini diperuntukkan secara bagi asesor, administrator, dan pemangku kepentingan yang telah memiliki kredensial akses resmi.
+                    Platform ini diperuntukkan secara bagi asesor, administrator, dan pemangku kepentingan yang telah
+                    memiliki kredensial akses resmi.
                 </p>
 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <a href="/login" class="cta-btn-primary">
                         Masuk ke Dashboard Utama
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <path d="M5 12h14" />
                             <path d="m12 5 7 7-7 7" />
                         </svg>
                     </a>
                     <div class="flex items-center gap-2 text-slate-400 text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg>
                         Akses aman dengan enkripsi penuh

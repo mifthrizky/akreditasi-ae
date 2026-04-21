@@ -3,7 +3,7 @@
 return [
     'main' => [
         'label' => 'Dashboard',
-        'route' => '/dashboard',
+        'route' => 'dashboard',
         'icon' => 'home',
     ],
 
@@ -13,38 +13,43 @@ return [
             'items' => [
                 [
                     'label' => 'Program Studi',
-                    'route' => '/program-studi',
+                    'route' => 'admin.program-studi.index',
                     'icon' => 'book',
                 ],
                 [
                     'label' => 'Kriteria & CPL',
-                    'route' => '/kriteria',
+                    'route' => 'admin.kriteria.index',
                     'icon' => 'clipboard',
                 ],
                 [
                     'label' => 'Kriteria Prodi',
-                    'route' => '/dosen/prodi',
+                    'route' => 'dosen.prodi.index',
                     'icon' => 'list-check',
                 ],
             ],
         ],
-        [
-            'title' => 'Evaluasi',
-            'items' => [
-                [
-                    'label' => 'Laporan Capaian',
-                    'route' => '/laporan',
-                    'icon' => 'chart',
-                ],
-            ],
-        ],
+        // [
+        //     'title' => 'Evaluasi',
+        //     'items' => [
+        //         [
+        //             'label' => 'Laporan Capaian',
+        //             'route' => 'dosen.dashboard',
+        //             'icon' => 'chart',
+        //         ],
+        //     ],
+        // ],
         [
             'title' => 'Validasi',
             'items' => [
                 [
                     'label' => 'Antrian Review',
-                    'route' => '/validator/antrian',
+                    'route' => 'validator.antrian.index',
                     'icon' => 'check-list',
+                ],
+                [
+                    'label' => 'Riwayat Validasi',
+                    'route' => 'validator.riwayat.index',
+                    'icon' => 'history',
                 ],
             ],
         ],
@@ -53,8 +58,13 @@ return [
             'items' => [
                 [
                     'label' => 'Manajemen User',
-                    'route' => '/users',
+                    'route' => 'admin.users.index',
                     'icon' => 'users',
+                ],
+                [
+                    'label' => 'Kelola Izin',
+                    'route' => 'admin.permissions.index',
+                    'icon' => 'lock',
                 ],
             ],
         ],
@@ -69,5 +79,7 @@ return [
         'list-check' => '<svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg>',
         'check-list' => '<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M5 20h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v11a2 2 0 002 2z"></path></svg>',
+        'lock' => '<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>',
+        'history' => '<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>',
     ],
 ];

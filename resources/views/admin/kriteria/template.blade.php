@@ -17,7 +17,7 @@
                 <p class="text-slate-500 text-sm mt-1">Bobot: {{ $kriteria->bobot }}%</p>
             </div>
             <div class="flex gap-2">
-                <a href="{{ route('kriteria.index') }}"
+                <a href="{{ route('admin.kriteria.index') }}"
                     class="inline-flex items-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors focus:outline-none">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -190,7 +190,7 @@
                     </svg>
                 </button>
             </div>
-            <form id="formTemplate" method="POST" action="{{ route('template-items.store') }}" class="p-6">
+            <form id="formTemplate" method="POST" action="{{ route('admin.template-items.store') }}" class="p-6">
                 @csrf
                 <input type="hidden" name="_method" value="POST">
                 <input type="hidden" name="kriteria_id" value="{{ $kriteria->kriteria_id }}">
@@ -478,7 +478,7 @@
                 document.getElementById('formTemplate').reset();
                 document.getElementById('modalTitle').textContent = 'Tambah Template Item';
                 document.getElementById('formTemplate').querySelector('input[name="_method"]').value = 'POST';
-                document.getElementById('formTemplate').action = "{{ route('template-items.store') }}";
+                document.getElementById('formTemplate').action = "{{ route('admin.template-items.store') }}";
                 updateTipeInfo();
                 document.getElementById('bobotInfoBox').classList.add('hidden');
             }

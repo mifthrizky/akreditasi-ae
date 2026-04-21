@@ -10,7 +10,7 @@
                 <p class="text-slate-600 mt-1 text-base">Daftar submission yang menunggu validasi</p>
             </div>
             <div>
-                <a href="{{ route('dashboard') }}"
+                <a href="{{ route('validator.dashboard') }}"
                     class="inline-flex items-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -55,7 +55,7 @@
                 <!-- Filter Section -->
                 <div class="p-6 border-b border-slate-200">
                     <h3 class="text-lg font-semibold text-slate-900 mb-4">Filter</h3>
-                    <form action="{{ route('validator.antrian') }}" method="GET" class="space-y-4">
+                    <form action="{{ route('validator.antrian.index') }}" method="GET" class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <!-- Filter Prodi -->
                             <div>
@@ -95,7 +95,7 @@
                                     class="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
                                     Filter
                                 </button>
-                                <a href="{{ route('validator.antrian') }}"
+                                <a href="{{ route('validator.antrian.index') }}"
                                     class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium rounded-lg transition-colors text-center">
                                     Reset
                                 </a>
@@ -200,7 +200,7 @@
 
                                     <!-- Aksi -->
                                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                                        <a href="{{ route('validator.review', $submission->submission_id) }}"
+                                        <a href="{{ route('validator.antrian.show', $submission->submission_id) }}"
                                             class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded transition-colors gap-1">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

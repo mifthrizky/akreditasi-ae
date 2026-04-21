@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Validator;
 
+use App\Http\Controllers\Controller;
 use App\Models\Submission;
 use App\Models\ProgramStudi;
 use App\Models\Kriteria;
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\AuditLogService;
 
-class ValidatorController extends Controller
+class ValidasiController extends Controller
 {
     /**
      * Display antrian submission yang menunggu review
@@ -58,7 +59,7 @@ class ValidatorController extends Controller
     /**
      * Show detail submission for review
      */
-    public function showReview($submission_id)
+    public function show($submission_id)
     {
         $submission = Submission::with(['prodi', 'kriteria', 'user', 'items.templateItem', 'validasi'])
             ->findOrFail($submission_id);
@@ -74,15 +75,14 @@ class ValidatorController extends Controller
     /**
      * Store validasi (approve/revisi/reject) + komentar
      * Uses state machine to validate status transitions
-     * Revisi/ditolak status requires komentar (per PRD)
      */
-    public function storeValidasi(Request $request, $submission_id)
+    public function store(Request $request, $submission_id)
     {
         $submission = Submission::findOrFail($submission_id);
 
         // Check if already validated
         if ($submission->status !== 'submitted') {
-            return redirect()->route('validator.antrian')
+            return redirect()->route('validator.antrian.index')
                 ->with('error', 'Submission ini sudah di-review');
         }
 
@@ -139,7 +139,7 @@ class ValidatorController extends Controller
             'ditolak' => 'Ditolak',
         };
 
-        return redirect()->route('validator.antrian')
+        return redirect()->route('validator.antrian.index')
             ->with('success', "Submission {$statusLabel}");
     }
 }

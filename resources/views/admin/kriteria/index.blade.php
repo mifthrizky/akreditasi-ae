@@ -72,7 +72,7 @@
                         <tbody>
                             @foreach ($kriterias as $kriteria)
                                 <!-- Level 0 Kriteria -->
-                                <tr class="border-b border-slate-200 bg-slate-50 hover:bg-slate-100 transition-colors">
+                                <tr class="level-0-row border-b border-slate-200 bg-slate-50 hover:bg-slate-100 transition-colors">
                                     <td class="px-6 py-4 text-slate-900 font-bold">{{ $kriteria->kode }}</td>
                                     <td class="px-6 py-4 text-slate-900 font-semibold">{{ $kriteria->nama }}</td>
                                     <td class="px-6 py-4">
@@ -114,11 +114,11 @@
                                 <!-- Level 1 Sub-Kriteria -->
                                 @if ($kriteria->children->count() > 0)
                                     @foreach ($kriteria->children as $subKriteria)
-                                        <tr class="border-b border-slate-200 hover:bg-slate-50 transition-colors">
-                                            <td class="px-6 py-4 text-slate-700 pl-12">
-                                                <span class="text-gray-400">├─ </span>{{ $subKriteria->kode }}
+                                        <tr class="level-1-row border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                                            <td class="px-6 py-4 text-slate-800 pl-12 font-medium">
+                                                <span class="text-slate-400">├─ </span>{{ $subKriteria->kode }}
                                             </td>
-                                            <td class="px-6 py-4 text-slate-700">{{ $subKriteria->nama }}</td>
+                                            <td class="px-6 py-4 text-slate-800 font-medium">{{ $subKriteria->nama }}</td>
                                             <td class="px-6 py-4">
                                                 <span
                                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -129,12 +129,13 @@
                                             <td class="px-6 py-4">
                                                 <div class="flex gap-2">
                                                     <button
-                                                        class=" btn-config-template inline-flex items-center px-3 py-1.5 text-sm font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 transition-colors focus:outline-none hover:rounded-xl"
+                                                        class="btn-add-sub-kriteria inline-flex items-center px-3 py-1.5 text-sm font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded transition-colors focus:outline-none hover:rounded-xl"
                                                         data-id="{{ $subKriteria->kriteria_id }}"
+                                                        data-kode="{{ $subKriteria->kode }}"
                                                         data-nama="{{ $subKriteria->nama }}">
-                                                        Template
+                                                        + Sub
                                                     </button>
-
+                                                    
                                                     <button
                                                         class="btn-edit-kriteria inline-flex items-center px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded transition-colors focus:outline-none hover:rounded-xl"
                                                         data-id="{{ $subKriteria->kriteria_id }}"
@@ -158,6 +159,56 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        
+                                        <!-- Level 2 Sub-Kriteria -->
+                                        @if ($subKriteria->children->count() > 0)
+                                            @foreach ($subKriteria->children as $subKriteriaLvl2)
+                                                <tr class="level-2-row border-b border-slate-200 bg-white hover:bg-slate-50 transition-colors">
+                                                    <td class="px-6 py-4 text-slate-600 pl-20">
+                                                        <span class="text-slate-300">└─ </span>{{ $subKriteriaLvl2->kode }}
+                                                    </td>
+                                                    <td class="px-6 py-4 text-slate-600 whitespace-normal min-w-[200px]">{{ $subKriteriaLvl2->nama }}</td>
+                                                    <td class="px-6 py-4">
+                                                        <span
+                                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                                            Level 2
+                                                        </span>
+                                                    </td>
+                                                    <td class="px-6 py-4 text-slate-600">{{ $subKriteriaLvl2->bobot }}%</td>
+                                                    <td class="px-6 py-4">
+                                                        <div class="flex gap-2">
+                                                            <button
+                                                                class=" btn-config-template inline-flex items-center px-3 py-1.5 text-sm font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 transition-colors focus:outline-none hover:rounded-xl"
+                                                                data-id="{{ $subKriteriaLvl2->kriteria_id }}"
+                                                                data-nama="{{ $subKriteriaLvl2->nama }}">
+                                                                Template
+                                                            </button>
+
+                                                            <button
+                                                                class="btn-edit-kriteria inline-flex items-center px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded transition-colors focus:outline-none hover:rounded-xl"
+                                                                data-id="{{ $subKriteriaLvl2->kriteria_id }}"
+                                                                data-kode="{{ $subKriteriaLvl2->kode }}"
+                                                                data-nama="{{ $subKriteriaLvl2->nama }}"
+                                                                data-deskripsi="{{ $subKriteriaLvl2->deskripsi }}"
+                                                                data-level="{{ $subKriteriaLvl2->level }}"
+                                                                data-bobot="{{ $subKriteriaLvl2->bobot }}"
+                                                                data-urutan="{{ $subKriteriaLvl2->urutan }}"
+                                                                data-parent_id="{{ $subKriteriaLvl2->parent_id }}">
+                                                                Edit
+                                                            </button>
+
+                                                            <button
+                                                                class="btn-delete-kriteria inline-flex items-center px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors focus:outline-none hover:rounded-xl"
+                                                                data-id="{{ $subKriteriaLvl2->kriteria_id }}"
+                                                                data-kode="{{ $subKriteriaLvl2->kode }}"
+                                                                data-nama="{{ $subKriteriaLvl2->nama }}">
+                                                                Hapus
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                 @endif
                             @endforeach
@@ -298,7 +349,7 @@
                             required
                             class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                     </div>
-                    <input type="hidden" name="level" value="1">
+                    <input type="hidden" name="level" id="input_level1" value="1">
                     <input type="hidden" id="parent_id1" name="parent_id">
                 </div>
                 <div class="mt-6 flex gap-3">
@@ -334,12 +385,23 @@
 
                 // Find the parent row
                 const parentRow = this.closest('tr');
+                const isLevel0 = parentRow.classList.contains('level-0-row');
+                const isLevel1 = parentRow.classList.contains('level-1-row');
 
-                // Find all child rows (rows between this parent and next parent)
+                // Find all child rows
                 let currentRow = parentRow.nextElementSibling;
                 let childRows = [];
-                while (currentRow && !currentRow.classList.contains('bg-slate-50')) {
-                    childRows.push(currentRow);
+                
+                while (currentRow) {
+                    if (isLevel0) {
+                        if (currentRow.classList.contains('level-0-row')) break; // Stop at next Level 0
+                        if (currentRow.classList.contains('level-1-row')) childRows.push(currentRow); // Collect Level 1s
+                    } else if (isLevel1) {
+                        if (currentRow.classList.contains('level-0-row') || currentRow.classList.contains('level-1-row')) break; // Stop at next Level 0 or 1
+                        if (currentRow.classList.contains('level-2-row')) childRows.push(currentRow); // Collect Level 2s
+                    } else {
+                        break;
+                    }
                     currentRow = currentRow.nextElementSibling;
                 }
 
@@ -359,19 +421,20 @@
                 }
 
                 // Format next code with padding (e.g., "K001.04")
-                const nextCode = `${parentKode}.${String(nextCodeNum).padStart(2, '0')}`;
+                const nextCode = `${parentKode}.${String(nextCodeNum).padStart(isLevel1 ? 1 : 2, '0')}`;
                 const nextUrutan = childRows.length + 1;
 
                 document.getElementById('modalTitle1').textContent =
                     `Tambah Sub-Kriteria dari "${parentKode}"`;
                 document.getElementById('parent_id1').value = parentId;
-                document.getElementById('formKriteria1').action = "{{ route('kriteria.store') }}";
+                document.getElementById('formKriteria1').action = "{{ route('admin.kriteria.store') }}";
                 document.getElementById('formKriteria1').method = 'POST';
                 document.getElementById('create_kode1').value = nextCode;
                 document.getElementById('create_nama1').value = '';
                 document.getElementById('create_deskripsi1').value = '';
                 document.getElementById('create_bobot1').value = '';
                 document.getElementById('create_urutan1').value = nextUrutan;
+                document.getElementById('input_level1').value = isLevel1 ? 2 : 1;
 
                 openModal('createKriteria1Modal');
             });
@@ -391,19 +454,19 @@
 
                 if (level == 0) {
                     document.getElementById('modalTitle0').textContent = 'Edit Kriteria Utama';
-                    document.getElementById('formKriteria0').action = `{{ url('/kriteria') }}/${id}`;
+                    document.getElementById('formKriteria0').action = `{{ url('/admin/kriteria') }}/${id}`;
                     document.getElementById('formKriteria0').querySelector('input[name="_method"]').value =
                         'PUT';
                     document.getElementById('create_kode0').value = kode;
                     document.getElementById('create_nama0').value = nama;
                     document.getElementById('create_deskripsi0').value = deskripsi;
-                    document.getElementById('create_bobot0').value = bobot;
+                    document.getElementById('create_bobot0').value = bobot; 
                     document.getElementById('create_urutan0').value = urutan;
 
                     openModal('createKriteria0Modal');
                 } else {
                     document.getElementById('modalTitle1').textContent = 'Edit Sub-Kriteria';
-                    document.getElementById('formKriteria1').action = `{{ url('/kriteria') }}/${id}`;
+                    document.getElementById('formKriteria1').action = `{{ url('/admin/kriteria') }}/${id}`;
                     document.getElementById('formKriteria1').querySelector('input[name="_method"]').value =
                         'PUT';
                     document.getElementById('create_kode1').value = kode;
@@ -412,6 +475,7 @@
                     document.getElementById('create_bobot1').value = bobot;
                     document.getElementById('create_urutan1').value = urutan;
                     document.getElementById('parent_id1').value = parentId;
+                    document.getElementById('input_level1').value = level;
 
                     openModal('createKriteria1Modal');
                 }
@@ -429,7 +493,7 @@
                         showLoadingAlert('Menghapus...');
                         const form = document.createElement('form');
                         form.method = 'POST';
-                        form.action = `{{ url('/kriteria') }}/${id}`;
+                        form.action = `{{ url('/admin/kriteria') }}/${id}`;
 
                         const csrfToken = document.querySelector('meta[name="csrf-token"]')
                             ?.content || '';
@@ -449,7 +513,7 @@
         document.querySelectorAll('.btn-config-template').forEach(btn => {
             btn.addEventListener('click', function() {
                 const id = this.getAttribute('data-id');
-                window.location.href = `{{ url('/kriteria') }}/${id}/template`;
+                window.location.href = `{{ url('/admin/kriteria') }}/${id}/template`;
             });
         });
 

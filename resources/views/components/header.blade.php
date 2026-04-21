@@ -1,12 +1,12 @@
 <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 z-10">
     <div class="font-semibold text-slate-800">
-        {{ 'Evaluasi Kurikulum' }}
+        {{ 'Pemeriksa Panduan Kurikulum' }}
     </div>
 
     <div class="flex items-center space-x-4">
         <button id="profileBtn" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
             <img src="{{ asset('profile/user-11.png') }}" alt="Profile" class="h-10 w-10 rounded-full cursor-pointer">
-            <span class="text-sm font-medium text-slate-600">{{ Auth::user()->name ?? 'Administrator' }}</span>
+            <span class="text-sm font-medium text-slate-600">{{ Str::ucfirst(Auth::user()->role) }}</span>
         </button>
     </div>
 </header>
@@ -30,7 +30,7 @@
                 class="h-24 w-24 rounded-full mx-auto mb-4 object-cover">
 
             <!-- User Name -->
-            <h3 class="text-xl font-semibold text-slate-900 mb-1">{{ Auth::user()->name ?? 'Administrator' }}</h3>
+            <h3 class="text-xl font-semibold text-slate-900 mb-1">{{ Auth::user()->role }}</h3>
             <p class="text-sm text-slate-600 mb-6">{{ Auth::user()->email ?? '-' }}</p>
 
             <!-- Logout Button -->

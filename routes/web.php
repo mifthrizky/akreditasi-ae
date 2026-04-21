@@ -1,13 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProgramStudiController;
-use App\Http\Controllers\KriteriaController;
-use App\Http\Controllers\TemplateItemController;
-use App\Http\Controllers\DosenController;
-use App\Http\Controllers\ValidatorController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProgramStudiController;
+use App\Http\Controllers\Admin\KriteriaController;
+use App\Http\Controllers\Admin\TemplateItemController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Dosen\DashboardController as DosenDashboardController;
+use App\Http\Controllers\Dosen\SubmissionController;
+use App\Http\Controllers\Dosen\LaporanController;
+use App\Http\Controllers\Dosen\RiwayatController as DosenRiwayatController;
+use App\Http\Controllers\Validator\DashboardController as ValidatorDashboardController;
+use App\Http\Controllers\Validator\ValidasiController;
+use App\Http\Controllers\Validator\RiwayatController as ValidatorRiwayatController;
 
 // Favicon route
 Route::get('/favicon.ico', function () {
@@ -25,41 +32,90 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// ============================================================
+// AUTHENTICATION ROUTES (Guest)
+// ============================================================
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'authenticate']);
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);
 });
 
-
-
-// Dashboard admin
+// ============================================================
+// AUTHENTICATED ROUTES (All roles)
+// ============================================================
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    // ============================================================
+    // ADMIN ROUTES
+    // ============================================================
+    Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
+        // Admin Dashboard
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-    // Admin routes
-    Route::resource('users', UserController::class);
-    Route::post('/users/{user}/assign-prodi', [UserController::class, 'assignProdi'])->name('users.assignProdi');
-    Route::resource('program-studi', ProgramStudiController::class);
-    Route::resource('kriteria', KriteriaController::class);
-    Route::get('/kriteria/{kriteria}/template', [KriteriaController::class, 'showTemplate'])->name('kriteria.template');
-    Route::resource('template-items', TemplateItemController::class);
+        // Permission Management (Kelola Izin)
+        Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions.index');
+        Route::post('/permissions/{routeName}', [PermissionController::class, 'toggleRole'])->name('permissions.toggle');
+        Route::delete('/permissions/reset', [PermissionController::class, 'reset'])->name('permissions.reset');
 
-    // Dosen routes
-    Route::get('/dosen/prodi', [DosenController::class, 'indexProdi'])->name('dosen.prodi.index');
-    Route::get('/dosen/prodi/{prodi_id}', [DosenController::class, 'showProdiKriteria'])->name('dosen.prodi.kriteria');
-    Route::get('/dosen/submission/{prodi_id}/{kriteria_id}', [DosenController::class, 'showSubmission'])->name('dosen.submission.show');
-    Route::post('/dosen/submission/{prodi_id}/{kriteria_id}', [DosenController::class, 'storeSubmission'])->name('dosen.submission.store');
-    Route::post('/dosen/submission/{prodi_id}/{submission_id}/reset', [DosenController::class, 'resetSubmission'])->name('dosen.submission.reset');
-    Route::get('/dosen/submission/{submission_id}/review', [DosenController::class, 'showReview'])->name('dosen.submission.review');
-    Route::get('/dosen/prodi/{prodi_id}/laporan', [DosenController::class, 'showProdiLaporan'])->name('dosen.prodi.laporan');
-    Route::post('/dosen/prodi/{prodi_id}/laporan', [DosenController::class, 'storeLaporan'])->name('dosen.prodi.laporan.store');
+        // User Management
+        Route::resource('users', UserController::class);
+        Route::post('/users/{user}/assign-prodi', [UserController::class, 'assignProdi'])->name('users.assignProdi');
 
-    // Validator routes
-    Route::get('/validator/antrian', [ValidatorController::class, 'indexAntrian'])->name('validator.antrian');
-    Route::get('/validator/antrian/{submission_id}', [ValidatorController::class, 'showReview'])->name('validator.review');
-    Route::post('/validator/antrian/{submission_id}/validasi', [ValidatorController::class, 'storeValidasi'])->name('validator.validasi.store');
+        // Program Studi Management
+        Route::resource('program-studi', ProgramStudiController::class);
+
+        // Kriteria Management
+        Route::resource('kriteria', KriteriaController::class);
+        Route::get('/kriteria/{kriteria}/template', [KriteriaController::class, 'showTemplate'])->name('kriteria.template');
+
+        // Template Item Management
+        Route::resource('template-items', TemplateItemController::class);
+    });
+
+    // ============================================================
+    // DOSEN ROUTES
+    // ============================================================
+    Route::prefix('dosen')->name('dosen.')->middleware('role:dosen')->group(function () {
+        // Dosen Dashboard
+        Route::get('/dashboard', [DosenDashboardController::class, 'index'])->name('dashboard');
+
+        // Prodi List & Kriteria List
+        Route::get('/prodi', [SubmissionController::class, 'indexProdi'])->name('prodi.index');
+        Route::get('/prodi/{prodi_id}', [SubmissionController::class, 'kriteriIndex'])->name('submission.kriteria-index');
+
+        // Submission Management
+        Route::get('/submission/{prodi_id}/{kriteria_id}', [SubmissionController::class, 'show'])
+            ->name('submission.show')
+            ->where(['prodi_id' => '[0-9]+', 'kriteria_id' => '[0-9]+']);
+        Route::post('/submission/{prodi_id}/{kriteria_id}', [SubmissionController::class, 'store'])
+            ->name('submission.store')
+            ->where(['prodi_id' => '[0-9]+', 'kriteria_id' => '[0-9]+']);
+        Route::post('/submission/{submission_id}/reset', [SubmissionController::class, 'reset'])->name('submission.reset');
+        Route::get('/submission/{submission_id}/review', [SubmissionController::class, 'review'])->name('submission.review');
+
+        // Submission Riwayat (Audit Log)
+        Route::get('/submission/{submission_id}/riwayat', [DosenRiwayatController::class, 'show'])->name('submission.riwayat');
+
+        // Laporan (Report)
+        Route::get('/prodi/{prodi_id}/laporan', [LaporanController::class, 'show'])->name('laporan.show');
+        Route::post('/prodi/{prodi_id}/laporan', [LaporanController::class, 'store'])->name('laporan.store');
+    });
+
+    // ============================================================
+    // VALIDATOR ROUTES
+    // ============================================================
+    Route::prefix('validator')->name('validator.')->middleware('role:validator')->group(function () {
+        // Validator Dashboard
+        Route::get('/dashboard', [ValidatorDashboardController::class, 'index'])->name('dashboard');
+
+        // Antrian Review (Queue)
+        Route::get('/antrian', [ValidasiController::class, 'indexAntrian'])->name('antrian.index');
+        Route::get('/antrian/{submission_id}', [ValidasiController::class, 'show'])->name('antrian.show');
+        Route::post('/antrian/{submission_id}/validasi', [ValidasiController::class, 'store'])->name('validasi.store');
+
+        // Riwayat Validasi (Validation History)
+        Route::get('/riwayat', [ValidatorRiwayatController::class, 'index'])->name('riwayat.index');
+        Route::get('/riwayat/{auditLogId}', [ValidatorRiwayatController::class, 'show'])->name('riwayat.show');
+    });
 });

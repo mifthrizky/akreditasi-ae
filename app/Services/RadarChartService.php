@@ -8,7 +8,7 @@ class RadarChartService
 {
     protected $skorService;
 
-    const IABEE_MINIMUM = 70; // 70% minimum standard
+    const IABEE_MINIMUM = 75; // 75% minimum standard per IABEE 2026
 
     public function __construct(SkorService $skorService)
     {
@@ -137,6 +137,7 @@ class RadarChartService
 
     /**
      * Get overall status based on total score vs IABEE minimum
+     * Returns status with color and label per PRD thresholds
      */
     public function getOverallStatus(int $prodi_id, string $status = 'diterima'): array
     {
@@ -147,8 +148,8 @@ class RadarChartService
             'total_score_percent' => round($totalScore, 2),
             'minimum_required' => self::IABEE_MINIMUM,
             'status' => $totalScore >= self::IABEE_MINIMUM ? 'passed' : 'failed',
-            'color' => $this->skorService->getStatusColor($totalScore / 100),
-            'label' => $this->skorService->getStatusLabel($totalScore / 100),
+            'color' => $this->skorService->getStatusColor($totalScore),
+            'label' => $this->skorService->getStatusLabel($totalScore),
         ];
     }
 }
