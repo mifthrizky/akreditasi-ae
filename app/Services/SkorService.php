@@ -35,8 +35,10 @@ class SkorService
         $filledBobot = 0;
 
         foreach ($templateItems as $template) {
-            // Only count wajib items toward total
-            if ($template->wajib) {
+            // Count ALL items with bobot > 0 toward denominator
+            // (narasi already excluded by query, and narasi items have bobot=0)
+            // wajib flag is for form validation (required/optional input), not scoring
+            if ($template->bobot > 0) {
                 $totalBobot += $template->bobot;
 
                 // Check if this item is filled
@@ -127,10 +129,10 @@ class SkorService
     {
         // Level 2 scores (submissions)
         $level2Scores = $this->calculateAllForProdi($prodi_id, $status);
-        
+
         // Aggregate Level 2 -> Level 1
         $level1Scores = $this->aggregateToParentLevel($level2Scores, 1);
-        
+
         // Aggregate Level 1 -> Level 0
         return $this->aggregateToParentLevel($level1Scores, 0);
     }
@@ -155,7 +157,7 @@ class SkorService
         }
 
         $level0Kriteria = \App\Models\Kriteria::where('level', 0)->get();
-        
+
         $totalSum = 0;
         $totalBobot = 0;
 

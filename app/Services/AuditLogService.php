@@ -14,8 +14,9 @@ class AuditLogService
      * @param Submission $submission
      * @param string $action ('created', 'updated', 'submitted', 'approved', 'rejected', 'revision')
      * @param array $changes (optional) ['field_name' => ['old' => value, 'new' => value]]
+     * @param int|null $userId (optional) User ID for audit log. If null, uses Auth::id()
      */
-    public static function log(Submission $submission, string $action, array $changes = []): AuditLog
+    public static function log(Submission $submission, string $action, array $changes = [], ?int $userId = null): AuditLog
     {
         $changedFields = array_keys($changes);
         $oldValues = [];
@@ -26,9 +27,12 @@ class AuditLogService
             $newValues[$field] = $change['new'] ?? null;
         }
 
+        // Use provided userId or fallback to Auth::id()
+        $userId = $userId ?? Auth::id();
+
         return AuditLog::create([
             'submission_id' => $submission->submission_id,
-            'user_id' => Auth::id(),
+            'user_id' => $userId,
             'action' => $action,
             'changed_fields' => !empty($changedFields) ? $changedFields : null,
             'old_values' => !empty($oldValues) ? $oldValues : null,
@@ -66,31 +70,31 @@ class AuditLogService
     /**
      * Log validator approval (submitted → diterima)
      */
-    public static function logApproval(Submission $submission): AuditLog
+    public static function logApproval(Submission $submission, ?int $userId = null): AuditLog
     {
         return self::log($submission, 'approved', [
             'status' => ['old' => 'submitted', 'new' => 'diterima'],
-        ]);
+        ], $userId);
     }
 
     /**
      * Log validator rejection (submitted → ditolak)
      */
-    public static function logRejection(Submission $submission): AuditLog
+    public static function logRejection(Submission $submission, ?int $userId = null): AuditLog
     {
         return self::log($submission, 'rejected', [
             'status' => ['old' => 'submitted', 'new' => 'ditolak'],
-        ]);
+        ], $userId);
     }
 
     /**
      * Log validator revision request (submitted → revisi)
      */
-    public static function logRevision(Submission $submission): AuditLog
+    public static function logRevision(Submission $submission, ?int $userId = null): AuditLog
     {
         return self::log($submission, 'revision', [
             'status' => ['old' => 'submitted', 'new' => 'revisi'],
-        ]);
+        ], $userId);
     }
 
     /**

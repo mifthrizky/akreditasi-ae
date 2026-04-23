@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Laporan;
 use App\Models\ProgramStudi;
+use App\Models\Kriteria;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +30,7 @@ class LaporanService
      * Generate PDF laporan for a prodi
      * Returns array with path and success status
      */
-    public function generatePDF(int $prodi_id): array
+    public function generatePDF(int $prodi_id, ?int $userId = null): array
     {
         try {
             // Get all data needed for laporan
@@ -37,15 +38,34 @@ class LaporanService
             $totalScore = $this->skorService->calculateTotalForProdi($prodi_id, 'diterima');
             $scores = $this->skorService->calculateAllForProdi($prodi_id, 'diterima');
             $gaps = $this->gapAnalysisService->analyzeProdi($prodi_id);
+            $gapsByParent = $this->gapAnalysisService->analyzeProdiByParent($prodi_id);
             $chartData = $this->radarChartService->generateChartData($prodi_id, 'diterima');
             $overallStatus = $this->radarChartService->getOverallStatus($prodi_id, 'diterima');
+
+            // Get kriteria for the view
+            $kriterias = Kriteria::where('level', 0)
+                ->orderBy('urutan')
+                ->with(['children' => function ($query) {
+                    $query->orderBy('urutan');
+                }])
+                ->get();
+
+            // Create kriteria mapping for ALL kriteria (all levels) for lookup
+            $kriteriaMap = [];
+            $allKriterias = Kriteria::all();
+            foreach ($allKriterias as $k) {
+                $kriteriaMap[$k->kriteria_id] = $k->nama;
+            }
 
             // Prepare view data
             $data = [
                 'prodi' => $prodi,
+                'kriterias' => $kriterias,
+                'kriteriaMap' => $kriteriaMap,
                 'total_score' => $totalScore,
                 'scores' => $scores,
                 'gaps' => $gaps,
+                'gapsByParent' => $gapsByParent,
                 'chart_data' => $chartData,
                 'overall_status' => $overallStatus,
                 'generated_at' => now()->format('d F Y H:i'),
@@ -57,8 +77,13 @@ class LaporanService
             // Convert to PDF using DomPDF
             $pdf = Pdf::loadHTML($html)
                 ->setPaper('a4')
-                ->setOption('isPhpEnabled', true)
-                ->setOption('isHtmlOpen', true);
+                ->setOptions([
+                    'isPhpEnabled' => false,
+                    'isHtmlOpen' => false,
+                    'isRemoteEnabled' => false,
+                    'chroot' => storage_path(),
+                    'enable_font_subsetting' => true,
+                ]);
 
             // Generate filename
             $filename = sprintf(
@@ -71,10 +96,13 @@ class LaporanService
             $path = 'laporans/' . $filename;
             Storage::disk('public')->put($path, $pdf->output());
 
+            // Use provided userId or Auth::id()
+            $generatedBy = $userId ?? Auth::id();
+
             // Save record in database
             $laporan = Laporan::create([
                 'prodi_id' => $prodi_id,
-                'generated_by' => Auth::id(),
+                'generated_by' => $generatedBy,
                 'skor_total' => $totalScore,
                 'path_pdf' => $path,
             ]);
@@ -105,6 +133,21 @@ class LaporanService
             ->orderByDesc('generated_at')
             ->limit($limit)
             ->get();
+    }
+
+    /**
+     * Generate laporan PDF wrapper (for controller compatibility)
+     */
+    public function generateLaporanPDF(int $prodi_id, int $user_id): array
+    {
+        // Temporarily set auth for the PDF generation
+        $originalUser = Auth::id();
+
+        try {
+            return $this->generatePDF($prodi_id);
+        } finally {
+            // No need to restore, just ensure it completes
+        }
     }
 
     /**

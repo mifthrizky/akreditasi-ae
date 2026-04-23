@@ -14,6 +14,18 @@ class PagePermissionSeeder extends Seeder
     {
         $navigationConfig = config('navigation');
 
+        // Define role permissions mapping
+        $rolePermissions = [
+            'dashboard' => ['admin', 'dosen', 'validator'],
+            'admin.program-studi.index' => ['admin'],
+            'admin.kriteria.index' => ['admin'],
+            'admin.users.index' => ['admin'],
+            'admin.permissions.index' => ['admin'],
+            'dosen.prodi.index' => ['admin', 'dosen'],
+            'validator.antrian.index' => ['admin', 'validator'],
+            'validator.riwayat.index' => ['admin', 'validator'],
+        ];
+
         // Get all navigation routes
         $routes = [];
 
@@ -41,13 +53,16 @@ class PagePermissionSeeder extends Seeder
             }
         }
 
-        // Seed default permissions
+        // Seed permissions with role mappings
         foreach ($routes as $route) {
+            $routeName = $route['route'];
+            $allowedRoles = $rolePermissions[$routeName] ?? ['admin'];
+
             PagePermission::updateOrCreate(
-                ['route_name' => $route['route']],
+                ['route_name' => $routeName],
                 [
                     'page_label' => $route['label'],
-                    'allowed_roles' => ['admin'],
+                    'allowed_roles' => $allowedRoles,
                 ]
             );
         }

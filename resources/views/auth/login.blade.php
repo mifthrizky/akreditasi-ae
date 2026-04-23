@@ -190,8 +190,8 @@
 
                 <div class="flex flex-col justify-center h-full">
                     <h1 class="text-white font-bold text-5xl leading-tight mb-4">
-                        Sistem Evaluasi <br>
-                        <span class="text-blue-400">Akreditasi IABEE</span>
+                        Sistem Pemeriksa <br>
+                        <span class="text-blue-400">Panduan Kurikulum</span>
                     </h1>
 
                     <p class="text-gray-300 text-lg max-w-md">

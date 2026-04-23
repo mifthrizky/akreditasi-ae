@@ -17,7 +17,7 @@
 
     <div class="flex-1 flex flex-col overflow-hidden">
 
-        @include('components.header', ['title' => 'Evaluasi Kurikulum '])
+        @include('components.header', ['title' => 'Evaluasi Panduan Pedoman Kurikulum '])
 
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-6">
             @yield('content')

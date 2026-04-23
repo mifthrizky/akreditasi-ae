@@ -12,15 +12,21 @@ class TemplateSeeder extends Seeder
      * Membuat template items untuk seluruh sub-kriteria Level 2 IABEE 2026 (29 item).
      *
      * Aturan bobot per PRD:
-     *   - Total bobot item wajib (wajib=true) per sub-kriteria = 100
-     *   - Item tipe 'narasi' WAJIB berbobot = 0
+     *   - Total bobot item per sub-kriteria = 100
+     *   - Item tipe 'narasi' berbobot = 0 (dokumentasi, wajib=true)
      *   - Item tipe 'upload', 'checklist', 'numerik' berkontribusi ke skor
      *
+     * Flag "wajib" (required/optional) berdasarkan tipe:
+     *   - narasi: wajib=true (penjelasan dokumentasi harus ada)
+     *   - numerik: wajib=true (nilai data harus terisi)
+     *   - checklist: wajib=true (konfirmasi harus dijawab)
+     *   - upload: wajib=false (dokumen opsional, tim mungkin belum punya)
+     *
      * Pola template yang digunakan:
-     *   [A] Standar   : narasi(0) + upload_utama(70) + checklist(30)          = 100
-     *   [B] Dua Dokumen: narasi(0) + upload_utama(60) + upload_pendukung(40)  = 100
-     *   [C] Kuantitatif: narasi(0) + numerik(40) + upload(60)                 = 100
-     *   [D] Dokumen saja: narasi(0) + upload(100)                             = 100
+     *   [A] Standar   : narasi(0,wajib) + upload(70,opsional) + checklist(30,wajib)          = 100
+     *   [B] Dua Dokumen: narasi(0,wajib) + upload(60,opsional) + upload(40,opsional)  = 100
+     *   [C] Kuantitatif: narasi(0,wajib) + numerik(40,wajib) + upload(60,opsional)                 = 100
+     *   [D] Dokumen saja: narasi(0,wajib) + upload(100,opsional)                             = 100
      */
     public function run(): void
     {
@@ -48,7 +54,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload dokumen kurikulum resmi atau buku panduan akademik yang memuat profil lulusan.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -57,7 +63,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload dokumen Renstra yang relevan dengan penetapan PPM.',
                 'bobot'       => 30,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -81,7 +87,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload SK pembentukan Satgas Penyusunan atau Kaji Ulang Kurikulum.',
                 'bobot'       => 50,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -90,7 +96,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload notulensi rapat kurikulum dan/atau dokumen kaji ulang yang mencantumkan masukan pemangku kepentingan.',
                 'bobot'       => 50,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -114,7 +120,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload salah satu atau lebih dari: Buku Panduan Akademik, Brosur Penerimaan Mahasiswa Baru, atau Laporan Kegiatan Sosialisasi PPM.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -147,7 +153,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload dokumen resmi CPL atau Standar Kompetensi Lulusan yang telah disahkan.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -156,7 +162,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload contoh RPS yang menunjukkan pemetaan CPL ke mata kuliah.',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -180,7 +186,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload dokumen kurikulum yang menunjukkan integrasi CPL tambahan sesuai kriteria disiplin.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -213,7 +219,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload Buku Panduan Akademik atau tautan/screenshot website resmi yang memuat PPM dan CPL.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -222,7 +228,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload laporan atau dokumentasi kegiatan orientasi mahasiswa baru yang mencantumkan sosialisasi PPM/CPL.',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -246,7 +252,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload SOP Kaji Ulang CPL atau Panduan Teknis Evaluasi & Pemutakhiran Kurikulum yang berlaku.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -255,7 +261,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload laporan evaluasi pembelajaran terbaru atau SK penetapan Tim Evaluasi Akademik.',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -279,7 +285,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload dokumen Sistem Penjamin Mutu Internal (SPMI) atau form evaluasi CPL yang digunakan.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -288,7 +294,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload bukti tindak lanjut hasil kaji ulang CPL (risalah rapat, dokumen revisi, atau surat keputusan perbaikan).',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -316,7 +322,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload dokumen kurikulum resmi yang memuat daftar mata kuliah, SKS, dan distribusi per bidang topik.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -349,7 +355,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload SOP Kaji Ulang Kurikulum atau Dokumen Standar SPMI yang mengatur mekanisme pengembangan kurikulum.',
                 'bobot'       => 50,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -358,7 +364,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload hasil tracer study alumni, laporan FGD industri, atau notulensi pertemuan dengan pemangku kepentingan terkait pengembangan kurikulum.',
                 'bobot'       => 50,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -382,7 +388,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload dokumen kurikulum yang memuat peta/matriks hubungan CPL dengan mata kuliah.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -391,7 +397,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload contoh RPS yang menunjukkan integrasi CPL dalam perencanaan pembelajaran per mata kuliah.',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -415,7 +421,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload RPS mata kuliah yang berfokus pada praktik computing dan penerapan computational thinking.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -424,7 +430,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload contoh laporan kegiatan atau laporan praktikum mahasiswa sebagai bukti pelaksanaan.',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -448,7 +454,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload daftar dosen yang memuat nama, pendidikan terakhir, jabatan fungsional, dan bidang keahlian.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -482,7 +488,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload SK Satgas atau Peraturan Pedoman Kurikulum yang menunjukkan keterlibatan dosen dalam penyusunan dan evaluasi CPL.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -515,7 +521,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload SK penetapan PMB atau SOP Penerimaan Mahasiswa Baru yang berlaku.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -548,7 +554,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload SOP atau SK Direktur yang mengatur mekanisme pemantauan kinerja dan kemajuan studi mahasiswa.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -557,7 +563,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload laporan kinerja mahasiswa atau rekap evaluasi akademik dari semester/tahun terakhir.',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -581,7 +587,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload peraturan akademik atau buku pedoman penasehatan/pembimbingan akademik yang berlaku.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -590,7 +596,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload dokumentasi kegiatan yang mendukung suasana akademik kondusif (seminar, kuliah tamu, lomba akademik, dll.).',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -614,7 +620,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload SK ORMAWA atau laporan kegiatan mahasiswa ko-kurikuler yang mendukung pembangunan karakter.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -647,7 +653,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload daftar inventaris fasilitas lengkap (ruang kelas, lab, peralatan, perangkat lunak, sumberdaya komputasi).',
                 'bobot'       => 50,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -656,7 +662,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload SOP penggunaan laboratorium dan/atau kebijakan pemeliharaan rutin fasilitas.',
                 'bobot'       => 50,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -680,7 +686,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload RENSTRA Institusi atau kebijakan pengelolaan keuangan yang menjamin keberlanjutan Prodi.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -713,7 +719,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload dokumen MoU atau perjanjian kerjasama yang masih aktif dengan mitra industri, penelitian, atau lembaga masyarakat.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -750,7 +756,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload RPS atau Standar Penilaian Pembelajaran yang memuat indikator kinerja CPL dan metode asesmennya.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -759,7 +765,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload contoh instrumen ujian, rubrik penilaian proyek, atau alat asesmen lain yang digunakan untuk mengukur CPL.',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -783,7 +789,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload dokumen SPMI atau prosedur pengukuran CPL yang rinci, konsisten, dan terdokumentasi secara resmi.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -816,7 +822,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload Buku Panduan Akademik atau Peraturan Akademik yang secara eksplisit memuat persyaratan kelulusan.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -849,7 +855,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload laporan rekap ketercapaian CPL lulusan atau dokumen audit kelulusan yang mencantumkan pemenuhan CPL per mahasiswa/angkatan.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -886,7 +892,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload laporan resmi ketercapaian CPL terbaru yang memuat data pengukuran, target, capaian aktual, dan analisis gap.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -895,7 +901,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload rekapitulasi hasil asesmen CPL yang dipetakan per mata kuliah untuk mengidentifikasi area yang membutuhkan perbaikan.',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -919,7 +925,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload risalah rapat tinjauan Prodi atau dokumen revisi kurikulum/RPS yang dipicu oleh hasil evaluasi CPL.',
                 'bobot'       => 70,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -952,7 +958,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload Laporan Tinjauan Manajemen (LTM) atau Laporan Audit Mutu Internal (AMI) yang mencerminkan siklus PDCA.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
@@ -961,7 +967,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload risalah rapat tinjauan Prodi yang memuat evaluasi efektivitas perbaikan yang telah dilakukan.',
                 'bobot'       => 40,
                 'urutan'      => 3,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
         }
 
@@ -985,7 +991,7 @@ class TemplateSeeder extends Seeder
                 'hint'        => 'Upload Daftar Induk Dokumen Prodi atau Laporan Tindak Lanjut yang membuktikan bahwa rekaman perbaikan terpelihara dan dapat diakses.',
                 'bobot'       => 60,
                 'urutan'      => 2,
-                'wajib'       => true,
+                'wajib'       => false,
             ]);
             TemplateItem::create([
                 'kriteria_id' => $k->kriteria_id,
