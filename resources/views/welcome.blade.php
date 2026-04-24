@@ -368,8 +368,8 @@
                 <!-- Eyebrow -->
                 <div class="flex items-center gap-3">
                     <div class="accent-line"></div>
-                    <span class="text-blue-400 text-xs font-semibold uppercase tracking-widest">Platform
-                        Akreditasi</span>
+                    <span class="text-blue-400 text-xs font-semibold uppercase tracking-widest">Pemeriksa Panduan
+                        Kurikulum</span>
                 </div>
 
                 <!-- Wordmark -->
