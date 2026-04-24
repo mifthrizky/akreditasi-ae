@@ -109,7 +109,10 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <a href="{{ route('validator.riwayat.show', $log->id) }}" class="inline-flex items-center text-sm font-bold text-blue-700 hover:text-blue-900 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded-md px-2 py-1 transition-colors">
+                                <a
+                                    href="{{ route('validator.riwayat.show', $log->id) }}"
+                                    data-riwayat-detail-url="{{ route('validator.riwayat.show', $log->id) }}"
+                                    class="js-open-riwayat-detail inline-flex items-center text-sm font-bold text-blue-700 hover:text-blue-900 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded-md px-2 py-1 transition-colors">
                                     <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -143,4 +146,77 @@
         @endif
     </div>
 </div>
+
+<!-- Detail Modal -->
+<div id="riwayatDetailModal"
+    class="hidden fixed inset-0 bg-slate-900/30 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+    onclick="if(event.target === this) closeRiwayatDetailModal()">
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-4xl" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-slate-200">
+            <div class="text-base font-semibold text-slate-900">Detail Riwayat</div>
+            <button type="button" onclick="closeRiwayatDetailModal()" class="text-slate-400 hover:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-600 rounded">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="riwayatDetailModalBody" class="p-5 max-h-[75vh] overflow-y-auto">
+            <div class="text-sm text-slate-600">Memuat...</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const riwayatDetailModal = document.getElementById('riwayatDetailModal');
+    const riwayatDetailModalBody = document.getElementById('riwayatDetailModalBody');
+
+    function openRiwayatDetailModal() {
+        riwayatDetailModal.classList.remove('hidden');
+    }
+
+    function closeRiwayatDetailModal() {
+        riwayatDetailModal.classList.add('hidden');
+        riwayatDetailModalBody.innerHTML = '<div class="text-sm text-slate-600">Memuat...</div>';
+    }
+
+    async function loadRiwayatDetail(url) {
+        openRiwayatDetailModal();
+        riwayatDetailModalBody.innerHTML = '<div class="text-sm text-slate-600">Memuat...</div>';
+
+        try {
+            const sep = url.includes('?') ? '&' : '?';
+            const res = await fetch(url + sep + 'modal=1', {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            if (!res.ok) {
+                throw new Error('Failed to load detail');
+            }
+
+            const html = await res.text();
+            riwayatDetailModalBody.innerHTML = html;
+        } catch (e) {
+            riwayatDetailModalBody.innerHTML =
+                '<div class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">Gagal memuat detail. Silahkan coba lagi.</div>';
+        }
+    }
+
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('.js-open-riwayat-detail');
+        if (!link) return;
+
+        const url = link.getAttribute('data-riwayat-detail-url') || link.getAttribute('href');
+        if (!url) return;
+
+        e.preventDefault();
+        loadRiwayatDetail(url);
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeRiwayatDetailModal();
+    });
+</script>
 @endsection

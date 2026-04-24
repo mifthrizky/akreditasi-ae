@@ -36,7 +36,7 @@ class RiwayatController extends Controller
 
         // Filter by prodi via submission relation
         if ($prodiId) {
-            $query->whereHas('submission', function($q) use ($prodiId) {
+            $query->whereHas('submission', function ($q) use ($prodiId) {
                 $q->where('prodi_id', $prodiId);
             });
         }
@@ -69,6 +69,12 @@ class RiwayatController extends Controller
         }
 
         $submission = $auditLog->submission;
+
+        // Used by riwayat index modal (AJAX) so we don't need a dedicated page.
+        // Keep non-modal view for direct navigation/debugging.
+        if (request()->boolean('modal') || request()->ajax()) {
+            return view('validator.riwayat._detail', compact('auditLog', 'submission'));
+        }
 
         return view('validator.riwayat.show', compact('auditLog', 'submission'));
     }
