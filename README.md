@@ -1,6 +1,18 @@
 # 📚 Pemeriksa Pedoman Kurikulum Persiapan Akreditasi
 
+Sistem pemeriksa pedoman kurikulum untuk persiapan akreditasi internasional adalah platform terpusat yang dirancang untuk membantu institusi pendidikan dalam mempersiapkan akreditasi internasional IABEE (_Institution of Accreditation Board for Engineering Education_).
+
+Sistem ini memfasilitasi:
+- ✅ Pengelolaan dokumen kurikulum terstruktur
+- ✅ Pengisian template per karakteristik akreditasi
+- ✅ Validasi dokumen oleh tim validator
+- ✅ Kalkulasi skor otomatis berbasis bobot
+- ✅ Laporan kesiapan akreditasi dalam format PDF
+- ✅ Visualisasi progress melalui grafik radar
+
 <div align="center">
+    
+---  
     
 [![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?logo=laravel)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php)](https://php.net)
@@ -8,7 +20,6 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Latest-336791?logo=postgresql)](https://www.postgresql.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
----  
 <img width="1906" height="970" alt="image" src="https://github.com/user-attachments/assets/c3db20f2-0f56-4a0d-986a-6010c6d8be57" />
 <img width="1906" height="972" alt="image" src="https://github.com/user-attachments/assets/2aec29a3-50c9-499b-b6f4-af36dbe233f6" />
 <img width="1591" height="972" alt="127 0 0 1_8000_admin_kriteria" src="https://github.com/user-attachments/assets/08df689d-0764-4a27-8043-e2c54e5693df" />
@@ -34,19 +45,6 @@
 - [Lisensi](#lisensi)
 
 ---
-
-## 🎯 Pendahuluan
-
-Sistem Pedoman Kurikulum Akreditasi IABEE 2026 adalah platform terpusat yang dirancang untuk membantu institusi pendidikan dalam mempersiapkan akreditasi internasional IABEE (_Institution of Accreditation Board for Engineering Education_).
-
-Sistem ini memfasilitasi:
-
-- ✅ Pengelolaan dokumen kurikulum terstruktur
-- ✅ Pengisian template per karakteristik akreditasi
-- ✅ Validasi dokumen oleh tim validator
-- ✅ Kalkulasi skor otomatis berbasis bobot
-- ✅ Laporan kesiapan akreditasi dalam format PDF
-- ✅ Visualisasi progress melalui grafik radar
 
 ### 📌 Latar Belakang Masalah
 
