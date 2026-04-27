@@ -24,6 +24,8 @@ Sistem ini memfasilitasi:
 <img width="1906" height="972" alt="image" src="https://github.com/user-attachments/assets/2aec29a3-50c9-499b-b6f4-af36dbe233f6" />
 <img width="1591" height="972" alt="127 0 0 1_8000_admin_kriteria" src="https://github.com/user-attachments/assets/08df689d-0764-4a27-8043-e2c54e5693df" />
 <img width="1595" height="978" alt="127 0 0 1_8000_admin_users" src="https://github.com/user-attachments/assets/6ee6ff13-989f-49ca-90e9-3bce486bd180" />
+<img width="1590" height="969" alt="127 0 0 1_8000_admin_permissions" src="https://github.com/user-attachments/assets/0ca9b616-9cf5-458a-93c6-580338c8f2fa" />
+
 
 
 </div>
