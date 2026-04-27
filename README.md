@@ -1,13 +1,17 @@
 # 📚 Sistem Pemeriksa Pedoman Kurikulum Persiapan Akreditasi
----
 
 <div align="center">
-
+    
 [![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?logo=laravel)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php)](https://php.net)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.2-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Latest-336791?logo=postgresql)](https://www.postgresql.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+---  
+<img width="1906" height="970" alt="image" src="https://github.com/user-attachments/assets/c3db20f2-0f56-4a0d-986a-6010c6d8be57" />
+<img width="1906" height="972" alt="image" src="https://github.com/user-attachments/assets/2aec29a3-50c9-499b-b6f4-af36dbe233f6" />
+<img width="1591" height="972" alt="127 0 0 1_8000_admin_kriteria" src="https://github.com/user-attachments/assets/08df689d-0764-4a27-8043-e2c54e5693df" />
 
 </div>
 
