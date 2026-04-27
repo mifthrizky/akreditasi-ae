@@ -49,7 +49,7 @@ class RiwayatController extends Controller
             $query->whereDate('created_at', '<=', $dateTo);
         }
 
-        $auditLogs = $query->orderBy('created_at', 'desc')->paginate(15);
+        $auditLogs = $query->orderBy('created_at', 'desc')->paginate(10);
         $prodis = \App\Models\ProgramStudi::orderBy('nama')->get();
 
         return view('validator.riwayat.index', compact('auditLogs', 'status', 'prodiId', 'dateFrom', 'dateTo', 'prodis'));

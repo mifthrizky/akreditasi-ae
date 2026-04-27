@@ -20,4 +20,10 @@ class Validasi extends Model
     {
         return $this->belongsTo(User::class, 'validator_id');
     }
+
+    // Backwards-compatible alias used in some controllers/views
+    public function user()
+    {
+        return $this->validator();
+    }
 }

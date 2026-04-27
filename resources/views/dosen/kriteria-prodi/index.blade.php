@@ -98,7 +98,8 @@
                                 @foreach ($kriteria->children as $subKriteria)
                                     <div class="bg-indigo-50/30 px-6 py-3 border-y border-slate-200 first:border-t-0">
                                         <div class="flex items-center gap-3">
-                                            <span class="text-xs font-semibold px-2 py-1 bg-indigo-100 text-indigo-800 rounded">{{ $subKriteria->kode }}</span>
+                                            <span
+                                                class="text-xs font-semibold px-2 py-1 bg-indigo-100 text-indigo-800 rounded">{{ $subKriteria->kode }}</span>
                                             <h3 class="font-semibold text-slate-800">{{ $subKriteria->nama }}</h3>
                                         </div>
                                     </div>
@@ -111,7 +112,8 @@
                                                     $submission = $submissions->get($subSubKriteria->kriteria_id);
                                                     $status = $submission?->status ?? 'draft';
                                                 @endphp
-                                                <div class="px-8 py-4 hover:bg-slate-50 transition-colors pl-12 border-l-4 border-transparent hover:border-blue-500">
+                                                <div
+                                                    class="px-8 py-4 hover:bg-slate-50 transition-colors pl-12 border-l-4 border-transparent hover:border-blue-500">
                                                     <div class="flex items-center justify-between gap-4">
                                                         <div class="flex-1">
                                                             <div class="flex items-center gap-3 mb-1">
@@ -119,9 +121,11 @@
                                                                     class="text-xs font-mono px-2 py-1 bg-slate-100 text-slate-600 rounded">
                                                                     {{ $subSubKriteria->kode }}
                                                                 </span>
-                                                                <h4 class="font-medium text-slate-900">{{ $subSubKriteria->nama }}</h4>
+                                                                <h4 class="font-medium text-slate-900">
+                                                                    {{ $subSubKriteria->nama }}</h4>
                                                             </div>
-                                                            <p class="text-slate-500 text-sm mt-1">{{ Str::limit($subSubKriteria->deskripsi, 120) }}</p>
+                                                            <p class="text-slate-500 text-sm mt-1">
+                                                                {{ Str::limit($subSubKriteria->deskripsi, 120) }}</p>
                                                         </div>
                                                         <div class="flex items-center gap-3 flex-shrink-0">
                                                             <!-- Status Badge -->
@@ -154,7 +158,8 @@
 
                                                             <!-- Bobot Badge -->
                                                             <span
-                                                                class="text-xs font-medium px-2 py-1 bg-slate-50 text-slate-500 rounded border border-slate-200" title="Bobot Perhitungan">
+                                                                class="text-xs font-medium px-2 py-1 bg-slate-50 text-slate-500 rounded border border-slate-200"
+                                                                title="Bobot Perhitungan">
                                                                 Bobot {{ $subSubKriteria->bobot }}
                                                             </span>
 
@@ -163,10 +168,10 @@
                                                                 @if ($submission)
                                                                     <a href="{{ route('dosen.submission.review', $submission->submission_id) }}"
                                                                         class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded transition-colors border border-slate-200">
-                                                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
-                                                                            viewBox="0 0 24 24">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                                stroke-width="2"
+                                                                        <svg class="w-4 h-4 mr-1" fill="none"
+                                                                            stroke="currentColor" viewBox="0 0 24 24">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
                                                                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
                                                                             </path>
                                                                         </svg>
@@ -176,10 +181,10 @@
                                                                 @if ($status === 'revisi')
                                                                     <a href="{{ route('dosen.submission.show', [$prodi->prodi_id, $subSubKriteria->kriteria_id]) }}"
                                                                         class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 rounded transition-colors">
-                                                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
-                                                                            viewBox="0 0 24 24">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                                stroke-width="2"
+                                                                        <svg class="w-4 h-4 mr-1" fill="none"
+                                                                            stroke="currentColor" viewBox="0 0 24 24">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
                                                                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                                                                             </path>
                                                                         </svg>
@@ -188,10 +193,10 @@
                                                                 @elseif ($status === 'ditolak')
                                                                     <a href="{{ route('dosen.submission.show', [$prodi->prodi_id, $subSubKriteria->kriteria_id]) }}"
                                                                         class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded transition-colors">
-                                                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
-                                                                            viewBox="0 0 24 24">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                                stroke-width="2"
+                                                                        <svg class="w-4 h-4 mr-1" fill="none"
+                                                                            stroke="currentColor" viewBox="0 0 24 24">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
                                                                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
                                                                             </path>
                                                                         </svg>
@@ -200,10 +205,11 @@
                                                                 @elseif ($status !== 'diterima' && $status !== 'submitted')
                                                                     <a href="{{ route('dosen.submission.show', [$prodi->prodi_id, $subSubKriteria->kriteria_id]) }}"
                                                                         class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded transition-colors shadow-sm">
-                                                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
-                                                                            viewBox="0 0 24 24">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                                stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                                                        <svg class="w-4 h-4 mr-1" fill="none"
+                                                                            stroke="currentColor" viewBox="0 0 24 24">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                                d="M9 5l7 7-7 7"></path>
                                                                         </svg>
                                                                         Isi
                                                                     </a>
