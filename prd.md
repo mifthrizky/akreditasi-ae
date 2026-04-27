@@ -1,12 +1,6 @@
 # Product Requirements Document (PRD)
 
 ## Sistem Pedoman Kurikulum Akreditasi IABEE 2026
-
-**Versi:** 3.0.0  
-**Tanggal:** April 2026  
-**Status:** Final — Siap Development  
-**Disusun oleh:** Tim Pengembang
-
 ---
 
 ## Daftar Isi
@@ -1572,22 +1566,4 @@ assert(abs($stored - $recalculated) < 0.01); // toleransi 0.01
 - [ ] Semua test case pada Bagian 15 lulus dengan hasil yang sesuai expected output
 
 ---
-
-## 18. Pertanyaan Klarifikasi untuk Stakeholder
-
-| No. | Pertanyaan                                                              | Opsi                           | Status |
-| --- | ----------------------------------------------------------------------- | ------------------------------ | ------ |
-| 1   | Berapa threshold minimum overall untuk status "COMPLIANT"?              | 75% / 80% / Custom             | ❓     |
-| 2   | Apakah threshold per karakteristik sama semua atau berbeda?             | Sama semua / Per karakteristik | ❓     |
-| 3   | Apakah bobot karakteristik fixed by system atau customizable per prodi? | Fixed / Custom per prodi       | ❓     |
-| 4   | Berapa batas minimum skor untuk tombol Submit diaktifkan?               | 50% / 60% / Tidak ada          | ❓     |
-| 5   | Upload dokumen langsung terpenuhi atau perlu validator approve dulu?    | Auto / Butuh validator         | ❓     |
-| 6   | Jika submission di-`tolak`, apakah data item ter-reset atau tersimpan?  | Reset / Tetap ada              | ❓     |
-| 7   | Apakah ada deadline pengisian per prodi atau per karakteristik?         | Ya / Tidak                     | ❓     |
-| 8   | Berapa banyak karakteristik utama IABEE 2026 yang perlu didukung?       | N karakteristik                | ❓     |
-| 9   | Apakah validator dapat di-assign ke lebih dari satu prodi?              | Ya / Tidak                     | ❓     |
-| 10  | Apakah admin juga bisa menjadi validator atau harus role terpisah?      | Boleh rangkap / Harus terpisah | ❓     |
-
----
-
 _Dokumen ini diperbarui ke versi 3.0.0. Halaman-halaman baru yang ditambahkan didokumentasikan lengkap di Bagian 10. Perbarui tanda ❓ pada Bagian 18 setelah konfirmasi stakeholder diperoleh._
