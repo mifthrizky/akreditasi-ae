@@ -1,4 +1,4 @@
-# 📚 Sistem Pemeriksa Pedoman Kurikulum Persiapan Akreditasi
+# 📚 Pemeriksa Pedoman Kurikulum Persiapan Akreditasi
 
 <div align="center">
     
