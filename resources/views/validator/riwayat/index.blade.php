@@ -159,19 +159,17 @@
             </div>
 
             <!-- Pagination -->
-            @if ($auditLogs->hasPages())
-                <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
-                    <div class="text-sm text-slate-600">
-                        Menampilkan <span class="font-medium">{{ $auditLogs->firstItem() ?? 0 }}</span> hingga
-                        <span class="font-medium">{{ $auditLogs->lastItem() ?? 0 }}</span> dari
-                        <span class="font-medium">{{ $auditLogs->total() ?? 0 }}</span> hasil
-                    </div>
-
-                    <div class="flex">
-                        {{ $auditLogs->render('vendor.pagination.custom') }}
-                    </div>
+            <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
+                <div class="text-sm text-slate-600">
+                    Menampilkan <span class="font-medium">{{ $auditLogs->firstItem() ?? 0 }}</span> hingga
+                    <span class="font-medium">{{ $auditLogs->lastItem() ?? 0 }}</span> dari
+                    <span class="font-medium">{{ $auditLogs->total() ?? 0 }}</span> hasil
                 </div>
-            @endif
+
+                <div class="flex">
+                    {{ $auditLogs->render('vendor.pagination.custom') }}
+                </div>
+            </div>
         </div>
     </div>
 

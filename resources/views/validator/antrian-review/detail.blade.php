@@ -10,7 +10,7 @@
                 <p class="text-slate-600 mt-1 text-base">Validasi dokumen submission dari dosen</p>
             </div>
             <div>
-                <a href="{{ route('validator.antrian.de') }}"
+                <a href="{{ route('validator.antrian.index') }}"
                     class="inline-flex items-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>

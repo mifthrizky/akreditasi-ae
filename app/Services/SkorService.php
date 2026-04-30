@@ -24,41 +24,28 @@ class SkorService
     {
         // Get all template items for this kriteria, excluding narasi items
         $templateItems = $submission->kriteria->templateItems()
-            ->where('tipe', '!=', 'narasi')
-            ->get();
-
+            ->where('tipe', '!=', 'narasi')->get();
         if ($templateItems->isEmpty()) {
             return 0;
         }
-
         $totalBobot = 0;
         $filledBobot = 0;
-
         foreach ($templateItems as $template) {
-            // Count ALL items with bobot > 0 toward denominator
-            // (narasi already excluded by query, and narasi items have bobot=0)
-            // wajib flag is for form validation (required/optional input), not scoring
             if ($template->bobot > 0) {
                 $totalBobot += $template->bobot;
-
-                // Check if this item is filled
                 $submissionItem = $submission->items()
                     ->where('template_item_id', $template->template_id)
                     ->first();
-
                 if ($this->isItemFilled($submissionItem, $template)) {
                     $filledBobot += $template->bobot;
                 }
             }
         }
-
         // Calculate percentage: filledBobot / totalBobot
         if ($totalBobot == 0) {
             return 0;
         }
-
         $percentage = ($filledBobot / $totalBobot) * 100; // 0-100 range
-
         return round($percentage, 2);
     }
 
@@ -97,16 +84,13 @@ class SkorService
             if (!isset($childScores[$child->kriteria_id])) {
                 continue;
             }
-
             $parentId = $child->parent_id;
             if (!$parentId) {
                 continue;
             }
-
             if (!isset($aggregated[$parentId])) {
                 $aggregated[$parentId] = ['sum_score_x_bobot' => 0, 'sum_bobot' => 0];
             }
-
             // Weighted average: Skor_i * Bobot_i
             $aggregated[$parentId]['sum_score_x_bobot'] += $childScores[$child->kriteria_id] * $child->bobot;
             $aggregated[$parentId]['sum_bobot'] += $child->bobot;
