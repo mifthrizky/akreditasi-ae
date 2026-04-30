@@ -51,7 +51,8 @@ class Submission extends Model
      * - submitted → diterima (approved): only by validator
      * - submitted → revisi: only by validator, komentar required
      * - submitted → ditolak: only by validator, komentar required
-     * - revisi → draft: automatic reset
+    * - revisi → draft: automatic reset
+    * - revisi → submitted: allowed when author resubmits after revision
      * - diterima (approved): LOCKED, no changes without admin intervention
      *
      * @param string $newStatus
@@ -76,13 +77,18 @@ class Submission extends Model
         $validTransitions = [
             self::STATUS_DRAFT => [self::STATUS_SUBMITTED, self::STATUS_DRAFT],  // draft → submitted or draft (save)
             self::STATUS_SUBMITTED => [self::STATUS_APPROVED, self::STATUS_REVISION, self::STATUS_REJECTED],  // submitted → validator actions
-            self::STATUS_REVISION => [self::STATUS_DRAFT],  // revisi → draft (reset for re-submission)
+            self::STATUS_REVISION => [self::STATUS_DRAFT, self::STATUS_SUBMITTED],  // revisi → draft/reset or resubmit
             self::STATUS_REJECTED => [self::STATUS_DRAFT],  // ditolak → draft (reset for re-submission)
         ];
 
         // Check if transition is in valid list
         if (!isset($validTransitions[$currentStatus]) || !in_array($newStatus, $validTransitions[$currentStatus])) {
             return ['valid' => false, 'message' => "Transisi dari {$currentStatus} ke {$newStatus} tidak diizinkan"];
+        }
+
+        // draft/revisi -> submitted is a creator action; review actions stay validator/admin only
+        if (in_array($currentStatus, [self::STATUS_DRAFT, self::STATUS_REVISION], true) && $newStatus === self::STATUS_SUBMITTED) {
+            return ['valid' => true, 'message' => 'Transisi diizinkan'];
         }
 
         // Validator-only checks

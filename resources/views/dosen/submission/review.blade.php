@@ -78,7 +78,7 @@
         @if ($submission->validasi)
             <div class="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm">
                 <div
-                    class="bg-gradient-to-r
+                    class="bg-linear-to-r
                     @if ($submission->validasi->status === 'disetujui') from-green-50 to-green-100 @elseif ($submission->validasi->status === 'revisi') from-yellow-50 to-yellow-100 @else from-red-50 to-red-100 @endif
                     px-6 py-4 border-b border-slate-200">
                     <h3
