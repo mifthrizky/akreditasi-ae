@@ -1,4 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&family=Outfit:wght@300;400;500;600;700&display=swap");
+
 @import "tailwindcss";
+
+@theme {
+  --font-serif: "Crimson Text", serif;
+  --font-sans: "Outfit", sans-serif;
+}
+
+/* Typography utilities */
+.font-display {
+  font-family: "Crimson Text", serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.font-display-lg {
+  font-family: "Crimson Text", serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.font-display-md {
+  font-family: "Crimson Text", serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.leading-relaxed-lg {
+  line-height: 1.8;
+}
 
 /* Disable rubber/bounce scroll effect */
 html,
