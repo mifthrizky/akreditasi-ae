@@ -368,24 +368,24 @@
                 <!-- Eyebrow -->
                 <div class="flex items-center gap-3">
                     <div class="accent-line"></div>
-                    <span class="text-violet-400 text-xs font-semibold uppercase tracking-widest">Pemeriksa Panduan
+                    <span class="text-violet-600 text-xs font-semibold uppercase tracking-wider">Pemeriksa Panduan
                         Kurikulum</span>
                 </div>
 
                 <!-- Wordmark -->
                 <div>
-                    <h1 class="font-display font-black leading-[1.05] text-white"
-                        style="font-size: clamp(2.6rem,5vw,4.2rem);">
+                    <h1 class="font-serif font-bold leading-tight text-white text-balance"
+                        style="font-size: clamp(2.8rem,6vw,4.5rem); letter-spacing: -0.03em;">
                         Persiapan Akreditasi
                     </h1>
-                    <h1 class="font-display font-black leading-[1.05] text-violet-400"
-                        style="font-size: clamp(2.6rem,5vw,4.2rem);">
+                    <h1 class="font-serif font-bold leading-tight text-violet-400 text-balance"
+                        style="font-size: clamp(2.8rem,6vw,4.5rem); letter-spacing: -0.03em;">
                         IABEE
                     </h1>
                 </div>
 
                 <!-- Sub -->
-                <p class="text-slate-300 text-base leading-relaxed max-w-sm font-light">
+                <p class="text-slate-300 text-base leading-relaxed-lg max-w-sm font-light">
                     Platform infrastruktur evaluasi untuk pemeriksa panduan kurikulum disesuaikan dengan standar
                     kriteria IABEE — dirancang untuk validator, administrator, dan pemangku kepentingan program studi
                     Polman Bandung.
@@ -440,7 +440,7 @@
 
         <!-- Scroll hint -->
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-40">
-            <span class="text-white text-xs tracking-widest uppercase">Scroll</span>
+            <span class="text-white text-xs tracking-wider uppercase">Scroll</span>
             <div class="w-px h-8 bg-linear-to-b from-white to-transparent"></div>
         </div>
     </section>
@@ -454,10 +454,11 @@
             <div class="text-center mb-16 reveal">
                 <div class="flex items-center justify-center gap-3 mb-4">
                     <div class="accent-line"></div>
-                    <span class="text-violet-600 text-xs font-semibold uppercase tracking-widest">Kemampuan Sistem</span>
+                    <span class="text-violet-600 text-xs font-semibold uppercase tracking-wider">Kemampuan Sistem</span>
                     <div class="accent-line"></div>
                 </div>
-                <h2 class="font-display font-black text-slate-900 text-4xl sm:text-5xl mb-5">
+                <h2 class="font-serif font-bold text-slate-900 text-4xl sm:text-5xl mb-5 text-balance"
+                    style="letter-spacing: -0.02em;">
                     Infrastruktur yang <span class="text-violet-600">Andal</span>
                 </h2>
                 <p class="text-slate-500 max-w-xl mx-auto leading-relaxed">
@@ -478,8 +479,8 @@
                             <path d="m19 9-5 5-4-4-3 3" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-slate-900 text-lg mb-2">Integritas Metrik</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Pemrosesan data mentah menjadi metrik evaluasi
+                    <h3 class="font-serif font-semibold text-slate-900 text-xl mb-3">Integritas Metrik</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed-lg">Pemrosesan data mentah menjadi metrik evaluasi
                         terstruktur yang selaras penuh dengan taksonomi dan bobot kriteria IABEE.</p>
                 </div>
 
@@ -496,8 +497,8 @@
                             <path d="M8 16h.01" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-slate-900 text-lg mb-2">Agregasi Laporan</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Generasi rekapitulasi Capaian Pembelajaran
+                    <h3 class="font-serif font-semibold text-slate-900 text-xl mb-3">Agregasi Laporan</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed-lg">Generasi rekapitulasi Capaian Pembelajaran
                         Lulusan (CPL) secara real-time dengan visualisasi yang siap untuk dokumen asesmen resmi.</p>
                 </div>
 
@@ -509,8 +510,8 @@
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-slate-900 text-lg mb-2">Keamanan Akses</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Infrastruktur tertutup dengan Role-Based Access
+                    <h3 class="font-serif font-semibold text-slate-900 text-xl mb-3">Keamanan Akses</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed-lg">Infrastruktur tertutup dengan Role-Based Access
                         Control (RBAC) — memastikan setiap pengguna hanya mengakses data yang relevan dengan perannya.
                     </p>
                 </div>
@@ -528,11 +529,12 @@
             <div class="text-center mb-20 reveal">
                 <div class="flex items-center justify-center gap-3 mb-4">
                     <div class="accent-line"></div>
-                    <span class="text-violet-400 text-xs font-semibold uppercase tracking-widest">Alur Kerja
+                    <span class="text-violet-400 text-xs font-semibold uppercase tracking-wider">Alur Kerja
                         Sistem</span>
                     <div class="accent-line"></div>
                 </div>
-                <h2 class="font-display font-black text-white text-4xl sm:text-5xl mb-5">
+                <h2 class="font-serif font-bold text-white text-4xl sm:text-5xl mb-5 text-balance"
+                    style="letter-spacing: -0.02em;">
                     Dari Data ke <span class="text-violet-400">Keputusan</span>
                 </h2>
                 <p class="text-slate-400 max-w-lg mx-auto leading-relaxed">
@@ -549,7 +551,7 @@
                         <div class="step-circle">01</div>
                     </div>
                     <h4 class="font-bold text-white mb-2">Input Data</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Administrator menginput capaian mahasiswa, nilai
+                    <p class="text-slate-400 text-sm leading-relaxed-lg">Administrator menginput capaian mahasiswa, nilai
                         matakuliah, dan dokumen pendukung ke dalam sistem secara terpusat.</p>
                 </div>
 
@@ -558,7 +560,7 @@
                         <div class="step-circle">02</div>
                     </div>
                     <h4 class="font-bold text-white mb-2">Pemetaan CPL</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Sistem secara otomatis memetakan data ke Capaian
+                    <p class="text-slate-400 text-sm leading-relaxed-lg">Sistem secara otomatis memetakan data ke Capaian
                         Pembelajaran Lulusan sesuai kurikulum yang telah dikonfigurasi.</p>
                 </div>
 
@@ -567,7 +569,7 @@
                         <div class="step-circle">03</div>
                     </div>
                     <h4 class="font-bold text-white mb-2">Analisis Metrik</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Kalkulasi metrik evaluasi terhadap 9 kriteria
+                    <p class="text-slate-400 text-sm leading-relaxed-lg">Kalkulasi metrik evaluasi terhadap 9 kriteria
                         IABEE dilakukan secara real-time dengan deteksi gap otomatis.</p>
                 </div>
 
@@ -576,7 +578,7 @@
                         <div class="step-circle">04</div>
                     </div>
                     <h4 class="font-bold text-white mb-2">Ekspor Laporan</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed">Laporan final digenerate dalam format
+                    <p class="text-slate-400 text-sm leading-relaxed-lg">Laporan final digenerate dalam format
                         siap-asesmen yang sesuai dengan template dokumen akreditasi IABEE.</p>
                 </div>
 
@@ -592,10 +594,11 @@
             <div class="reveal">
                 <div class="flex items-center justify-center gap-3 mb-6">
                     <div class="accent-line"></div>
-                    <span class="text-violet-400 text-xs font-semibold uppercase tracking-widest">Akses Terbatas</span>
+                    <span class="text-violet-400 text-xs font-semibold uppercase tracking-wider">Akses Terbatas</span>
                     <div class="accent-line"></div>
                 </div>
-                <h2 class="font-display font-black text-white text-4xl sm:text-5xl mb-6 leading-tight">
+                <h2 class="font-serif font-bold text-white text-4xl sm:text-5xl mb-6 leading-tight text-balance"
+                    style="letter-spacing: -0.02em;">
                     Siap untuk Memulai<br>Persiapan <span class="text-violet-400">Akreditasi</span>?
                 </h2>
                 <p class="text-slate-300 max-w-lg mx-auto mb-10 leading-relaxed">
