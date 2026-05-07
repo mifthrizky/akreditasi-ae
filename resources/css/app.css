@@ -132,16 +132,16 @@
 }
 
 /* Custom shadows */
-.shadow-indigo {
-    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.15);
+.shadow-blue-soft {
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.12);
 }
 
-.shadow-indigo-lg {
-    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2);
+.shadow-blue-soft-lg {
+    box-shadow: 0 18px 36px rgba(59, 130, 246, 0.16);
 }
 
-.shadow-indigo-sm {
-    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+.shadow-blue-soft-sm {
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
 }
 
 /* Enhanced button states */
@@ -186,7 +186,7 @@
         top: 56px;
         width: 2px;
         height: 3rem;
-        background: linear-gradient(180deg, rgba(139, 92, 246, 0.3), transparent);
+        background: linear-gradient(180deg, rgba(59, 130, 246, 0.3), transparent);
         transform: translateX(-1px);
     }
 }
@@ -200,7 +200,7 @@
         left: 56px;
         right: -100%;
         height: 2px;
-        background: linear-gradient(90deg, rgba(139, 92, 246, 0.4), transparent);
+        background: linear-gradient(90deg, rgba(59, 130, 246, 0.4), transparent);
         z-index: 0;
     }
     
@@ -213,12 +213,10 @@
 .step-circle {
     position: relative;
     z-index: 1;
-    box-shadow: 0 0 0 4px #0f172a, 0 0 0 6px rgba(139, 92, 246, 0.3);
-    transition: all 0.3s ease;
 }
 
 .step-item:hover .step-circle {
-    box-shadow: 0 0 0 4px #0f172a, 0 0 20px rgba(139, 92, 246, 0.5);
+    transition: all 0.3s ease;
 }
 
 .feature-grid {
