@@ -131,6 +131,37 @@
     color: #8B5CF6;
 }
 
+/* Custom shadows */
+.shadow-indigo {
+    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.15);
+}
+
+.shadow-indigo-lg {
+    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2);
+}
+
+.shadow-indigo-sm {
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+}
+
+/* Enhanced button states */
+.btn-primary {
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary:focus {
+    outline: 2px solid rgba(139, 92, 246, 0.5);
+    outline-offset: 2px;
+}
+
 /* Show hamburger on mobile */
 @media (max-width: 768px) {
     .mobile-menu-toggle {
