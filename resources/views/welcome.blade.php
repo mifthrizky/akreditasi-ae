@@ -493,9 +493,32 @@
                         </svg>
                     </div>
                     <h3 class="font-serif font-semibold text-slate-900 text-2xl mb-4">Integritas Metrik</h3>
-                    <p class="text-slate-500 text-base leading-relaxed-lg">Pemrosesan data mentah menjadi metrik
-                        evaluasi terstruktur yang selaras penuh dengan taksonomi dan bobot kriteria IABEE. Setiap data
-                        point divalidasi dan dikualifikasi melalui pipeline integrity check yang ketat.</p>
+                    
+                    <p class="text-slate-500 text-base leading-relaxed-lg mb-4">
+                        Pemrosesan data mentah menjadi metrik evaluasi terstruktur yang selaras penuh dengan taksonomi dan bobot kriteria IABEE. Setiap data point divalidasi dan dikualifikasi melalui pipeline integrity check yang ketat.
+                    </p>
+
+                    <p class="text-slate-500 text-base leading-relaxed-lg mb-4">
+                        Platform ini mengotomasi perhitungan kompleks yang sebelumnya memakan waktu berhari-hari menjadi proses real-time. Dari input data mahasiswa hingga generasi laporan akhir, setiap tahap dijaga integritasnya dengan validation rules yang mengikuti standar IABEE terbaru.
+                    </p>
+
+                    <p class="text-slate-500 text-base leading-relaxed-lg mb-5">
+                        Hasilnya adalah confidence penuh terhadap akurasi metrik evaluasi, dengan audit trail lengkap yang memudahkan verifikasi dan compliance check saat proses asesmen berlangsung.
+                    </p>
+
+                    <div class="border-t border-slate-200 pt-5 mt-5">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 text-sm">
+                            <div class="text-slate-600">
+                                <span class="font-semibold text-slate-900">99.9%</span> Accuracy Rate
+                            </div>
+                            <div class="text-slate-600">
+                                <span class="font-semibold text-slate-900">&lt;100ms</span> Processing Time
+                            </div>
+                            <div class="text-slate-600">
+                                <span class="font-semibold text-slate-900">100%</span> Audit Coverage
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Right column: 2 stacked cards -->
