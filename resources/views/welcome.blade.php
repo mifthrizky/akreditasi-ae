@@ -358,10 +358,26 @@
         <div class="font-display font-bold text-xl text-white tracking-tight w-35">
             <img src="{{ asset('images/polman.png') }}" alt="Logo">
         </div>
+        
+        <!-- Desktop login button -->
         <a href="/login"
-            class="text-sm font-medium text-white bg-violet-900 hover:text-white border border-slate-600 hover:bg-violet-400 hover:border-white px-4 py-2 rounded-lg transition-all duration-200">
+            class="hidden sm:inline-block text-sm font-medium text-white bg-violet-900 hover:text-white border border-slate-600 hover:bg-violet-400 hover:border-white px-4 py-2 rounded-lg transition-all duration-200">
             Login
         </a>
+        
+        <!-- Mobile hamburger menu -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- Mobile menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#deskripsi">Fitur</a>
+            <a href="#alur">Alur Kerja</a>
+            <a href="/login" class="text-violet-400">Login</a>
+        </div>
     </nav>
 
 
@@ -530,7 +546,7 @@
 
 
     <!-- SECTION ALUR KERJA -->
-    <section class="process-section py-28 px-6">
+    <section id="alur" class="process-section py-28 px-6">
         <div class="max-w-6xl mx-auto">
 
             <!-- Header -->
@@ -672,6 +688,32 @@
             threshold: 0.12
         });
         revealEls.forEach(el => io.observe(el));
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close menu when link clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
     </script>
 
 </body>
