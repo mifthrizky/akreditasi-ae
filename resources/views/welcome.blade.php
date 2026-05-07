@@ -456,8 +456,8 @@
                 </div>
 
                 <!-- Stats row -->
-                <div class="flex gap-4 pt-4 flex-wrap">
-                    <div class="stat-badge rounded-xl px-4 py-3">
+                <div class="flex gap-2 sm:gap-3 lg:gap-4 pt-4 flex-wrap">
+                    <div class="stat-badge rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-3">
                         <div class="font-display font-bold text-white text-xl">9</div>
                         <div class="text-slate-400 text-xs mt-0.5">Kriteria IABEE</div>
                     </div>
@@ -496,8 +496,8 @@
 
 
     <!-- SECTION DESKRIPSI & FITUR -->
-    <section id="deskripsi" class="desc-section py-28 px-6">
-        <div class="max-w-6xl mx-auto">
+    <section id="deskripsi" class="desc-section py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
 
             <!-- Header -->
             <div class="text-center mb-16 reveal">
@@ -506,7 +506,7 @@
                     <span class="text-violet-600 text-xs font-semibold uppercase tracking-wider">Kemampuan Sistem</span>
                     <div class="accent-line"></div>
                 </div>
-                <h2 class="font-serif font-bold text-slate-900 text-4xl sm:text-5xl mb-5 text-balance"
+                <h2 class="font-serif font-bold text-slate-900 text-3xl sm:text-4xl lg:text-5xl mb-4 sm:mb-5 text-balance"
                     style="letter-spacing: -0.02em;">
                     Infrastruktur yang <span class="text-violet-600">Andal</span>
                 </h2>
@@ -517,7 +517,7 @@
             </div>
 
             <!-- Feature grid -->
-            <div class="feature-grid">
+            <div class="feature-grid gap-4 sm:gap-6 lg:gap-8">
 
                 <!-- Large card: Left side, spans 2 rows -->
                 <div class="feature-card feature-card-large reveal" style="transition-delay:0.1s">
@@ -569,8 +569,8 @@
 
 
     <!-- SECTION ALUR KERJA -->
-    <section id="alur" class="process-section py-28 px-6">
-        <div class="max-w-6xl mx-auto">
+    <section id="alur" class="process-section py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-0">
 
             <!-- Header -->
             <div class="text-center mb-20 reveal">
@@ -580,7 +580,7 @@
                         Sistem</span>
                     <div class="accent-line"></div>
                 </div>
-                <h2 class="font-serif font-bold text-white text-4xl sm:text-5xl mb-5 text-balance"
+                <h2 class="font-serif font-bold text-white text-3xl sm:text-4xl lg:text-5xl mb-4 sm:mb-5 text-balance"
                     style="letter-spacing: -0.02em;">
                     Dari Data ke <span class="text-violet-400">Keputusan</span>
                 </h2>
@@ -591,7 +591,7 @@
             </div>
 
             <!-- Steps -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 relative">
 
                 <div class="step-item text-center reveal" style="transition-delay:0.05s">
                     <div class="flex justify-center mb-5">
@@ -635,8 +635,8 @@
 
 
     <!-- SECTION CTA -->
-    <section class="cta-section py-28 px-6">
-        <div class="max-w-4xl mx-auto text-center relative z-10">
+    <section class="cta-section py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center relative z-10 px-4 sm:px-6">
 
             <div class="reveal">
                 <div class="flex items-center justify-center gap-3 mb-6">
