@@ -552,7 +552,7 @@
             </div>
 
             <!-- Steps -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
 
                 <div class="step-item text-center reveal" style="transition-delay:0.05s">
                     <div class="flex justify-center mb-5">
