@@ -1,4 +1,4 @@
-<aside class="w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 transition-all duration-300">
+<aside id="sidebar" class="w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 transition-transform duration-300 fixed lg:relative z-50 h-full lg:translate-x-0 -translate-x-full">
     <div class="h-16 flex items-center px-6 bg-slate-950 border-b border-slate-800 justify-center">
         <img src="{{ asset('images/polman.png') }}" alt="Polman" class="h-10">
     </div>

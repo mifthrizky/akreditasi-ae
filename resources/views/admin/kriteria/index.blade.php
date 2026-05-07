@@ -11,11 +11,11 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-slate-900">Manajemen Kriteria</h1>
-                <p class="text-slate-600 mt-1 text-base">Kelola hierarki kriteria akreditasi</p>
+                <h1 class="text-2xl sm:text-3xl font-bold text-slate-900">Manajemen Kriteria</h1>
+                <p class="text-slate-600 mt-1 text-sm sm:text-base">Kelola hierarki kriteria akreditasi</p>
             </div>
             <button onclick="openModal('createKriteria0Modal')"
-                class="inline-flex items-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
+                class="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none w-full sm:w-auto">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
@@ -55,44 +55,42 @@
             </script>
         @endif
 
-        <!-- Table Container -->
         <div class="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm">
             @if ($kriterias->count() > 0)
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
+                    <table class="w-full text-sm min-w-[640px]">
                         <thead class="bg-slate-50 border-b border-slate-200">
                             <tr>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Kode</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Nama</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Level</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Bobot</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Aksi</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Kode</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Nama</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Level</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Bobot</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($kriterias as $kriteria)
-                                <!-- Level 0 Kriteria -->
                                 <tr class="level-0-row border-b border-slate-200 bg-slate-50 hover:bg-slate-100 transition-colors">
-                                    <td class="px-6 py-4 text-slate-900 font-bold">{{ $kriteria->kode }}</td>
-                                    <td class="px-6 py-4 text-slate-900 font-semibold">{{ $kriteria->nama }}</td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-900 font-bold">{{ $kriteria->kode }}</td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-900 font-semibold">{{ $kriteria->nama }}</td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4">
                                         <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                             Level 0
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 text-slate-700 font-medium">{{ $kriteria->bobot }}%</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex gap-2">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-700 font-medium">{{ $kriteria->bobot }}%</td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4">
+                                        <div class="flex flex-col sm:flex-row gap-2">
                                             <button
-                                                class="btn-add-sub-kriteria inline-flex items-center px-3 py-1.5 text-sm font-medium text-green-600 hover:text-green-800 hover:bg-green-50 rounded transition-colors focus:outline-none hover:rounded-xl"
+                                                class="btn-add-sub-kriteria inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium text-green-600 hover:text-green-800 hover:bg-green-50 rounded transition-colors focus:outline-none hover:rounded-xl"
                                                 data-id="{{ $kriteria->kriteria_id }}" data-kode="{{ $kriteria->kode }}"
                                                 data-nama="{{ $kriteria->nama }}">
                                                 + Sub
                                             </button>
 
                                             <button
-                                                class="btn-edit-kriteria inline-flex items-center px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded transition-colors focus:outline-none"
+                                                class="btn-edit-kriteria inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded transition-colors focus:outline-none"
                                                 data-id="{{ $kriteria->kriteria_id }}" data-kode="{{ $kriteria->kode }}"
                                                 data-nama="{{ $kriteria->nama }}"
                                                 data-deskripsi="{{ $kriteria->deskripsi }}"
@@ -102,7 +100,7 @@
                                             </button>
 
                                             <button
-                                                class="btn-delete-kriteria inline-flex items-center px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors focus:outline-none"
+                                                class="btn-delete-kriteria inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors focus:outline-none"
                                                 data-id="{{ $kriteria->kriteria_id }}" data-kode="{{ $kriteria->kode }}"
                                                 data-nama="{{ $kriteria->nama }}">
                                                 Hapus

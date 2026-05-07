@@ -5,16 +5,16 @@
     <div class="space-y-6">
         <!-- Header -->
         <div>
-            <h1 class="text-3xl font-bold text-slate-900">Program Studi Saya</h1>
-            <p class="text-slate-600 mt-1 text-base">Pilih program studi untuk melihat daftar kriteria akreditasi</p>
+            <h1 class="text-2xl sm:text-3xl font-bold text-slate-900">Program Studi Saya</h1>
+            <p class="text-slate-600 mt-1 text-sm sm:text-base">Pilih program studi untuk melihat daftar kriteria akreditasi</p>
         </div>
 
         <!-- Program Studi Cards -->
         @if ($prodis->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($prodis as $prodi)
                     <a href="{{ route('dosen.submission.kriteria-index', $prodi->prodi_id) }}"
-                        class="bg-white rounded-lg border border-slate-200 p-6 hover:shadow-lg hover:border-blue-300 transition-all">
+                        class="bg-white rounded-lg border border-slate-200 p-4 sm:p-6 hover:shadow-lg hover:border-blue-300 transition-all">
                         <div class="flex items-start justify-between mb-4">
                             <div>
                                 <p class="text-sm font-semibold text-slate-500 mb-1">Kode</p>

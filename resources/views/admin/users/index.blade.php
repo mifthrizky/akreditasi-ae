@@ -11,11 +11,11 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-slate-900">Manajemen User</h1>
-                <p class="text-slate-600 mt-1 text-base">Kelola semua pengguna sistem akreditasi</p>
+                <h1 class="text-2xl sm:text-3xl font-bold text-slate-900">Manajemen User</h1>
+                <p class="text-slate-600 mt-1 text-sm sm:text-base">Kelola semua pengguna sistem akreditasi</p>
             </div>
             <button onclick="openModal('createModal')"
-                class="inline-flex items-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
+                class="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none w-full sm:w-auto">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
@@ -56,26 +56,25 @@
             </script>
         @endif
 
-        <!-- Table Container -->
         <div class="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm">
             @if ($users->count() > 0)
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
+                    <table class="w-full text-sm min-w-[640px]">
                         <thead class="bg-slate-50 border-b border-slate-200">
                             <tr>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Nama</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Email</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Role</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Prodi</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-900">Aksi</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Nama</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Email</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Role</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Prodi</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
                                 <tr class="border-b border-slate-200 hover:bg-slate-50 transition-colors">
-                                    <td class="px-6 py-4 text-slate-900 font-medium">{{ $user->nama }}</td>
-                                    <td class="px-6 py-4 text-slate-700">{{ $user->email }}</td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-900 font-medium">{{ $user->nama }}</td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-700">{{ $user->email }}</td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4">
                                         <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
                                         @if ($user->role === 'admin') bg-blue-100 text-blue-800
@@ -87,7 +86,7 @@
                                             {{ ucfirst($user->role) }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4">
                                         @if ($user->prodis && $user->prodis->count() > 0)
                                             <span
                                                 class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
@@ -97,23 +96,23 @@
                                             <span class="text-slate-500 italic text-xs">Belum ada prodi</span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex gap-2">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4">
+                                        <div class="flex flex-col sm:flex-row gap-2">
                                             <button
-                                                class="btn-assign-prodi inline-flex items-center px-3 py-1.5 text-sm font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded transition-colors focus:outline-none"
+                                                class="btn-assign-prodi inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded transition-colors focus:outline-none"
                                                 data-id="{{ $user->user_id }}" data-nama="{{ $user->nama }}">
                                                 Assign Prodi
                                             </button>
 
                                             <button
-                                                class="btn-edit-user inline-flex items-center px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded transition-colors focus:outline-none"
+                                                class="btn-edit-user inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded transition-colors focus:outline-none"
                                                 data-id="{{ $user->user_id }}" data-nama="{{ $user->nama }}"
                                                 data-email="{{ $user->email }}" data-role="{{ $user->role }}">
                                                 Edit
                                             </button>
 
                                             <button
-                                                class="btn-delete-user inline-flex items-center px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors focus:outline-none"
+                                                class="btn-delete-user inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors focus:outline-none"
                                                 data-id="{{ $user->user_id }}" data-nama="{{ $user->nama }}">
                                                 Hapus
                                             </button>
@@ -126,14 +125,14 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
-                    <div class="text-sm text-slate-600">
+                <div class="px-4 sm:px-6 py-4 border-t border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-sm text-slate-600 text-center sm:text-left">
                         Menampilkan <span class="font-medium">{{ $users->firstItem() ?? 0 }}</span> hingga
                         <span class="font-medium">{{ $users->lastItem() ?? 0 }}</span> dari
                         <span class="font-medium">{{ $users->total() ?? 0 }}</span> hasil
                     </div>
 
-                    <div class="flex">
+                    <div class="flex overflow-x-auto">
                         {{ $users->render('vendor.pagination.custom') }}
                     </div>
                 </div>

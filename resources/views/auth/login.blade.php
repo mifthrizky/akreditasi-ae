@@ -218,7 +218,7 @@
 
                 @if ($errors->any())
                     <div
-                        style="background:#fee2e2; padding:10px; border-radius:10px; margin-top:15px; font-size:13px; color:#b91c1c;">
+                        style="background:#fee2e2; padding:10px; border-radius  :10px; margin-top:15px; font-size:13px; color:#b91c1c;">
                         {{ $errors->first() }}
                     </div>
                 @endif
@@ -242,7 +242,7 @@
                 </form>
 
                 <div class="auth-footer">
-                    <a href="/" style="color:#3b82f6;">Kembali ke beranda</a>
+                    <a href="/" class="text-gray-500 hover:text-blue-900">Kembali ke beranda</a>
                 </div>
 
             </div>

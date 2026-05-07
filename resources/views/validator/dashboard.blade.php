@@ -10,7 +10,7 @@
                 </p>
             </div>
             <a href="{{ route('validator.antrian.index') }}"
-                class="inline-flex items-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                class="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors w-full sm:w-auto">
                 Lihat Semua Antrian
             </a>
         </div>
@@ -21,7 +21,7 @@
             </div>
         @endif
 
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
             <div class="bg-white rounded-lg border border-slate-200 p-5 shadow-sm">
                 <p class="text-sm text-slate-600 font-medium">Menunggu Review</p>
                 <p class="text-3xl font-bold text-amber-600 mt-2">{{ $waitingReview }}</p>
@@ -58,21 +58,21 @@
                             };
                         @endphp
                         <div
-                            class="px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-slate-50">
-                            <div>
-                                <p class="font-semibold text-slate-900">{{ $validation->prodi_nama }}</p>
-                                <p class="text-sm text-slate-600">{{ $validation->kriteria_nama }}</p>
+                            class="px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-slate-50 border-b border-slate-200 last:border-b-0">
+                            <div class="min-w-0">
+                                <p class="font-semibold text-slate-900 truncate">{{ $validation->prodi_nama }}</p>
+                                <p class="text-sm text-slate-600 truncate">{{ $validation->kriteria_nama }}</p>
                                 <p class="text-xs text-slate-500 mt-1">
                                     {{ \Carbon\Carbon::parse($validation->validated_at)->format('d M Y H:i') }}
                                 </p>
                             </div>
-                            <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-2 flex-shrink-0">
                                 <span
                                     class="inline-flex px-2.5 py-1 text-xs font-semibold rounded-full {{ $badgeClass }}">
                                     {{ ucfirst($validation->status) }}
                                 </span>
                                 <a href="{{ route('validator.antrian.show', $validation->submission_id) }}"
-                                    class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors">
+                                    class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors whitespace-nowrap">
                                     Detail
                                 </a>
                             </div>

@@ -4,13 +4,13 @@
     <div class="space-y-6">
         <!-- Header -->
         <div>
-            <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Riwayat Validasi</h1>
-            <p class="text-slate-700 mt-1 text-base">Lihat semua riwayat penilaian dan validasi dokumen kurikulum yang pernah
+            <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Riwayat Validasi</h1>
+            <p class="text-slate-700 mt-1 text-sm sm:text-base">Lihat semua riwayat penilaian dan validasi dokumen kurikulum yang pernah
                 Anda lakukan.</p>
         </div>
 
         <!-- Filter Card -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-300 p-5">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-300 p-4 sm:p-5">
             <form action="{{ route('validator.riwayat.index') }}" method="GET"
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
 
@@ -71,7 +71,7 @@
         <!-- Table Card -->
         <div class="bg-white rounded-xl shadow-sm border border-slate-300 overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm whitespace-nowrap">
+                <table class="w-full text-left text-sm whitespace-nowrap min-w-[640px]">
                     <thead class="bg-slate-50 border-b border-slate-300 text-slate-800 uppercase tracking-wider">
                         <tr>
                             <th class="px-6 py-4 font-bold">Program Studi</th>
@@ -85,19 +85,19 @@
                     <tbody class="divide-y divide-slate-200">
                         @forelse($auditLogs as $log)
                             <tr class="hover:bg-slate-50 transition-colors">
-                                <td class="px-6 py-4 text-slate-900 font-medium">
+                                <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-900 font-medium">
                                     {{ optional($log->submission->prodi)->nama }}
                                 </td>
-                                <td class="px-6 py-4 text-slate-700">
+                                <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-700">
                                     {{ optional($log->submission->kriteria)->kode }}
                                 </td>
-                                <td class="px-6 py-4 text-slate-700">
+                                <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-700">
                                     {{ optional($log->submission->user)->nama ?? 'Unknown Dosen' }}
                                 </td>
-                                <td class="px-6 py-4 text-slate-700">
+                                <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-700">
                                     {{ \Carbon\Carbon::parse($log->created_at)->translatedFormat('d M Y, H:i') }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-4 sm:px-6 py-3 sm:py-4">
                                     @if ($log->action === 'approved')
                                         <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800 border border-green-200">
@@ -120,7 +120,7 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 text-center">
+                                <td class="px-4 sm:px-6 py-3 sm:py-4 text-center">
                                     <a href="{{ route('validator.riwayat.show', $log->id) }}"
                                         data-riwayat-detail-url="{{ route('validator.riwayat.show', $log->id) }}"
                                         class="js-open-riwayat-detail inline-flex items-center text-sm font-bold text-blue-700 hover:text-blue-900 focus:ring-2 focus:ring-blue-600 focus:outline-none rounded-md px-2 py-1 transition-colors">

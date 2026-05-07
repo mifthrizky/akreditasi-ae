@@ -10,7 +10,7 @@
                 </p>
             </div>
             <a href="{{ route('dosen.prodi.index') }}"
-                class="inline-flex items-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                class="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors w-full sm:w-auto">
                 Buka Daftar Prodi
             </a>
         </div>
@@ -22,7 +22,7 @@
         @endif
 
         @if ($prodiStats->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
                 @php
                     $totalProdi = $prodiStats->count();
                     $totalSubmission = $prodiStats->sum('total_submissions');
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 @foreach ($prodiStats as $stat)
                     @php
                         $badgeClass = $stat['progress_percentage'] >= 80
@@ -60,7 +60,7 @@
                             : ($stat['progress_percentage'] >= 50 ? 'Berproses' : 'Butuh Percepatan');
                     @endphp
                     <div class="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
-                        <div class="flex items-start justify-between gap-3 mb-3">
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                             <div>
                                 <p class="text-xs font-semibold tracking-wide text-slate-500">{{ $stat['prodi']->kode }}</p>
                                 <h3 class="text-lg font-semibold text-slate-900">{{ $stat['prodi']->nama }}</h3>
@@ -82,13 +82,13 @@
                             <span class="font-semibold text-slate-900">{{ $stat['avg_score'] }}%</span>
                         </div>
 
-                        <div class="flex gap-2">
+                        <div class="flex flex-col sm:flex-row gap-2">
                             <a href="{{ route('dosen.submission.kriteria-index', $stat['prodi']->prodi_id) }}"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors">
+                                class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors">
                                 Buka Kriteria
                             </a>
                             <a href="{{ route('dosen.laporan.show', $stat['prodi']->prodi_id) }}"
-                                class="inline-flex items-center px-4 py-2 border border-slate-300 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-50 transition-colors">
+                                class="inline-flex items-center justify-center px-4 py-2 border border-slate-300 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-50 transition-colors">
                                 Lihat Laporan
                             </a>
                         </div>

@@ -6,12 +6,12 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-slate-900">Antrian Review Submission</h1>
-                <p class="text-slate-600 mt-1 text-base">Daftar submission yang menunggu validasi</p>
+                <h1 class="text-2xl sm:text-3xl font-bold text-slate-900">Antrian Review Submission</h1>
+                <p class="text-slate-600 mt-1 text-sm sm:text-base">Daftar submission yang menunggu validasi</p>
             </div>
             <div>
                 <a href="{{ route('validator.dashboard') }}"
-                    class="inline-flex items-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">
+                    class="inline-flex items-center justify-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors w-full sm:w-auto">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
@@ -33,7 +33,7 @@
         @endif
 
         <!-- Summary Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             <div class="bg-white rounded-lg border border-slate-200 p-4 shadow-sm">
                 <p class="text-sm text-slate-600 font-medium">Total Antrian</p>
                 <p class="text-3xl font-bold text-blue-600 mt-2">{{ $submissions->total() }}</p>
@@ -53,8 +53,8 @@
         @if ($submissions->count() > 0)
             <div class="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm">
                 <!-- Filter Section -->
-                <div class="p-6 border-b border-slate-200">
-                    <h3 class="text-lg font-semibold text-slate-900 mb-4">Filter</h3>
+                <div class="p-4 sm:p-6 border-b border-slate-200">
+                    <h3 class="text-base sm:text-lg font-semibold text-slate-900 mb-4">Filter</h3>
                     <form action="{{ route('validator.antrian.index') }}" method="GET" class="space-y-4">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <!-- Filter Prodi -->
@@ -106,36 +106,29 @@
 
                 <!-- Table Section -->
                 <div class="overflow-x-auto">
-                    <table class="w-full">
+                    <table class="w-full min-w-[768px]">
                         <!-- Table Header -->
                         <thead>
                             <tr class="bg-slate-50 border-b border-slate-200">
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
                                     Program Studi
                                 </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
                                     Kriteria
                                 </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
                                     Disubmit Oleh
                                 </th>
-                                <th
-                                    class="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
                                     Tanggal Submit
                                 </th>
-                                <th
-                                    class="px-6 py-4 text-center text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-center text-xs font-semibold text-slate-700 uppercase tracking-wider">
                                     Item
                                 </th>
-                                <th
-                                    class="px-6 py-4 text-center text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-center text-xs font-semibold text-slate-700 uppercase tracking-wider">
                                     Status
                                 </th>
-                                <th
-                                    class="px-6 py-4 text-center text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-center text-xs font-semibold text-slate-700 uppercase tracking-wider">
                                     Aksi
                                 </th>
                             </tr>
@@ -146,7 +139,7 @@
                             @foreach ($submissions as $submission)
                                 <tr class="hover:bg-slate-50 transition-colors">
                                     <!-- Program Studi -->
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
                                         <div class="flex items-center gap-2">
                                             <span
                                                 class="inline-flex px-2.5 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded">
@@ -156,14 +149,14 @@
                                     </td>
 
                                     <!-- Kriteria -->
-                                    <td class="px-6 py-4">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4">
                                         <div class="text-sm">
                                             <p class="font-semibold text-slate-900">{{ $submission->kriteria->kode }}</p>
                                         </div>
                                     </td>
 
                                     <!-- Disubmit Oleh -->
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
                                         <div class="text-sm">
                                             <p class="font-medium text-slate-900">{{ $submission->user->nama }}</p>
                                             <p class="text-xs text-slate-600">{{ $submission->user->email }}</p>
@@ -171,7 +164,7 @@
                                     </td>
 
                                     <!-- Tanggal Submit -->
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
                                         <div class="text-sm">
                                             <p class="font-medium text-slate-900">
                                                 {{ \Carbon\Carbon::parse($submission->submitted_at)->format('d M Y') }}
@@ -183,7 +176,7 @@
                                     </td>
 
                                     <!-- Item Count -->
-                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-center">
                                         <span
                                             class="inline-flex px-3 py-1 text-sm font-semibold bg-slate-100 text-slate-800 rounded-full">
                                             {{ $submission->items->count() }}
@@ -191,7 +184,7 @@
                                     </td>
 
                                     <!-- Status -->
-                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-center">
                                         <span
                                             class="inline-flex px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded-full">
                                             Menunggu Review
@@ -199,7 +192,7 @@
                                     </td>
 
                                     <!-- Aksi -->
-                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-center">
                                         <a href="{{ route('validator.antrian.show', $submission->submission_id) }}"
                                             class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded transition-colors gap-1">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -219,14 +212,14 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
-                    <div class="text-sm text-slate-600">
+                <div class="px-4 sm:px-6 py-4 border-t border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-sm text-slate-600 text-center sm:text-left">
                         Menampilkan <span class="font-medium">{{ $submissions->firstItem() ?? 0 }}</span> hingga
                         <span class="font-medium">{{ $submissions->lastItem() ?? 0 }}</span> dari
                         <span class="font-medium">{{ $submissions->total() ?? 0 }}</span> hasil
                     </div>
 
-                    <div class="flex">
+                    <div class="flex overflow-x-auto">
                         {{ $submissions->render('vendor.pagination.custom') }}
                     </div>
                 </div>

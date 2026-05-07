@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
             <div class="bg-white rounded-lg border border-slate-200 p-5 shadow-sm">
                 <p class="text-sm text-slate-600 font-medium">Program Studi Aktif</p>
                 <p class="text-3xl font-bold text-slate-900 mt-2">{{ $totalProdi }}</p>
@@ -41,20 +41,20 @@
         </div>
 
         <div class="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm">
-            <div class="px-6 py-4 border-b border-slate-200">
-                <h2 class="text-lg font-semibold text-slate-900">Progress per Program Studi</h2>
-                <p class="text-sm text-slate-600 mt-1">Persentase didasarkan pada submission berstatus diterima.</p>
+            <div class="px-4 sm:px-6 py-4 border-b border-slate-200">
+                <h2 class="text-base sm:text-lg font-semibold text-slate-900">Progress per Program Studi</h2>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1">Persentase didasarkan pada submission berstatus diterima.</p>
             </div>
 
             @if ($prodiProgress->count() > 0)
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
+                    <table class="w-full text-sm min-w-[640px]">
                         <thead class="bg-slate-50 border-b border-slate-200">
                             <tr>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-700">Program Studi</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-700">Progres</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-700">Skor Rata-rata</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-700">Status</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-700 text-xs sm:text-sm">Program Studi</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-700 text-xs sm:text-sm">Progres</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-700 text-xs sm:text-sm">Skor Rata-rata</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-700 text-xs sm:text-sm">Status</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200">
@@ -70,11 +70,11 @@
                                         : ($progressPercentage >= 60 ? 'bg-amber-100 text-amber-800' : 'bg-red-100 text-red-800');
                                 @endphp
                                 <tr class="hover:bg-slate-50 transition-colors">
-                                    <td class="px-6 py-4">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4">
                                         <p class="font-semibold text-slate-900">{{ $row->nama }}</p>
                                         <p class="text-xs text-slate-500">{{ $row->kode }}</p>
                                     </td>
-                                    <td class="px-6 py-4 min-w-[280px]">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 min-w-[200px] sm:min-w-[280px]">
                                         <div class="flex items-center justify-between text-xs text-slate-600 mb-2">
                                             <span>{{ $completed }}/{{ $total }} selesai</span>
                                             <span>{{ $progressPercentage }}%</span>
@@ -84,8 +84,8 @@
                                                 style="width: {{ $progressPercentage }}%"></div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 font-semibold text-slate-900">{{ $avgScore }}%</td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 font-semibold text-slate-900">{{ $avgScore }}%</td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4">
                                         <span class="inline-flex px-2.5 py-1 text-xs font-semibold rounded-full {{ $statusClass }}">
                                             {{ $statusLabel }}
                                         </span>
@@ -104,19 +104,19 @@
         </div>
 
         <div class="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-sm">
-            <div class="px-6 py-4 border-b border-slate-200">
-                <h2 class="text-lg font-semibold text-slate-900">Submission Terbaru</h2>
+            <div class="px-4 sm:px-6 py-4 border-b border-slate-200">
+                <h2 class="text-base sm:text-lg font-semibold text-slate-900">Submission Terbaru</h2>
             </div>
             @if ($recentSubmissions->count() > 0)
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
+                    <table class="w-full text-sm min-w-[640px]">
                         <thead class="bg-slate-50 border-b border-slate-200">
                             <tr>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-700">Prodi</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-700">Kriteria</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-700">Pengirim</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-700">Status</th>
-                                <th class="px-6 py-4 text-left font-semibold text-slate-700">Tanggal</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-700 text-xs sm:text-sm">Prodi</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-700 text-xs sm:text-sm">Kriteria</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-700 text-xs sm:text-sm">Pengirim</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-700 text-xs sm:text-sm">Status</th>
+                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-700 text-xs sm:text-sm">Tanggal</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200">
@@ -131,15 +131,15 @@
                                     };
                                 @endphp
                                 <tr class="hover:bg-slate-50 transition-colors">
-                                    <td class="px-6 py-4 font-medium text-slate-900">{{ $submission->prodi->kode ?? '-' }}</td>
-                                    <td class="px-6 py-4 text-slate-700">{{ $submission->kriteria->kode ?? '-' }}</td>
-                                    <td class="px-6 py-4 text-slate-700">{{ $submission->user->nama ?? '-' }}</td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 font-medium text-slate-900">{{ $submission->prodi->kode ?? '-' }}</td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-700">{{ $submission->kriteria->kode ?? '-' }}</td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-700">{{ $submission->user->nama ?? '-' }}</td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4">
                                         <span class="inline-flex px-2.5 py-1 text-xs font-semibold rounded-full {{ $badgeClass }}">
                                             {{ ucfirst($submission->status) }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 text-slate-600">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-600">
                                         {{ \Carbon\Carbon::parse($submission->submitted_at)->format('d M Y H:i') }}
                                     </td>
                                 </tr>

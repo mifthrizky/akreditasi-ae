@@ -6,13 +6,12 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-slate-900">Daftar Kriteria {{ $prodi->nama }}</h1>
-                <p class="text-slate-600 mt-1 text-base">Kode Prodi: <span class="font-semibold">{{ $prodi->kode }}</span>
-                </p>
+                <h1 class="text-2xl sm:text-3xl font-bold text-slate-900">Daftar Kriteria {{ $prodi->nama }}</h1>
+                <p class="text-slate-600 mt-1 text-xs sm:text-sm">Kode Prodi: <span class="font-semibold">{{ $prodi->kode }}</span></p>
             </div>
-            <div class="flex gap-3">
+            <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                 <a href="{{ route('dosen.laporan.show', $prodi->prodi_id) }}"
-                    class="inline-flex items-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
+                    class="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
@@ -21,7 +20,7 @@
                     Laporan Kesiapan
                 </a>
                 <a href="{{ route('dosen.prodi.index') }}"
-                    class="inline-flex items-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors focus:outline-none">
+                    class="inline-flex items-center justify-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors focus:outline-none">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
@@ -39,7 +38,7 @@
             $revisi = $submissions->where('status', 'revisi')->count();
             $ditolak = $submissions->where('status', 'ditolak')->count();
         @endphp
-        <div class="grid grid-cols-2 sm:grid-cols-6 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
             <div class="bg-white rounded-lg border border-slate-200 p-4 text-center shadow-sm">
                 <p class="text-sm text-slate-600 font-medium">Total Sub-Kriteria</p>
                 <p class="text-2xl font-bold text-slate-900 mt-1">{{ $totalSub }}</p>

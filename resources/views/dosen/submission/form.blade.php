@@ -6,12 +6,12 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-slate-900">{{ $kriteria->nama }}</h1>
-                <p class="text-slate-600 text-sm mt-1">Kode: {{ $kriteria->kode }}</p>
+                <h1 class="text-2xl sm:text-3xl font-bold text-slate-900">{{ $kriteria->nama }}</h1>
+                <p class="text-slate-600 text-xs sm:text-sm mt-1">Kode: {{ $kriteria->kode }}</p>
             </div>
             <div>
                 <a href="{{ route('dosen.submission.kriteria-index', $prodi->prodi_id) }}"
-                    class="inline-flex items-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors">
+                    class="inline-flex items-center justify-center px-4 py-2.5 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors w-full sm:w-auto">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
@@ -22,7 +22,7 @@
 
         <!-- Status Badge -->
         <div class="bg-white rounded-lg border border-slate-200 p-4 shadow-sm">
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div>
                     <p class="text-sm text-slate-600 font-medium">Status Submission</p>
                     @if ($submission->status === 'draft')
@@ -77,10 +77,10 @@
                     @php
                         $submissionItem = $submissionItems->get($template->template_id);
                     @endphp
-                    <div class="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
+                    <div class="bg-white rounded-lg border border-slate-200 p-4 sm:p-6 shadow-sm">
                         <!-- Template Item Header -->
                         <div class="mb-4">
-                            <div class="flex items-start justify-between mb-2">
+                            <div class="flex flex-col sm:flex-row items-start sm:items-start justify-between mb-2 gap-2">
                                 <label class="block">
                                     <span class="text-sm font-semibold text-slate-900">{{ $template->label }}</span>
                                     @if ($template->wajib)
@@ -153,11 +153,11 @@
 
             <!-- Form Actions -->
             @if ($templateItems->count() > 0)
-                <div class="flex flex-col sm:flex-row gap-3">
+                <div class="flex flex-col gap-3">
                     @if ($submission->status === 'ditolak')
                         <!-- Reset button for ditolak status -->
                         <button type="button" id="resetFormBtn"
-                            class="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors focus:outline-none"
+                            class="w-full px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors focus:outline-none"
                             onclick="if(confirm('Apakah Anda yakin ingin mereset form? Semua jawaban akan dihapus.')) { document.getElementById('resetForm').submit(); }">
                             <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -168,7 +168,7 @@
                         </button>
                     @else
                         <button type="submit" name="action" value="save"
-                            class="flex-1 px-4 py-2.5 bg-slate-600 hover:bg-slate-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
+                            class="w-full px-4 py-2.5 bg-slate-600 hover:bg-slate-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
                             <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V3">
@@ -177,7 +177,7 @@
                             Simpan Sebagai Draft
                         </button>
                         <button type="submit" name="action" value="submit"
-                            class="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none"
+                            class="w-full px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none"
                             {{ $submission->status !== 'draft' && $submission->status !== 'revisi' ? 'disabled' : '' }}>
                             <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
