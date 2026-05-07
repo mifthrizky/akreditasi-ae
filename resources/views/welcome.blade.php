@@ -128,9 +128,16 @@
 
         /* Stat badge */
         .stat-badge {
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            background: rgba(124, 58, 237, 0.08);
-            backdrop-filter: blur(8px);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            background: rgba(139, 92, 246, 0.08);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-badge:hover {
+            background: rgba(139, 92, 246, 0.12);
+            border-color: rgba(139, 92, 246, 0.6);
         }
 
         /* Floating card on hero right */
@@ -187,12 +194,13 @@
 
         .feature-card {
             background: white;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e5e7eb;
             border-radius: 20px;
             padding: 2.5rem;
-            transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 6px rgba(124, 58, 237, 0.08);
         }
 
         .feature-card::before {
@@ -209,13 +217,18 @@
         }
 
         .feature-card:hover {
-            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
-            transform: translateY(-4px);
-            border-color: rgba(124, 58, 237, 0.2);
+            box-shadow: 0 25px 50px rgba(124, 58, 237, 0.2);
+            transform: translateY(-6px);
+            border-color: rgba(124, 58, 237, 0.3);
         }
 
         .feature-card:hover::before {
             transform: scaleX(1);
+        }
+
+        .feature-card:focus-visible {
+            outline: 2px solid #7C3AED;
+            outline-offset: 4px;
         }
 
         .feature-icon {
@@ -295,12 +308,22 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 24px rgba(124, 58, 237, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.35);
         }
 
         .cta-btn-primary:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(124, 58, 237, 0.5);
+        }
+
+        .cta-btn-primary:active {
+            transform: translateY(-2px);
+        }
+
+        .cta-btn-primary:focus {
+            outline: 2px solid rgba(139, 92, 246, 0.5);
+            outline-offset: 2px;
         }
 
         /* Scroll reveal */
