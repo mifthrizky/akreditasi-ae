@@ -308,16 +308,16 @@
                 min-height: auto;
                 padding-bottom: 3rem;
             }
-            
+
             .hero-left {
                 grid-column: 1;
                 padding: 6rem 1.5rem 2rem;
             }
-            
+
             .hero-left::before {
                 background: none;
             }
-            
+
             .hero-right {
                 grid-column: 1;
                 transform: none;
@@ -325,11 +325,11 @@
                 height: 300px;
                 border-radius: 16px;
             }
-            
+
             .hero-float-card {
                 display: none;
             }
-            
+
             .nav-wrapper {
                 padding: 1rem 1.5rem;
             }
@@ -344,15 +344,15 @@
         <div class="font-display font-bold text-xl text-white tracking-tight w-35">
             <img src="{{ asset('images/polman.png') }}" alt="Logo">
         </div>
-        
+
         <!-- Desktop login button -->
         <a href="/login"
-            class="hidden sm:inline-block text-sm font-medium text-white bg-blue-900 hover:text-white border border-slate-600 hover:bg-blue-400 hover:border-white px-4 py-2 rounded-lg transition-all duration-200">
+            class="hidden sm:inline-block text-sm font-medium text-white bg-blue-900 hover:text-white border border-slate-600 hover:bg-blue-400 hover:border-white px-4 py-2 rounded-lg transition-all duration-200 ml-auto">
             Login
         </a>
-        
+
         <!-- Mobile hamburger menu -->
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <button class="mobile-menu-toggle sm:hidden" id="mobileMenuToggle" aria-label="Toggle menu">
             <span></span>
             <span></span>
             <span></span>
@@ -493,7 +493,9 @@
                         </svg>
                     </div>
                     <h3 class="font-serif font-semibold text-slate-900 text-2xl mb-4">Integritas Metrik</h3>
-                    <p class="text-slate-500 text-base leading-relaxed-lg">Pemrosesan data mentah menjadi metrik evaluasi terstruktur yang selaras penuh dengan taksonomi dan bobot kriteria IABEE. Setiap data point divalidasi dan dikualifikasi melalui pipeline integrity check yang ketat.</p>
+                    <p class="text-slate-500 text-base leading-relaxed-lg">Pemrosesan data mentah menjadi metrik
+                        evaluasi terstruktur yang selaras penuh dengan taksonomi dan bobot kriteria IABEE. Setiap data
+                        point divalidasi dan dikualifikasi melalui pipeline integrity check yang ketat.</p>
                 </div>
 
                 <!-- Right column: 2 stacked cards -->
@@ -511,7 +513,8 @@
                         </svg>
                     </div>
                     <h3 class="font-serif font-semibold text-slate-900 text-lg mb-3">Agregasi Laporan</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed-lg">Generasi rekapitulasi Capaian Pembelajaran Lulusan (CPL) secara real-time dengan visualisasi yang siap untuk dokumen asesmen resmi.</p>
+                    <p class="text-slate-500 text-sm leading-relaxed-lg">Generasi rekapitulasi Capaian Pembelajaran
+                        Lulusan (CPL) secara real-time dengan visualisasi yang siap untuk dokumen asesmen resmi.</p>
                 </div>
 
                 <div class="feature-card reveal" style="transition-delay:0.3s">
@@ -523,7 +526,9 @@
                         </svg>
                     </div>
                     <h3 class="font-serif font-semibold text-slate-900 text-lg mb-3">Keamanan Akses</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed-lg">Infrastruktur tertutup dengan Role-Based Access Control (RBAC) — memastikan setiap pengguna hanya mengakses data yang relevan dengan perannya.</p>
+                    <p class="text-slate-500 text-sm leading-relaxed-lg">Infrastruktur tertutup dengan Role-Based
+                        Access Control (RBAC) — memastikan setiap pengguna hanya mengakses data yang relevan dengan
+                        perannya.</p>
                 </div>
 
             </div>
@@ -561,7 +566,8 @@
                         <div class="step-circle">01</div>
                     </div>
                     <h4 class="font-bold text-white mb-2">Input Data</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed-lg">Administrator menginput capaian mahasiswa, nilai
+                    <p class="text-slate-400 text-sm leading-relaxed-lg">Administrator menginput capaian mahasiswa,
+                        nilai
                         matakuliah, dan dokumen pendukung ke dalam sistem secara terpusat.</p>
                 </div>
 
@@ -570,7 +576,8 @@
                         <div class="step-circle">02</div>
                     </div>
                     <h4 class="font-bold text-white mb-2">Pemetaan CPL</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed-lg">Sistem secara otomatis memetakan data ke Capaian
+                    <p class="text-slate-400 text-sm leading-relaxed-lg">Sistem secara otomatis memetakan data ke
+                        Capaian
                         Pembelajaran Lulusan sesuai kurikulum yang telah dikonfigurasi.</p>
                 </div>
 
