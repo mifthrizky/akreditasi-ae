@@ -38,6 +38,32 @@
   line-height: 1.8;
 }
 
+/* Feature grid masonry */
+.feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.feature-card-large {
+    grid-row: span 2;
+}
+
+.feature-card-large .feature-icon {
+    width: 64px;
+    height: 64px;
+}
+
+@media (max-width: 1024px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .feature-card-large {
+        grid-row: span 1;
+    }
+}
+
 /* Disable rubber/bounce scroll effect */
 html,
 body {
