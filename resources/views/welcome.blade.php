@@ -17,7 +17,7 @@
             /* Firefox */
             -ms-overflow-style: none;
             /* Edge/IE */
-            background-color: #0a1628;
+            background-color: #0f172a;
             overscroll-behavior: none;
         }
 
@@ -47,7 +47,7 @@
             position: relative;
             z-index: 2;
             flex: 0 0 52%;
-            background-color: #0a1628;
+            background-color: #0f172a;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -82,7 +82,7 @@
             bottom: 0;
             width: 160px;
 
-            background-color: #0a1628;
+            background-color: #0f172a;
 
             clip-path: polygon(0 0, 40% 0, 100% 100%, 0 100%);
             z-index: 3;
@@ -94,7 +94,7 @@
             height: 500px;
             bottom: -150px;
             right: -150px;
-            background: radial-gradient(circle, rgba(96, 165, 250, 0.25), transparent 70%);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.25), transparent 70%);
             filter: blur(120px);
         }
 
@@ -114,25 +114,25 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(90deg,
-                    #0a1628 0%,
-                    #0a1628 42%,
-                    rgba(10, 22, 40, 0.85) 58%,
-                    rgba(10, 22, 40, 0.3) 78%,
-                    rgba(10, 22, 40, 0.05) 100%);
+                    #0f172a 0%,
+                    #0f172a 42%,
+                    rgba(15, 23, 42, 0.85) 58%,
+                    rgba(15, 23, 42, 0.3) 78%,
+                    rgba(15, 23, 42, 0.05) 100%);
         }
 
         /* Accent line */
         .accent-line {
             width: 48px;
             height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            background: linear-gradient(90deg, #7C3AED, #8B5CF6);
             border-radius: 2px;
         }
 
         /* Stat badge */
         .stat-badge {
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            background: rgba(59, 130, 246, 0.07);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            background: rgba(124, 58, 237, 0.08);
             backdrop-filter: blur(8px);
         }
 
@@ -178,9 +178,9 @@
         }
 
         .nav-wrapper.scrolled {
-            background: rgba(10, 22, 40, 0.95);
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(12px);
-            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+            box-shadow: 0 1px 0 rgba(139, 92, 246, 0.1);
         }
 
         /* Description section */
@@ -212,9 +212,9 @@
         }
 
         .feature-card:hover {
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
             transform: translateY(-4px);
-            border-color: rgba(59, 130, 246, 0.2);
+            border-color: rgba(124, 58, 237, 0.2);
         }
 
         .feature-card:hover::before {
@@ -224,7 +224,7 @@
         .feature-icon {
             width: 52px;
             height: 52px;
-            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+            background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -233,33 +233,33 @@
 
         /* Process section */
         .process-section {
-            background: #0a1628;
+            background: #0f172a;
         }
 
         .step-circle {
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            border: 2px solid rgba(59, 130, 246, 0.5);
-            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid rgba(124, 58, 237, 0.5);
+            background: rgba(124, 58, 237, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Playfair Display', serif;
             font-size: 1.25rem;
             font-weight: 700;
-            color: #60a5fa;
+            color: #8B5CF6;
             transition: background 0.3s, border-color 0.3s;
         }
 
         .step-item:hover .step-circle {
-            background: rgba(59, 130, 246, 0.25);
-            border-color: #60a5fa;
+            background: rgba(124, 58, 237, 0.25);
+            border-color: #8B5CF6;
         }
 
         /* CTA section */
         .cta-section {
-            background: linear-gradient(135deg, #1e3a5f 0%, #0a1628 60%, #0f2444 100%);
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 60%, #1e293b 100%);
             position: relative;
             overflow: hidden;
         }
@@ -272,7 +272,7 @@
             width: 400px;
             height: 400px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -284,12 +284,12 @@
             width: 320px;
             height: 320px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
             pointer-events: none;
         }
 
         .cta-btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, #7C3AED, #6D28D9);
             color: white;
             padding: 1rem 2.5rem;
             border-radius: 12px;
@@ -299,7 +299,7 @@
             align-items: center;
             gap: 0.5rem;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 24px rgba(59, 130, 246, 0.35);
+            box-shadow: 0 4px 24px rgba(124, 58, 237, 0.4);
         }
 
         .cta-btn-primary:hover {
@@ -349,7 +349,7 @@
             <img src="{{ asset('images/polman.png') }}" alt="Logo">
         </div>
         <a href="/login"
-            class="text-sm font-medium text-white bg-blue-900 hover:text-white border border-slate-600 hover:bg-blue-400 hover:border-white px-4 py-2 rounded-lg transition-all duration-200">
+            class="text-sm font-medium text-white bg-violet-900 hover:text-white border border-slate-600 hover:bg-violet-400 hover:border-white px-4 py-2 rounded-lg transition-all duration-200">
             Login
         </a>
     </nav>
@@ -368,7 +368,7 @@
                 <!-- Eyebrow -->
                 <div class="flex items-center gap-3">
                     <div class="accent-line"></div>
-                    <span class="text-blue-400 text-xs font-semibold uppercase tracking-widest">Pemeriksa Panduan
+                    <span class="text-violet-400 text-xs font-semibold uppercase tracking-widest">Pemeriksa Panduan
                         Kurikulum</span>
                 </div>
 
@@ -378,7 +378,7 @@
                         style="font-size: clamp(2.6rem,5vw,4.2rem);">
                         Persiapan Akreditasi
                     </h1>
-                    <h1 class="font-display font-black leading-[1.05] text-blue-400"
+                    <h1 class="font-display font-black leading-[1.05] text-violet-400"
                         style="font-size: clamp(2.6rem,5vw,4.2rem);">
                         IABEE
                     </h1>
@@ -428,7 +428,7 @@
         <!-- <div class="hero-float-card">
             <div class="text-xs text-slate-400 mb-2 font-medium uppercase tracking-wider">CPL Terkini</div>
             <div class="flex items-end gap-2">
-                <span class="font-display font-bold text-white text-3xl">87<span class="text-blue-400">%</span></span>
+                <span class="font-display font-bold text-white text-3xl">87<span class="text-violet-400">%</span></span>
                 <span class="text-green-400 text-xs mb-1">↑ 4.2%</span>
             </div>
             <div class="mt-3 flex gap-1">
@@ -454,11 +454,11 @@
             <div class="text-center mb-16 reveal">
                 <div class="flex items-center justify-center gap-3 mb-4">
                     <div class="accent-line"></div>
-                    <span class="text-blue-600 text-xs font-semibold uppercase tracking-widest">Kemampuan Sistem</span>
+                    <span class="text-violet-600 text-xs font-semibold uppercase tracking-widest">Kemampuan Sistem</span>
                     <div class="accent-line"></div>
                 </div>
                 <h2 class="font-display font-black text-slate-900 text-4xl sm:text-5xl mb-5">
-                    Infrastruktur yang <span class="text-blue-600">Andal</span>
+                    Infrastruktur yang <span class="text-violet-600">Andal</span>
                 </h2>
                 <p class="text-slate-500 max-w-xl mx-auto leading-relaxed">
                     Dibangun secara untuk memenuhi kompleksitas teknis evaluasi akreditasi IABEE dengan presisi dan
@@ -472,7 +472,7 @@
                 <div class="feature-card reveal" style="transition-delay:0.1s">
                     <div class="feature-icon mb-5">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
-                            fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"
+                            fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round">
                             <path d="M3 3v18h18" />
                             <path d="m19 9-5 5-4-4-3 3" />
@@ -486,7 +486,7 @@
                 <div class="feature-card reveal" style="transition-delay:0.2s">
                     <div class="feature-icon mb-5">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
-                            fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"
+                            fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round">
                             <rect width="8" height="4" x="8" y="2" rx="1" />
                             <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
@@ -504,7 +504,7 @@
                 <div class="feature-card reveal" style="transition-delay:0.3s">
                     <div class="feature-icon mb-5">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
-                            fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"
+                            fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg>
@@ -528,12 +528,12 @@
             <div class="text-center mb-20 reveal">
                 <div class="flex items-center justify-center gap-3 mb-4">
                     <div class="accent-line"></div>
-                    <span class="text-blue-400 text-xs font-semibold uppercase tracking-widest">Alur Kerja
+                    <span class="text-violet-400 text-xs font-semibold uppercase tracking-widest">Alur Kerja
                         Sistem</span>
                     <div class="accent-line"></div>
                 </div>
                 <h2 class="font-display font-black text-white text-4xl sm:text-5xl mb-5">
-                    Dari Data ke <span class="text-blue-400">Keputusan</span>
+                    Dari Data ke <span class="text-violet-400">Keputusan</span>
                 </h2>
                 <p class="text-slate-400 max-w-lg mx-auto leading-relaxed">
                     Empat tahap terstruktur yang mengubah data mentah program studi menjadi laporan akreditasi yang
@@ -592,11 +592,11 @@
             <div class="reveal">
                 <div class="flex items-center justify-center gap-3 mb-6">
                     <div class="accent-line"></div>
-                    <span class="text-blue-400 text-xs font-semibold uppercase tracking-widest">Akses Terbatas</span>
+                    <span class="text-violet-400 text-xs font-semibold uppercase tracking-widest">Akses Terbatas</span>
                     <div class="accent-line"></div>
                 </div>
                 <h2 class="font-display font-black text-white text-4xl sm:text-5xl mb-6 leading-tight">
-                    Siap untuk Memulai<br>Persiapan <span class="text-blue-400">Akreditasi</span>?
+                    Siap untuk Memulai<br>Persiapan <span class="text-violet-400">Akreditasi</span>?
                 </h2>
                 <p class="text-slate-300 max-w-lg mx-auto mb-10 leading-relaxed">
                     Platform ini diperuntukkan secara bagi asesor, administrator, dan pemangku kepentingan yang telah
@@ -632,7 +632,7 @@
     <footer style="background:#060e1c; border-top: 1px solid rgba(255,255,255,0.05);">
         <div class="max-w-7xl mx-auto py-8 px-6 flex flex-col sm:flex-row justify-between items-center gap-3">
             <div class="font-display font-bold text-white text-lg">
-                Sistem Persiapan <span class="text-blue-400">IABEE</span>
+                Sistem Persiapan <span class="text-violet-400">IABEE</span>
             </div>
             <p class="text-slate-500 text-sm">
                 &copy; {{ date('Y') }} Infrastruktur Evaluasi. Dibangun untuk skala operasional.
