@@ -333,7 +333,7 @@
                 const nilaiMinNumerik = this.getAttribute('data-nilai_min_numerik');
 
                 document.getElementById('modalTitle').textContent = 'Edit Template Item';
-                document.getElementById('formTemplate').action = `{{ url('/template-items') }}/${id}`;
+                document.getElementById('formTemplate').action = `{{ url('/admin/template-items') }}/${id}`;
                 document.getElementById('formTemplate').querySelector('input[name="_method"]').value =
                     'PUT';
                 document.getElementById('template_tipe').value = tipe;
@@ -361,7 +361,7 @@
                         showLoadingAlert('Menghapus...');
                         const form = document.createElement('form');
                         form.method = 'POST';
-                        form.action = `{{ url('/template-items') }}/${id}`;
+                        form.action = `{{ url('/admin/template-items') }}/${id}`;
 
                         const csrfToken = document.querySelector('meta[name="csrf-token"]')
                             ?.content || '';

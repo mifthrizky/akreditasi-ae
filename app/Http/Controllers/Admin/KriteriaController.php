@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Exports\KriteriaTemplateExport;
+use App\Imports\KriteriaImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KriteriaController extends Controller
 {
@@ -107,7 +110,19 @@ class KriteriaController extends Controller
             // Check if kriteria has children (sub-kriteria)
             if (in_array($kriteria->level, [0, 1]) && $kriteria->children()->count() > 0) {
                 return back()
-                    ->with('error', 'Tidak dapat menghapus kriteria yang memiliki sub-kriteria');
+                    ->with('error', 'Tidak dapat menghapus kriteria yang masih memiliki sub-kriteria');
+            }
+
+            // Check if kriteria has template items
+            if ($kriteria->templateItems()->count() > 0) {
+                return back()
+                    ->with('error', 'Tidak dapat menghapus kriteria yang masih memiliki template item');
+            }
+
+            // Check if kriteria has submissions
+            if ($kriteria->submissions()->count() > 0) {
+                return back()
+                    ->with('error', 'Tidak dapat menghapus kriteria yang masih memiliki data submission');
             }
 
             $kriteria->delete();
@@ -116,6 +131,38 @@ class KriteriaController extends Controller
         } catch (\Exception $e) {
             return back()
                 ->with('error', 'Gagal menghapus kriteria: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Download Excel template for kriteria import
+     */
+    public function downloadTemplate()
+    {
+        return Excel::download(new KriteriaTemplateExport, 'template_kriteria.xlsx');
+    }
+
+    /**
+     * Import kriteria data from Excel
+     */
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048',
+        ], [
+            'file.required' => 'File Excel harus dipilih',
+            'file.mimes' => 'File harus berformat xlsx, xls, atau csv',
+            'file.max' => 'Ukuran file maksimal 2MB',
+        ]);
+
+        try {
+            Excel::import(new KriteriaImport, $request->file('file'));
+
+            return redirect()->route('admin.kriteria.index')
+                ->with('success', 'Data kriteria berhasil diimport');
+        } catch (\Exception $e) {
+            return back()
+                ->with('error', 'Gagal mengimport data: ' . $e->getMessage());
         }
     }
 

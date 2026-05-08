@@ -342,7 +342,7 @@
             document.getElementById('edit_nama').value = nama;
             document.getElementById('edit_email').value = email;
             document.getElementById('edit_role').value = role;
-            document.getElementById('editForm').action = `/users/${userId}`;
+            document.getElementById('editForm').action = `/admin/users/${userId}`;
             openModal('editModal');
         }
 

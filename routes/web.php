@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('program-studi', ProgramStudiController::class);
 
         // Kriteria Management
+        Route::get('/kriteria/download-template', [KriteriaController::class, 'downloadTemplate'])->name('kriteria.download-template');
+        Route::post('/kriteria/import', [KriteriaController::class, 'import'])->name('kriteria.import');
         Route::resource('kriteria', KriteriaController::class);
         Route::get('/kriteria/{kriteria}/template', [KriteriaController::class, 'showTemplate'])->name('kriteria.template');
 

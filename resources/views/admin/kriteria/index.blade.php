@@ -14,13 +14,22 @@
                 <h1 class="text-2xl sm:text-3xl font-bold text-slate-900">Manajemen Kriteria</h1>
                 <p class="text-slate-600 mt-1 text-sm sm:text-base">Kelola hierarki kriteria akreditasi</p>
             </div>
-            <button onclick="openModal('createKriteria0Modal')"
-                class="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none w-full sm:w-auto">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-                Tambah Kriteria Utama
-            </button>
+            <div class="flex flex-col sm:flex-row gap-2">
+                <button onclick="openImportModal()"
+                    class="inline-flex items-center justify-center px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                    Import Excel
+                </button>
+                <button onclick="openCreateKriteria0Modal()"
+                    class="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Tambah Kriteria Utama
+                </button>
+            </div>
         </div>
 
         @if ($message = Session::get('success'))
@@ -33,6 +42,20 @@
                         confirmButtonColor: '#3b82f6',
                         timer: 3000,
                         timerProgressBar: true,
+                        heightAuto: false
+                    });
+                });
+            </script>
+        @endif
+
+        @if ($message = Session::get('error'))
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: '{{ $message }}',
+                        confirmButtonColor: '#ef4444',
                         heightAuto: false
                     });
                 });
@@ -61,25 +84,39 @@
                     <table class="w-full text-sm min-w-[640px]">
                         <thead class="bg-slate-50 border-b border-slate-200">
                             <tr>
-                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Kode</th>
-                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Nama</th>
-                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Level</th>
-                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Bobot</th>
-                                <th class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">Aksi</th>
+                                <th
+                                    class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">
+                                    Kode</th>
+                                <th
+                                    class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">
+                                    Nama</th>
+                                <th
+                                    class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">
+                                    Level</th>
+                                <th
+                                    class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">
+                                    Bobot</th>
+                                <th
+                                    class="px-4 sm:px-6 py-3 sm:py-4 text-left font-semibold text-slate-900 text-xs sm:text-sm">
+                                    Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($kriterias as $kriteria)
-                                <tr class="level-0-row border-b border-slate-200 bg-slate-50 hover:bg-slate-100 transition-colors">
-                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-900 font-bold">{{ $kriteria->kode }}</td>
-                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-900 font-semibold">{{ $kriteria->nama }}</td>
+                                <tr
+                                    class="level-0-row border-b border-slate-200 bg-slate-50 hover:bg-slate-100 transition-colors">
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-900 font-bold">{{ $kriteria->kode }}
+                                    </td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-900 font-semibold">{{ $kriteria->nama }}
+                                    </td>
                                     <td class="px-4 sm:px-6 py-3 sm:py-4">
                                         <span
                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                             Level 0
                                         </span>
                                     </td>
-                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-700 font-medium">{{ $kriteria->bobot }}%</td>
+                                    <td class="px-4 sm:px-6 py-3 sm:py-4 text-slate-700 font-medium">{{ $kriteria->bobot }}%
+                                    </td>
                                     <td class="px-4 sm:px-6 py-3 sm:py-4">
                                         <div class="flex flex-col sm:flex-row gap-2">
                                             <button
@@ -112,7 +149,8 @@
                                 <!-- Level 1 Sub-Kriteria -->
                                 @if ($kriteria->children->count() > 0)
                                     @foreach ($kriteria->children as $subKriteria)
-                                        <tr class="level-1-row border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                                        <tr
+                                            class="level-1-row border-b border-slate-200 hover:bg-slate-50 transition-colors">
                                             <td class="px-6 py-4 text-slate-800 pl-12 font-medium">
                                                 <span class="text-slate-400">├─ </span>{{ $subKriteria->kode }}
                                             </td>
@@ -133,7 +171,7 @@
                                                         data-nama="{{ $subKriteria->nama }}">
                                                         + Sub
                                                     </button>
-                                                    
+
                                                     <button
                                                         class="btn-edit-kriteria inline-flex items-center px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded transition-colors focus:outline-none hover:rounded-xl"
                                                         data-id="{{ $subKriteria->kriteria_id }}"
@@ -157,26 +195,29 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        
+
                                         <!-- Level 2 Sub-Kriteria -->
                                         @if ($subKriteria->children->count() > 0)
                                             @foreach ($subKriteria->children as $subKriteriaLvl2)
-                                                <tr class="level-2-row border-b border-slate-200 bg-white hover:bg-slate-50 transition-colors">
+                                                <tr
+                                                    class="level-2-row border-b border-slate-200 bg-white hover:bg-slate-50 transition-colors">
                                                     <td class="px-6 py-4 text-slate-600 pl-20">
                                                         <span class="text-slate-300">└─ </span>{{ $subKriteriaLvl2->kode }}
                                                     </td>
-                                                    <td class="px-6 py-4 text-slate-600 whitespace-normal min-w-[200px]">{{ $subKriteriaLvl2->nama }}</td>
+                                                    <td class="px-6 py-4 text-slate-600 whitespace-normal min-w-[200px]">
+                                                        {{ $subKriteriaLvl2->nama }}</td>
                                                     <td class="px-6 py-4">
                                                         <span
                                                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
                                                             Level 2
                                                         </span>
                                                     </td>
-                                                    <td class="px-6 py-4 text-slate-600">{{ $subKriteriaLvl2->bobot }}%</td>
+                                                    <td class="px-6 py-4 text-slate-600">{{ $subKriteriaLvl2->bobot }}%
+                                                    </td>
                                                     <td class="px-6 py-4">
                                                         <div class="flex gap-2">
                                                             <button
-                                                                class=" btn-config-template inline-flex items-center px-3 py-1.5 text-sm font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 transition-colors focus:outline-none hover:rounded-xl"
+                                                                class="btn-config-template inline-flex items-center px-3 py-1.5 text-sm font-medium text-purple-600 hover:text-purple-800 hover:bg-purple-50 transition-colors focus:outline-none hover:rounded-xl"
                                                                 data-id="{{ $subKriteriaLvl2->kriteria_id }}"
                                                                 data-nama="{{ $subKriteriaLvl2->nama }}">
                                                                 Template
@@ -222,7 +263,7 @@
                     </svg>
                     <h3 class="text-lg font-medium text-slate-900 mb-1">Tidak ada kriteria</h3>
                     <p class="text-slate-600 mb-4">Mulai dengan membuat kriteria utama</p>
-                    <button onclick="openModal('createKriteria0Modal')"
+                    <button onclick="openCreateKriteria0Modal()"
                         class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
                         Tambah Kriteria Pertama
                     </button>
@@ -367,36 +408,51 @@
     <script>
         // Helper functions
         function openModal(modalId) {
-            document.getElementById(modalId).classList.remove('hidden');
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('hidden');
         }
 
         function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.add('hidden');
         }
 
-        // Add Sub-Kriteria
-        document.querySelectorAll('.btn-add-sub-kriteria').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const parentId = this.getAttribute('data-id');
-                const parentKode = this.getAttribute('data-kode');
-                const parentNama = this.getAttribute('data-nama');
+        function openCreateKriteria0Modal() {
+            document.getElementById('modalTitle0').textContent = 'Tambah Kriteria Utama';
+            document.getElementById('formKriteria0').reset();
+            document.getElementById('formKriteria0').action = "{{ route('admin.kriteria.store') }}";
+            document.getElementById('kriteriaId0').value = 'POST'; // _method
+            openModal('createKriteria0Modal');
+        }
+
+        // Gunakan Event Delegation
+        document.addEventListener('click', function(e) {
+            // Add Sub-Kriteria
+            const btnAddSub = e.target.closest('.btn-add-sub-kriteria');
+            if (btnAddSub) {
+                const parentId = btnAddSub.getAttribute('data-id');
+                const parentKode = btnAddSub.getAttribute('data-kode');
+                const parentNama = btnAddSub.getAttribute('data-nama');
 
                 // Find the parent row
-                const parentRow = this.closest('tr');
+                const parentRow = btnAddSub.closest('tr');
                 const isLevel0 = parentRow.classList.contains('level-0-row');
                 const isLevel1 = parentRow.classList.contains('level-1-row');
 
                 // Find all child rows
                 let currentRow = parentRow.nextElementSibling;
                 let childRows = [];
-                
+
                 while (currentRow) {
                     if (isLevel0) {
                         if (currentRow.classList.contains('level-0-row')) break; // Stop at next Level 0
-                        if (currentRow.classList.contains('level-1-row')) childRows.push(currentRow); // Collect Level 1s
+                        if (currentRow.classList.contains('level-1-row')) childRows.push(
+                            currentRow); // Collect Level 1s
                     } else if (isLevel1) {
-                        if (currentRow.classList.contains('level-0-row') || currentRow.classList.contains('level-1-row')) break; // Stop at next Level 0 or 1
-                        if (currentRow.classList.contains('level-2-row')) childRows.push(currentRow); // Collect Level 2s
+                        if (currentRow.classList.contains('level-0-row') || currentRow.classList.contains(
+                                'level-1-row')) break; // Stop at next Level 0 or 1
+                        if (currentRow.classList.contains('level-2-row')) childRows.push(
+                            currentRow); // Collect Level 2s
                     } else {
                         break;
                     }
@@ -406,67 +462,61 @@
                 // Calculate next code number and urutan
                 let nextCodeNum = 1;
                 if (childRows.length > 0) {
-                    // Get the last child's code
                     const lastChildRow = childRows[childRows.length - 1];
                     const codeCell = lastChildRow.querySelector('td:first-child').textContent.trim();
-                    // Extract just the code (remove the tree symbol "├─ ")
-                    const lastChildCode = codeCell.replace(/^[├─\s]+/, '').trim();
-                    // Extract the number after the dot
+                    const lastChildCode = codeCell.replace(/^[├─└\s]+/, '').trim();
                     const match = lastChildCode.match(/\.(\d+)$/);
                     if (match) {
                         nextCodeNum = parseInt(match[1]) + 1;
                     }
                 }
 
-                // Format next code with padding (e.g., "K001.04")
                 const nextCode = `${parentKode}.${String(nextCodeNum).padStart(isLevel1 ? 1 : 2, '0')}`;
                 const nextUrutan = childRows.length + 1;
 
-                document.getElementById('modalTitle1').textContent =
-                    `Tambah Sub-Kriteria dari "${parentKode}"`;
-                document.getElementById('parent_id1').value = parentId;
+                document.getElementById('modalTitle1').textContent = `Tambah Sub-Kriteria dari "${parentKode}"`;
+                document.getElementById('formKriteria1').reset();
                 document.getElementById('formKriteria1').action = "{{ route('admin.kriteria.store') }}";
-                document.getElementById('formKriteria1').method = 'POST';
+                document.getElementById('kriteriaId1').value = 'POST'; // _method
+                document.getElementById('parent_id1').value = parentId;
+
                 document.getElementById('create_kode1').value = nextCode;
-                document.getElementById('create_nama1').value = '';
-                document.getElementById('create_deskripsi1').value = '';
-                document.getElementById('create_bobot1').value = '';
                 document.getElementById('create_urutan1').value = nextUrutan;
                 document.getElementById('input_level1').value = isLevel1 ? 2 : 1;
 
                 openModal('createKriteria1Modal');
-            });
-        });
+                return;
+            }
 
-        // Edit Kriteria
-        document.querySelectorAll('.btn-edit-kriteria').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                const kode = this.getAttribute('data-kode');
-                const nama = this.getAttribute('data-nama');
-                const deskripsi = this.getAttribute('data-deskripsi');
-                const level = this.getAttribute('data-level');
-                const bobot = this.getAttribute('data-bobot');
-                const urutan = this.getAttribute('data-urutan');
-                const parentId = this.getAttribute('data-parent_id');
+            // Edit Kriteria
+            const btnEdit = e.target.closest('.btn-edit-kriteria');
+            if (btnEdit) {
+                const id = btnEdit.getAttribute('data-id');
+                const kode = btnEdit.getAttribute('data-kode');
+                const nama = btnEdit.getAttribute('data-nama');
+                const deskripsi = btnEdit.getAttribute('data-deskripsi') || '';
+                const level = btnEdit.getAttribute('data-level');
+                const bobot = btnEdit.getAttribute('data-bobot');
+                const urutan = btnEdit.getAttribute('data-urutan');
+                const parentId = btnEdit.getAttribute('data-parent_id') || '';
 
                 if (level == 0) {
                     document.getElementById('modalTitle0').textContent = 'Edit Kriteria Utama';
                     document.getElementById('formKriteria0').action = `{{ url('/admin/kriteria') }}/${id}`;
-                    document.getElementById('formKriteria0').querySelector('input[name="_method"]').value =
-                        'PUT';
+                    document.getElementById('kriteriaId0').value = 'PUT'; // _method
+
                     document.getElementById('create_kode0').value = kode;
                     document.getElementById('create_nama0').value = nama;
                     document.getElementById('create_deskripsi0').value = deskripsi;
-                    document.getElementById('create_bobot0').value = bobot; 
+                    document.getElementById('create_bobot0').value = bobot;
                     document.getElementById('create_urutan0').value = urutan;
 
                     openModal('createKriteria0Modal');
                 } else {
                     document.getElementById('modalTitle1').textContent = 'Edit Sub-Kriteria';
                     document.getElementById('formKriteria1').action = `{{ url('/admin/kriteria') }}/${id}`;
-                    document.getElementById('formKriteria1').querySelector('input[name="_method"]').value =
-                        'PUT';
+                    document.getElementById('kriteriaId1').value = 'PUT'; // _method
+
                     document.getElementById('create_kode1').value = kode;
                     document.getElementById('create_nama1').value = nama;
                     document.getElementById('create_deskripsi1').value = deskripsi;
@@ -477,24 +527,42 @@
 
                     openModal('createKriteria1Modal');
                 }
-            });
-        });
+                return;
+            }
 
-        // Delete Kriteria
-        document.querySelectorAll('.btn-delete-kriteria').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                const nama = this.getAttribute('data-nama');
+            // Delete Kriteria
+            const btnDelete = e.target.closest('.btn-delete-kriteria');
+            if (btnDelete) {
+                const id = btnDelete.getAttribute('data-id');
+                const nama = btnDelete.getAttribute('data-nama');
 
-                showDeleteConfirmation(nama).then((result) => {
-                    if (result.isConfirmed) {
-                        showLoadingAlert('Menghapus...');
+                if (typeof showDeleteConfirmation === 'function') {
+                    showDeleteConfirmation(nama).then((result) => {
+                        if (result.isConfirmed) {
+                            if (typeof showLoadingAlert === 'function') showLoadingAlert('Menghapus...');
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = `{{ url('/admin/kriteria') }}/${id}`;
+
+                            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content ||
+                                '';
+                            form.innerHTML = `
+                                <input type="hidden" name="_token" value="${csrfToken}">
+                                <input type="hidden" name="_method" value="DELETE">
+                            `;
+
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                    });
+                } else {
+                    // Fallback
+                    if (confirm(`Apakah Anda yakin ingin menghapus kriteria ${nama}?`)) {
                         const form = document.createElement('form');
                         form.method = 'POST';
                         form.action = `{{ url('/admin/kriteria') }}/${id}`;
 
-                        const csrfToken = document.querySelector('meta[name="csrf-token"]')
-                            ?.content || '';
+                        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
                         form.innerHTML = `
                             <input type="hidden" name="_token" value="${csrfToken}">
                             <input type="hidden" name="_method" value="DELETE">
@@ -503,72 +571,146 @@
                         document.body.appendChild(form);
                         form.submit();
                     }
-                });
-            });
-        });
+                }
+                return;
+            }
 
-        // Config Template
-        document.querySelectorAll('.btn-config-template').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
+            // Config Template
+            const btnConfig = e.target.closest('.btn-config-template');
+            if (btnConfig) {
+                const id = btnConfig.getAttribute('data-id');
                 window.location.href = `{{ url('/admin/kriteria') }}/${id}/template`;
-            });
-        });
-
-        // Form submission
-        document.getElementById('formKriteria0').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const method = this.querySelector('input[name="_method"]').value;
-            if (method === 'PUT') {
-                const formData = new FormData(this);
-                const url = this.action;
-
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: new URLSearchParams(formData)
-                }).then(response => {
-                    if (response.ok) return response.text();
-                    throw new Error('Network response was not ok');
-                }).then(() => {
-                    location.reload();
-                }).catch(() => {
-                    location.reload();
-                });
-            } else {
-                this.submit();
+                return;
             }
         });
 
-        document.getElementById('formKriteria1').addEventListener('submit', function(e) {
+        // Handle Form Submit
+        function handleFormSubmit(e) {
             e.preventDefault();
-            const method = this.querySelector('input[name="_method"]').value;
+            const form = e.target;
+            const method = form.querySelector('input[name="_method"]').value;
+
+            if (typeof showLoadingAlert === 'function') {
+                showLoadingAlert(method === 'PUT' ? 'Menyimpan...' : 'Menambahkan...');
+            }
+
             if (method === 'PUT') {
-                const formData = new FormData(this);
-                const url = this.action;
+                const formData = new FormData(form);
+                const url = form.action;
 
                 fetch(url, {
-                    method: 'POST',
+                    method: 'POST', // Native POST carrying _method=PUT
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        'X-Requested-With': 'XMLHttpRequest'
                     },
-                    body: new URLSearchParams(formData)
+                    body: formData
                 }).then(response => {
-                    if (response.ok) return response.text();
-                    throw new Error('Network response was not ok');
-                }).then(() => {
-                    location.reload();
+                    if (response.ok) {
+                        if (typeof showSuccessAlert === 'function') {
+                            showSuccessAlert('Berhasil!', 'Kriteria berhasil diperbarui').then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            location.reload();
+                        }
+                    } else {
+                        // Coba untuk fallback submit normal jika fetch gagal
+                        form.submit();
+                    }
                 }).catch(() => {
-                    location.reload();
+                    form.submit();
                 });
             } else {
-                this.submit();
+                form.submit();
+            }
+        }
+
+        document.getElementById('formKriteria0')?.addEventListener('submit', handleFormSubmit);
+        document.getElementById('formKriteria1')?.addEventListener('submit', handleFormSubmit);
+
+        // Import Modal Functions
+        function openImportModal() {
+            document.getElementById('importModal').classList.remove('hidden');
+        }
+
+        function closeImportModal() {
+            document.getElementById('importModal').classList.add('hidden');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('importModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeImportModal();
+            }
+        });
+
+        // Tutup Modal dengan tombol ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                ['createKriteria0Modal', 'createKriteria1Modal', 'importModal'].forEach(id => {
+                    const modal = document.getElementById(id);
+                    if (modal && !modal.classList.contains('hidden')) {
+                        if (id === 'importModal') {
+                            closeImportModal();
+                        } else {
+                            closeModal(id);
+                        }
+                    }
+                });
             }
         });
     </script>
+
+    <!-- Import Modal -->
+    <div id="importModal"
+        class="hidden fixed inset-0 bg-slate-900/30 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        onclick="if(event.target === this) closeImportModal()">
+        <div class="bg-white rounded-xl shadow-lg max-w-md w-full" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between p-6 border-b border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-900">Import Data Kriteria</h3>
+                <button onclick="closeImportModal()"
+                    class="text-slate-400 hover:text-slate-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <p class="text-sm text-slate-500 mb-4">Upload file Excel sesuai template yang telah disediakan.</p>
+
+                <!-- Download Template Button -->
+                <a href="{{ route('admin.kriteria.download-template') }}"
+                    class="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-green-700 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 focus:outline-none transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Download Template Excel
+                </a>
+
+                <!-- Import Form -->
+                <form action="{{ route('admin.kriteria.import') }}" method="POST" enctype="multipart/form-data" class="mt-4">
+                    @csrf
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Pilih File Excel</label>
+                        <input type="file" name="file" accept=".xlsx,.xls,.csv" required
+                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 cursor-pointer"/>
+                        <p class="mt-1 text-xs text-slate-500">Format: .xlsx, .xls, .csv (Max: 2MB)</p>
+                    </div>
+                    <div class="mt-6 flex gap-3">
+                        <button type="submit"
+                            class="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
+                            Import Data
+                        </button>
+                        <button type="button" onclick="closeImportModal()"
+                            class="flex-1 px-4 py-2 border border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-colors focus:outline-none">
+                            Batal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 @endsection

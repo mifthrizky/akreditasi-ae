@@ -267,7 +267,7 @@
             document.getElementById('edit_kode').value = kode;
             document.getElementById('edit_nama').value = nama;
             document.getElementById('edit_jurusan').value = jurusan;
-            document.getElementById('editForm').action = `/program-studi/${programId}`;
+            document.getElementById('editForm').action = `/admin/program-studi/${programId}`;
             openModal('editModal');
         }
 
@@ -290,7 +290,7 @@
                             if (typeof showLoadingAlert === 'function') showLoadingAlert('Menghapus...');
                             const form = document.createElement('form');
                             form.method = 'POST';
-                            form.action = `/program-studi/${btnDelete.dataset.id}`;
+                            form.action = `/admin/program-studi/${btnDelete.dataset.id}`;
                             const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content ||
                                 '';
                             form.innerHTML = `
