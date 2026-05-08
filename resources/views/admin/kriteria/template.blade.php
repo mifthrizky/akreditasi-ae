@@ -197,15 +197,18 @@
                 <input type="hidden" id="remainingBobot" value="0">
                 <div class="space-y-4">
                     <div id="bobotInfoBox" class="p-3 bg-blue-50 border border-blue-200 rounded-lg hidden">
+                        <p class="text-xs text-blue-600 mb-1">
+                            Bobot kriteria terhadap induk: {{ $kriteria->bobot }}%
+                        </p>
                         <p class="text-sm text-blue-700">
-                            <span class="font-medium">Bobot Kriteria:</span> {{ $kriteria->bobot }}%
+                            <span class="font-medium">Total Bobot Template:</span> 100%
                         </p>
                         <p class="text-sm text-blue-700">
                             <span class="font-medium">Bobot Terpakai:</span> <span id="usedBobotDisplay">0</span>%
                         </p>
                         <p class="text-sm text-blue-700 font-semibold">
                             <span class="font-medium">Sisa Bobot:</span> <span
-                                id="remainingBobotDisplay">{{ $kriteria->bobot }}</span>%
+                                id="remainingBobotDisplay">100</span>%
                         </p>
                     </div>
                     <div>
@@ -279,9 +282,9 @@
     </div>
 
     <script>
-        // Constants
-        const KRITERIA_BOBOT = {{ $kriteria->bobot }};
-        const EXISTING_ITEMS = @json($templateItems->map(fn($item) => ['id' => $item->template_id, 'bobot' => $item->bobot])->toArray());
+        // Constants - template items bobot must sum to 100% (internal allocation)
+        const KRITERIA_BOBOT = 100;
+        const EXISTING_ITEMS = @json($templateItems->filter(fn($item) => $item->tipe !== 'narasi')->map(fn($item) => ['id' => $item->template_id, 'bobot' => $item->bobot])->values()->toArray());
 
         // Helper functions
         function openModal(modalId) {

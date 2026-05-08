@@ -52,7 +52,7 @@ class PermissionController extends Controller
                 ['route_name' => $route['route']],
                 [
                     'page_label' => $route['label'],
-                    'allowed_roles' => [],
+                    'allowed_roles' => ['admin'],
                 ]
             );
             $permission->section = $route['section'];
@@ -90,7 +90,7 @@ class PermissionController extends Controller
             ['route_name' => $routeName],
             [
                 'page_label' => str_replace(['.', '-'], ' ', ucfirst($routeName)),
-                'allowed_roles' => [],
+                'allowed_roles' => ['admin'],
             ]
         );
 

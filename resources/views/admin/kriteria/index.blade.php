@@ -18,7 +18,9 @@
                 <button onclick="openImportModal()"
                     class="inline-flex items-center justify-center px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors focus:outline-none">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                        </path>
                     </svg>
                     Import Excel
                 </button>
@@ -669,8 +671,7 @@
         <div class="bg-white rounded-xl shadow-lg max-w-md w-full" onclick="event.stopPropagation()">
             <div class="flex items-center justify-between p-6 border-b border-slate-200">
                 <h3 class="text-lg font-semibold text-slate-900">Import Data Kriteria</h3>
-                <button onclick="closeImportModal()"
-                    class="text-slate-400 hover:text-slate-600 focus:outline-none">
+                <button onclick="closeImportModal()" class="text-slate-400 hover:text-slate-600 focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                         </path>
@@ -684,18 +685,21 @@
                 <a href="{{ route('admin.kriteria.download-template') }}"
                     class="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-green-700 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 focus:outline-none transition-colors">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                        </path>
                     </svg>
                     Download Template Excel
                 </a>
 
                 <!-- Import Form -->
-                <form action="{{ route('admin.kriteria.import') }}" method="POST" enctype="multipart/form-data" class="mt-4">
+                <form action="{{ route('admin.kriteria.import') }}" method="POST" enctype="multipart/form-data"
+                    class="mt-4">
                     @csrf
                     <div>
                         <label class="block text-sm font-medium text-slate-700 mb-2">Pilih File Excel</label>
                         <input type="file" name="file" accept=".xlsx,.xls,.csv" required
-                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 cursor-pointer"/>
+                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 cursor-pointer" />
                         <p class="mt-1 text-xs text-slate-500">Format: .xlsx, .xls, .csv (Max: 2MB)</p>
                     </div>
                     <div class="mt-6 flex gap-3">

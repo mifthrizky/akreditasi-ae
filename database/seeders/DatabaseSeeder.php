@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ProgramStudiSeeder::class,
             KriteriaSeeder::class,
             TemplateSeeder::class,
+            PagePermissionSeeder::class,
         ]);
     }
 }
