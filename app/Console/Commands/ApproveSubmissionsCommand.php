@@ -18,7 +18,8 @@ class ApproveSubmissionsCommand extends Command
     protected $signature = 'submissions:approve-all
         {--prodi_id= : Filter by Program Studi ID}
         {--kriteria_id= : Filter by Kriteria ID}
-        {--validator_id= : Validator ID (default: 1)}
+        {--validator_id= : Validator ID}
+        {--validator_email= : Validator Email}
         {--komentar= : Optional comment for all approvals}
         {--force : Skip confirmation}';
 
@@ -37,9 +38,42 @@ class ApproveSubmissionsCommand extends Command
         // Get filter parameters
         $prodi_id = $this->option('prodi_id');
         $kriteria_id = $this->option('kriteria_id');
-        $validator_id = $this->option('validator_id') ?? 1;
+        $validator_id = $this->option('validator_id');
+        $validator_email = $this->option('validator_email');
         $komentar = $this->option('komentar') ?? 'Disetujui via bulk approve command';
         $force = $this->option('force');
+
+        // 1. Resolve Validator
+        $validator = null;
+
+        if ($validator_id) {
+            $validator = User::find($validator_id);
+        } elseif ($validator_email) {
+            $validator = User::where('email', $validator_email)->first();
+        } elseif ($prodi_id) {
+            // Try to find a validator assigned to this prodi
+            $validator = User::where('role', 'validator')
+                ->whereHas('prodis', function ($q) use ($prodi_id) {
+                    $q->where('program_studi.prodi_id', $prodi_id);
+                })->first();
+        }
+
+        // Fallback: First available validator
+        if (!$validator) {
+            $validator = User::where('role', 'validator')->first();
+        }
+
+        // Last Fallback: First Admin (ID 1)
+        if (!$validator) {
+            $validator = User::find(1);
+        }
+
+        if (!$validator) {
+            $this->error("❌ Tidak ada user validator atau admin (ID 1) yang ditemukan");
+            return Command::FAILURE;
+        }
+
+        $validator_id = $validator->user_id;
 
         // Build query for pending submissions
         $query = Submission::where('status', 'submitted');
@@ -69,7 +103,7 @@ class ApproveSubmissionsCommand extends Command
         if ($kriteria_id) {
             $this->info("Filter by Kriteria ID: {$kriteria_id}");
         }
-        $this->info("Validator ID: {$validator_id}");
+        $this->info("Validator: {$validator->nama} ({$validator->email}) [ID: {$validator_id}]");
         $this->info("Comment: {$komentar}");
         $this->line(str_repeat('=', 50) . "\n");
 
@@ -77,13 +111,6 @@ class ApproveSubmissionsCommand extends Command
         if (!$force && !$this->confirm('Lanjutkan dengan approve semua?')) {
             $this->warn('❌ Dibatalkan');
             return Command::SUCCESS;
-        }
-
-        // Verify validator exists
-        $validator = User::find($validator_id);
-        if (!$validator) {
-            $this->error("❌ Validator dengan ID {$validator_id} tidak ditemukan");
-            return Command::FAILURE;
         }
 
         // Process each submission

@@ -16,14 +16,15 @@ class PagePermissionSeeder extends Seeder
 
         // Define role permissions mapping
         $rolePermissions = [
-            'dashboard' => ['admin', 'dosen', 'validator'],
-            'admin.program-studi.index' => ['admin'],
-            'admin.kriteria.index' => ['admin'],
-            'admin.users.index' => ['admin'],
-            'admin.permissions.index' => ['admin'],
-            'dosen.prodi.index' => ['admin', 'dosen'],
-            'validator.antrian.index' => ['admin', 'validator'],
-            'validator.riwayat.index' => ['admin', 'validator'],
+            'dashboard' => ['admin', 'super_admin', 'dosen', 'validator'],
+            'admin.program-studi.index' => ['admin', 'super_admin'],
+            'admin.kriteria.index' => ['admin', 'super_admin'],
+            'admin.users.index' => ['admin', 'super_admin'],
+            'admin.permissions.index' => ['admin', 'super_admin'],
+            'admin.prodi-data-cleanup.index' => ['super_admin'], // Only super_admin
+            'dosen.prodi.index' => ['admin', 'super_admin', 'dosen'],
+            'validator.antrian.index' => ['admin', 'super_admin', 'validator'],
+            'validator.riwayat.index' => ['admin', 'super_admin', 'validator'],
         ];
 
         // Get all navigation routes

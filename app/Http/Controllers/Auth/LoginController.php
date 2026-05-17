@@ -27,9 +27,10 @@ class LoginController extends Controller
             $role = Auth::user()->role;
             $redirectRoute = match ($role) {
                 'admin' => 'admin.dashboard',
+                'super_admin' => 'admin.dashboard', // Super admin uses admin dashboard
                 'dosen' => 'dosen.dashboard',
                 'validator' => 'validator.dashboard',
-                default => '/',
+                default => 'login',
             };
 
             return redirect()->route($redirectRoute);

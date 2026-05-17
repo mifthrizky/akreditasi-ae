@@ -112,4 +112,37 @@ class AuditLogService
 
         return $query->get();
     }
+    
+    /**
+     * Log prodi data deletion (bulk cleanup)
+     */
+    public static function logProdiDataDeletion(
+        \App\Models\ProgramStudi $prodi, 
+        array $summary, 
+        string $backupPath
+    ): AuditLog
+    {
+        return AuditLog::create([
+            'submission_id' => null,
+            'user_id' => auth()->id(),
+            'action' => 'prodi_data_deleted',
+            'changed_fields' => ['prodi_id', 'prodi_nama', 'prodi_kode'],
+            'old_values' => [
+                'prodi_id' => $prodi->prodi_id,
+                'prodi_nama' => $prodi->nama,
+                'prodi_kode' => $prodi->kode,
+                'jurusan' => $prodi->jurusan,
+            ],
+            'new_values' => [
+                'deleted_submissions' => $summary['submission_count'],
+                'deleted_items' => $summary['item_count'],
+                'deleted_dokumen' => $summary['dokumen_count'],
+                'deleted_laporan' => $summary['laporan_count'],
+                'total_records' => $summary['total_records'],
+                'disk_freed_mb' => $summary['total_size_mb'],
+                'backup_path' => $backupPath,
+                'deleted_at' => now()->toIso8601String(),
+            ],
+        ]);
+    }
 }

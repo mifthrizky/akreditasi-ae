@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProgramStudiController;
 use App\Http\Controllers\Admin\KriteriaController;
 use App\Http\Controllers\Admin\TemplateItemController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\ProdiDataCleanupController;
 use App\Http\Controllers\Dosen\DashboardController as DosenDashboardController;
 use App\Http\Controllers\Dosen\SubmissionController;
 use App\Http\Controllers\Dosen\LaporanController;
@@ -73,6 +74,11 @@ Route::middleware(['auth'])->group(function () {
 
         // Template Item Management
         Route::resource('template-items', TemplateItemController::class);
+        
+        // Prodi Data Cleanup (Super Admin Only)
+        Route::get('/prodi-data-cleanup', [ProdiDataCleanupController::class, 'index'])->name('prodi-data-cleanup.index');
+        Route::post('/prodi-data-cleanup/preview', [ProdiDataCleanupController::class, 'preview'])->name('prodi-data-cleanup.preview');
+        Route::delete('/prodi-data-cleanup/{prodi}', [ProdiDataCleanupController::class, 'destroy'])->name('prodi-data-cleanup.destroy');
     });
 
     // ============================================================

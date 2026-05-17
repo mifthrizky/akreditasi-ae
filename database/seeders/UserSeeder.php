@@ -16,6 +16,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Super Admin
+        User::create([
+            'nama' => 'Super Administrator',
+            'email' => 'superadmin@acreditasi.com',
+            'password' => Hash::make('password'),
+            'role' => 'super_admin',
+        ]);
+
         // Admin users
         User::create([
             'nama' => 'Administrator',

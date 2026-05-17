@@ -21,7 +21,13 @@
     {{-- Main Dashboard Link --}}
     @if ($canAccess($mainLink['route']))
         @php
-            $dashboardRoute = $mainLink['route'] === 'dashboard' ? $userRole . '.dashboard' : $mainLink['route'];
+            // Map role to dashboard route
+            $dashboardRoute = match($userRole) {
+                'admin', 'super_admin' => 'admin.dashboard',
+                'dosen' => 'dosen.dashboard',
+                'validator' => 'validator.dashboard',
+                default => $mainLink['route']
+            };
         @endphp
         <a href="{{ route($dashboardRoute) }}"
             class="flex items-center px-3 py-2.5 @if (str_ends_with($currentRouteName, '.dashboard')) bg-blue-600 text-white @else text-slate-300 hover:bg-slate-800 hover:text-white @endif rounded-lg font-medium transition-colors">
