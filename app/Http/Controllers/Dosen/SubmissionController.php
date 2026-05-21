@@ -162,12 +162,6 @@ class SubmissionController extends Controller
             $skorService = app(SkorService::class);
             $currentScore = $skorService->calculate($submission);
 
-            // PRD requirement: score must be ≥50% to submit
-            if ($currentScore < 50) {
-                return redirect()->back()
-                    ->with('error', "Skor submission ({$currentScore}%) harus minimal 50% untuk submit. Lengkapi terlebih dahulu.");
-            }
-
             // Validate state transition: draft → submitted
             $transition = $submission->canTransitionTo('submitted', Auth::user()->role);
             if (!$transition['valid']) {
